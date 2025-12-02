@@ -34,7 +34,7 @@
     </div>
 
     <div>
-        <label for="image_url" class="">Cover Image URL</label>
+        <label for="image_url" class="">FotoL</label>
         <input type="url" name="image_url" id="image_url" value="{{ old('image_url') }}"
                class="bg-white text-black"
                placeholder="https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_3840,h_2880,g_auto/f_auto/q_auto/v1/images/mountain?_a=BAVMn6DW0" alt="Route afbeelding van putten natuurmonument">
