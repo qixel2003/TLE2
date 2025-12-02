@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('checkpoint');
-            $table->foreignId('route_id')->constrained();
-            $table->foreignId('mission_id')->constrained();
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mission_id')->constrained()->onDelete('cascade');
             $table->integer('points');
         });
     }
