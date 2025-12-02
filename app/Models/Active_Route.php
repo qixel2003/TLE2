@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Active_Route extends Model
@@ -21,15 +23,13 @@ class Active_Route extends Model
         'start_date',
     ];
 
-    public function route(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function route(): BelongsTo
     {
-
         return $this->belongsTo(Route::class);
     }
 
-    public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function student(): BelongsTo
     {
-
         return $this->belongsTo(Student::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,16 +19,16 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        $student = User::factory()->create([
             'firstname' => 'Mark',
             'lastname' => 'Marcus',
             'email' => 'mark@example.com',
             'password' => Hash::make('password'),
             'role' => 0,
-            // Missing model.
         ]);
+        Student::create(['user_id' => $student->id, 'active_route_id' => 0, 'points' => 0]);
 
-        User::factory()->create([
+        $teacher = User::factory()->create([
             'firstname' => 'Bobby',
             'lastname' => 'Boberson',
             'email' => 'bobby@example.com',
@@ -35,7 +36,7 @@ class UsersSeeder extends Seeder
             'role' => 1,
         ]);
 
-        User::factory()->create([
+        $admin = User::factory()->create([
             'firstname' => 'Mary',
             'lastname' => 'Marilyn',
             'email' => 'mary@example.com',
