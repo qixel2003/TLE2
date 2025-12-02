@@ -16,4 +16,16 @@ class Comment extends Model
         'photo_id',
         'comment',
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(User::class);
+    }
+
+    public function photo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Photo::class);
+    }
 }

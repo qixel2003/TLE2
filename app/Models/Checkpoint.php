@@ -17,4 +17,16 @@ class Checkpoint extends Model
         'mission_id',
         'points',
     ];
+
+    public function route(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Route::class);
+    }
+
+    public function mission(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Mission::class);
+    }
 }

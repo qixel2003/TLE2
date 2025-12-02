@@ -20,4 +20,16 @@ class Active_Route extends Model
         'points',
         'start_date',
     ];
+
+    public function route(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Route::class);
+    }
+
+    public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Student::class);
+    }
 }
