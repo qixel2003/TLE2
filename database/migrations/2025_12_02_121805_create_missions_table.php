@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('question');
+            $table->string('answer');
+            $table->string('drawing_prompt');
+            $table->string('photography_prompt');
             $table->timestamps();
         });
     }

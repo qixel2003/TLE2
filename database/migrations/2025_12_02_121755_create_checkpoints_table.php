@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('checkpoints', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('checkpoint');
+            $table->foreignId('route_id')->constrained();
+            $table->foreignId('mission_id')->constrained();
+            $table->integer('points');
         });
     }
 

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('location');
+            $table->integer('distance');
+            $table->integer('duration');
+            $table->text('description');
+            $table->string('difficulty'); // makkelijk, gemiddeld, moeilijk
             $table->timestamps();
         });
     }

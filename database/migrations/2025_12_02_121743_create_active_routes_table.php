@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('active_routes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('route_id')->constrained();
+            $table->foreignId('student_id')->constrained();
+            $table->integer('role')->default(0); // 0 historian, 1 explorer/scout, 2 photographer, 3 sketcher
+            $table->boolean('is_completed')->default(false);
+            $table->integer('current_checkpoint')->default(0);
+            $table->integer('points')->default(0);
+            $table->date('start_date');
             $table->timestamps();
         });
     }
