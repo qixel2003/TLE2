@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#tutorial-container {
+    /* Set up a container for the cards */
+    position: relative; /* **Crucial** for positioning the cards absolutely inside it */
+    width: 300px; /* Define the width of your card area */
+    height: 400px; /* Define the height of your card area */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tutorial-card {
+    /* Makes the card "float" and stack on top of each other */
+    position: absolute; /* **Crucial** to take it out of the normal flow and stack them */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Styling for the card appearance */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+
+    /* Hide the card by default */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Smooth transition for showing/hiding */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    /* Center the content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tutorial-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 50%;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* Class to make a card visible (added by JavaScript) */
+.tutorial-card.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#next-step-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Styling for the container that holds the buttons */
+.clickable {
+    display: flex; /* **Crucial** - enables flexible layout */
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 15px; /* Adds space between the buttons */
+    margin-top: 20px; /* Separates the buttons from the tutorial card */
+    width: 300px; /* Match the width of your tutorial-container if needed */
+}
+
+/* Styling for all buttons inside the container */
+.clickable button {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 2px solid #007bff; /* Primary color border */
+    border-radius: 6px;
+    background-color: #fff;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Specific styling for the Next/Home button (to make them stand out) */
+#next-step-btn, #home-btn {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Hover effects */
+.clickable button:hover:not([disabled]) {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* Style for disabled button (Previous/Next at start/end) */
+.clickable button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
