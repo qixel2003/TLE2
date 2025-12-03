@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Arr;
+use Illuminate\Notifications\Notifiable;
 
 class route extends Model
 {
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
         'location',
         'distance',
+        'duration',
         'description',
-        'difficulty',];
-    protected $primaryKey = 'id';
+        'difficulty',
+        'image_url',
+        'active'
+    ];
 
-
+    public mixed $name;
 }

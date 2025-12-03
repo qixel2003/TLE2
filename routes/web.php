@@ -1,20 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RouteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/route', function () {
-    return view('route');
-});
-
-
-Route::get('/create', function () {
-    return view('create');
-});
+Route::get('/', [RouteController::class, 'index'])->name('routes.index');
+Route::get('/routes/create', [RouteController::class, 'create'])->name('routes.create');
+Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');
+Route::get('/routes/{id}', [RouteController::class, 'show'])->name('routes.show');
 
 Route::get('/tutorial', function () {
     return view('tutorial');

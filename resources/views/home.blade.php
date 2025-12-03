@@ -97,13 +97,13 @@
         </div>
     </div>
 
-    @if($routes->hasPages())
-        <div class="mt-12 flex justify-center">
-            <div class="bg-white px-4 py-3 rounded-lg shadow-sm">
-                {{ $routes->links() }}
-            </div>
-        </div>
-    @endif
+{{--    @if($routes->hasPages())--}}
+{{--        <div class="mt-12 flex justify-center">--}}
+{{--            <div class="bg-white px-4 py-3 rounded-lg shadow-sm">--}}
+{{--                {{ $routes->links() }}--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    @endif--}}
 
 </div>
 {{--</x-layout>--}}
