@@ -1,15 +1,13 @@
 <?php
 
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/create', function () {
-    return view('create');
-});
+Route::get('/', [RouteController::class, 'index'])->name('routes.index');
+Route::get('/routes/create', [RouteController::class, 'create'])->name('routes.create');
+Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');
+Route::get('/routes/{route}', [RouteController::class, 'show'])->name('routes.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
