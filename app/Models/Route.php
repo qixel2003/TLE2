@@ -10,4 +10,14 @@ class Route extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'name',
+        'picture',
+        'location',
+        'distance',
+        'duration',
+        'description',
+        'difficulty',
+    ];
 }
