@@ -7,8 +7,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/route', function () {
+    return view('route');
+});
+
+
 Route::get('/create', function () {
     return view('create');
+});
+
+Route::get('/tutorial', function () {
+    return view('tutorial');
 });
 
 Route::get('/dashboard', function () {
@@ -21,4 +30,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
