@@ -49,8 +49,8 @@
             @forelse ($routes as $route)
                 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="h-56 overflow-hidden">
-                        @if($route->image_url)
-                            <img src="{{ $route->image_url }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                        @if($route->picture)
+                            <img src="{{ $route->picture }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
                                 <span class="text-white text-3xl">🌲</span>
@@ -90,7 +90,6 @@
                 </div>
             @empty
                 <div class="col-span-full text-center py-16 bg-white rounded-xl shadow-sm">
-                    <div class="text-5xl mb-4">🌿</div>
                     <h3 class="text-2xl font-bold text-gray-700 mb-2">Geen routes gevonden</h3>
                     <p class="text-gray-600 mb-6">Zodra er routes beschikbaar zijn verschijnen ze hier!</p>
                     <a href="{{ route('routes.create') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">

@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+//use Illuminate\Notifications\Notifiable;
 
 class route extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+//    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -19,8 +19,7 @@ class route extends Model
         'description',
         'difficulty',
         'picture',
-        'active'
     ];
 
-    public mixed $name;
+//    public mixed $name;
 }

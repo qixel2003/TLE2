@@ -10,7 +10,7 @@ class RouteController extends Controller
     public function index()
     {
         // 1. Fetch all routes from the database
-        $routes = Route::where('active', true)->latest()->get();
+        $routes = Route::latest()->get();
 
         // 2. Pass the fetched data to a view named 'routes.index'
         return view('home', [
