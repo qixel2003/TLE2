@@ -1,3 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route pagina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
 {{--<x-layout>--}}
 <div class="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
@@ -61,11 +71,9 @@
 
                         <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
                             <div class="flex items-center">
-                                <span class="mr-1">📏</span>
                                 <span>{{ $route->distance }}</span>
                             </div>
                             <div class="flex items-center">
-                                <span class="mr-1">⏱️</span>
                                 <span>{{ $route->duration }}</span>
                             </div>
                         </div>
@@ -75,12 +83,7 @@
                         </p>
 
                         <div class="flex justify-between items-center">
-                            <a href="{{ route('routes.show', $route) }}" class="text-green-600 hover:text-green-700 font-semibold flex items-center">
-                                Bekijk route
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                                </svg>
-                            </a>
+                            <a href="{{ route('routes.show', $route) }}" class="text-green-600 hover:text-green-700 font-semibold flex items-center">Bekijk route</a>
                             <span class="text-xs text-gray-500">{{ $route->created_at->format('d M') }}</span>
                         </div>
                     </div>
@@ -107,3 +110,6 @@
 
 </div>
 {{--</x-layout>--}}
+
+</body>
+</html>

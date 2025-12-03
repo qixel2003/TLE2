@@ -38,8 +38,7 @@ class RouteController extends Controller
             'distance' => 'required',
             'duration' => 'required',
             'description' => 'required',
-            'difficulty' => 'required|in:⭐,⭐⭐,⭐⭐⭐,⭐⭐⭐⭐,⭐⭐⭐⭐⭐',
-            'image_url' => 'nullable|url',
+            'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
         $route = new Route();
@@ -49,7 +48,7 @@ class RouteController extends Controller
         $route->duration = $request->input('duration');
         $route->description = $request->input('description');
         $route->difficulty = $request->input('difficulty');
-        $route->image_url = $request->input('image_url');
+        $route->picture = null;
         $route->active = true;
         $route->save();
 

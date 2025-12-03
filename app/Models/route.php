@@ -18,7 +18,7 @@ class route extends Model
         'duration',
         'description',
         'difficulty',
-        'image_url',
+        'picture',
         'active'
     ];
 

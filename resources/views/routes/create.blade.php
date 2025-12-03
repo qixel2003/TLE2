@@ -1,3 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maak een route aan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
 {{--<x-layout>--}}
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 py-12">
 <form action="{{ route ('routes.store') }}" method="post" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
@@ -9,7 +19,7 @@
     </div>
 
     <div>
-        <label for="name" class="block font-semibold text-white">Title</label>
+        <label for="name" class="block font-semibold text-black">Title</label>
         <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
         @error('name')
         <div class="text-red-500">{{ $message }}</div>
@@ -17,24 +27,24 @@
     </div>
 
     <div>
-        <label for="location" class="block font-semibold text-white">Locatie</label>
-        <textarea name="location" id="location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('location') }}</textarea>
+        <label for="location" class="block font-semibold text-black">Locatie</label>
+        <textarea name="text" id="location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('location') }}</textarea>
         @error('location')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
     </div>
 
     <div>
-        <label for="distance" class="block font-semibold text-white">Afstand</label>
-        <textarea name="distance" id="distance" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('distance') }}</textarea>
+        <label for="distance" class="block font-semibold text-black">Afstand</label>
+        <textarea name="number" id="distance" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('distance') }}</textarea>
         @error('distance')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
     </div>
 
     <div>
-        <label for="duration" class="block font-semibold text-white">Tijd</label>
-        <textarea name="duration" id="duration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('duration') }}</textarea>
+        <label for="duration" class="block font-semibold text-black">Tijd (in minuten)</label>
+        <textarea name="number" id="duration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('duration') }}</textarea>
         @error('duration')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
@@ -52,23 +62,20 @@
 {{--    </div>--}}
 
     <div>
-        <label for="description" class="block font-semibold text-white">Description</label>
+        <label for="description" class="block font-semibold text-black">Description</label>
         <textarea name="description" id="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('description') }}</textarea>
         @error('description')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
     </div>
 
-    {{--        dit is van mijn programmeer 5 opdracht, moet nog veranderen. IS--}}
     <div>
-        <label for="difficulty" class="block font-semibold text-white">Moeilijkheid</label>
+        <label for="difficulty" class="block font-semibold text-black">Moeilijkheid</label>
         <select name="difficulty" id="difficulty" class="border border-gray-300 rounded p-2 w-full text-black">
             <option value="">Select difficulty</option>
-            <option value="⭐" {{ old('difficulty') == '⭐' ? 'selected' : '' }}>⭐</option>
-            <option value="⭐⭐" {{ old('difficulty') == '⭐⭐' ? 'selected' : '' }}>⭐⭐</option>
-            <option value="⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐</option>
-            <option value="⭐⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐⭐</option>
-            <option value="⭐⭐⭐⭐⭐" {{ old('difficulty') == '⭐⭐⭐⭐⭐' ? 'selected' : '' }}>⭐⭐⭐⭐⭐</option>
+            <option value="makkelijk" {{ old('difficulty') == 'makkelijk' ? 'selected' : '' }}>makkelijk</option>
+            <option value="gemiddeld" {{ old('difficulty') == 'gemiddeld' ? 'selected' : '' }}>gemiddeld</option>
+            <option value="moeilijk" {{ old('difficulty') == 'moeilijk' ? 'selected' : '' }}>moeilijk</option>
         </select>
         @error('difficulty')
         <div class="text-red-500">{{ $message }}</div>
@@ -77,7 +84,7 @@
 
     <div class="pt-6 border-t">
         <div class="flex space-x-4">
-            <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+            <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-black font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
                 Route Aanmaken
             </button>
             <a href="{{ route('routes.index') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200 text-center">Terug</a>
@@ -86,4 +93,7 @@
 </form>
 </div>
 {{--</x-layout>--}}
+
+</body>
+</html>
 
