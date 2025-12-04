@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Checkpoint;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,4 +19,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/checkpoints', function () {
+    $checkpoints = Checkpoint::with('mission')->orderBy('checkpoint')->get();
+    return view('checkpoints.index', compact('checkpoints'));
+})->name('checkpoints');
+
+Route::get('/checkpoints/{id}', function ($id) {
+    $checkpoint = Checkpoint::with('mission')->findOrFail($id);
+    return view('checkpoints.show', compact('checkpoint'));
+})->name('missions');
+
+require __DIR__ . '/auth.php';
