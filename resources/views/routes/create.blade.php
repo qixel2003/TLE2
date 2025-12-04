@@ -10,7 +10,22 @@
 
 {{--<x-layout>--}}
 <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 py-12">
-<form action="{{ route ('routes.store') }}" method="post" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+<form action="{{ route ('routes.store') }}" method="POST" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+    @if(session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @csrf
 
     <div class="border-b pb-4 mb-6">
@@ -28,7 +43,7 @@
 
     <div>
         <label for="location" class="block font-semibold text-black">Locatie</label>
-        <textarea name="text" id="location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('location') }}</textarea>
+        <textarea name="location" id="location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('location') }}</textarea>
         @error('location')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
@@ -36,7 +51,7 @@
 
     <div>
         <label for="distance" class="block font-semibold text-black">Afstand</label>
-        <textarea name="number" id="distance" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('distance') }}</textarea>
+        <input type="number" step="0.01" name="distance" id="distance" value="{{ old('distance') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
         @error('distance')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
@@ -44,7 +59,7 @@
 
     <div>
         <label for="duration" class="block font-semibold text-black">Tijd (in minuten)</label>
-        <textarea name="number" id="duration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('duration') }}</textarea>
+        <input type="number" name="duration" id="duration" value="{{ old('duration') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
         @error('duration')
         <div class="text-red-500">{{ $message }}</div>
         @enderror
