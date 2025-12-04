@@ -72,7 +72,7 @@
     <div>
         <label for="difficulty" class="block font-semibold text-black">Moeilijkheid</label>
         <select name="difficulty" id="difficulty" class="border border-gray-300 rounded p-2 w-full text-black">
-            <option value="">Select difficulty</option>
+            <option value="">Kies moeilijkheid</option>
             <option value="makkelijk" {{ old('difficulty') == 'makkelijk' ? 'selected' : '' }}>makkelijk</option>
             <option value="gemiddeld" {{ old('difficulty') == 'gemiddeld' ? 'selected' : '' }}>gemiddeld</option>
             <option value="moeilijk" {{ old('difficulty') == 'moeilijk' ? 'selected' : '' }}>moeilijk</option>

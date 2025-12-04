@@ -13,6 +13,7 @@
     <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Ontdek wandelroutes bij jou in de buurt</h1>
         <div class="h-1 w-24 bg-green-500 mx-auto"></div>
+        <a href="{{ route('routes.create') }}" class="text-green-600 hover:text-green-700 font-semibold flex items-center">Maak route</a>
     </div>
 
     <div class="max-w-4xl mx-auto mb-12">
