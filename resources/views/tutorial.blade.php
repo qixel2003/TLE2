@@ -1,6 +1,4 @@
 @
-@yield('nav')
-
 
 <title>Tutorial</title>
 @vite(['resources/css/app.css', 'resources/css/tutorial.css'])
