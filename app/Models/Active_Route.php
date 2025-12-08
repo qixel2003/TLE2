@@ -13,6 +13,8 @@ class Active_Route extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'active_routes';
+
     protected $fillable = [
         'route_id',
         'student_id',

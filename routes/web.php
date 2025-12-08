@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveRouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,18 @@ Route::get('/dashboard', function () {
 Route::get('/route-test', [RouteController::class, 'index'])
     ->middleware('auth')
     ->name('route-test');
+
+Route::post('/routes/{route}/start', [ActiveRouteController::class, 'store'])
+    ->middleware('auth')
+    ->name('routes.start');
+Route::get('/active-routes/{active_route}/select', [ActiveRouteController::class, 'select'])
+    ->middleware('auth')
+    ->name('active-routes.select');
+Route::patch('/active-routes/{active_route}/role', [ActiveRouteController::class, 'updateRole'])
+    ->middleware('auth')
+    ->name('active-routes.update-role');
+
+
 
 
 Route::middleware('auth')->group(function () {
