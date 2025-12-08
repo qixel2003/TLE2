@@ -1,14 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Route pagina</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-
-{{--<x-layout>--}}
+<x-layout :heading="'Routes'">
 <div class="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Ontdek wandelroutes bij jou in de buurt</h1>
@@ -85,6 +75,7 @@
 
                         <div class="flex justify-between items-center">
                             <a href="{{ route('routes.show', $route) }}" class="text-green-600 hover:text-green-700 font-semibold flex items-center">Bekijk route</a>
+                            <a href="{{ route('routes.edit', $route) }}" class="text-blue-600 hover:text-blue-700 font-semibold flex items-center">Bewerken</a>
                             <span class="text-xs text-gray-500">{{ $route->created_at->format('d M') }}</span>
                         </div>
                     </div>
@@ -109,7 +100,4 @@
 {{--    @endif--}}
 
 </div>
-{{--</x-layout>--}}
-
-</body>
-</html>
+</x-layout>

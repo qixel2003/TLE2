@@ -9,10 +9,18 @@ Route::get('/routes/create', [RouteController::class, 'create'])->name('routes.c
 Route::post('/routes/create', [RouteController::class, 'create'])->name('routes.create');
 Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');
 Route::get('/routes/{id}', [RouteController::class, 'show'])->name('routes.show');
+Route::get('/{route}/edit', [RouteController::class, 'edit'])->name('routes.edit');
+Route::put('/{route}', [RouteController::class, 'update'])->name('routes.update');
+Route::resource('routes', RouteController::class);
+Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
 
 Route::get('/tutorial', function () {
     return view('tutorial');
 });
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

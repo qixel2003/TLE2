@@ -26,6 +26,27 @@ class RouteController extends Controller
         return view('route', compact('route'));
     }
 
+    public function edit(Route $route)
+    {
+        return view('routes.edit', compact('route'));
+    }
+
+    public function update(Request $request, Route $route)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string',
+            'distance' => 'required|numeric',
+            'duration' => 'required|integer',
+            'description' => 'required|string',
+            'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
+        ]);
+
+        $route->update($validated);
+
+        return redirect()->route('routes.show', $route)->with('success', 'Route succesvol bijgewerkt!');
+    }
+
     public function create() {
         return view('routes.create');
     }
