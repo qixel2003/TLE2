@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student@example.com',
             'password' => Hash::make('password'),
             'role' => 0 // Student role
+
         ]);
 
         $route = Route::create([
