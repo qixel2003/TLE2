@@ -27,7 +27,7 @@
 
         <div>
             <label for="distance" class="block font-semibold">Afstand</label>
-            <input type="number" step="0.01" name="distance" id="distance" value="{{ old('distance') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
+            <input type="number" step="0,01" name="distance" id="distance" value="{{ old('distance', $route->distance) }}" class="border border-gray-300 rounded p-2 w-full text-black">
             @error('distance')
             <div class="text-red-500">{{ $message }}</div>
             @enderror
@@ -35,15 +35,15 @@
 
         <div>
             <label for="duration" class="block font-semibold text-black">Tijd (in minuten)</label>
-            <input type="number" name="duration" id="duration" value="{{ old('duration') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
+            <input type="number" name="duration" id="duration" value="{{ old('duration', $route->duration) }}" class="border border-gray-300 rounded p-2 w-full text-black">
             @error('duration')
             <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
         <div>
-            <label for="description" class="block font-semibold text-black">Description</label>
-            <textarea name="description" id="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">{{ old('description') }}</textarea>
+            <label for="description" class="block font-semibold text-black">Beschrijving</label>
+            <textarea name="description" id="description" class="border border-gray-300 rounded p-2 w-full text-black">{{ old('description', $route->description) }}</textarea>
             @error('description')
             <div class="text-red-500">{{ $message }}</div>
             @enderror
@@ -53,9 +53,9 @@
             <label for="difficulty" class="block font-semibold text-black">Moeilijkheid</label>
             <select name="difficulty" id="difficulty" class="border border-gray-300 rounded p-2 w-full text-black">
                 <option value="">Kies moeilijkheid</option>
-                <option value="makkelijk" {{ old('difficulty') == 'makkelijk' ? 'selected' : '' }}>makkelijk</option>
-                <option value="gemiddeld" {{ old('difficulty') == 'gemiddeld' ? 'selected' : '' }}>gemiddeld</option>
-                <option value="moeilijk" {{ old('difficulty') == 'moeilijk' ? 'selected' : '' }}>moeilijk</option>
+                <option value="makkelijk" {{ (old('difficulty', $route->difficulty) == 'makkelijk') ? 'selected' : '' }}>makkelijk</option>
+                <option value="gemiddeld" {{ (old('difficulty', $route->difficulty) == 'gemiddeld') ? 'selected' : '' }}>gemiddeld</option>
+                <option value="moeilijk" {{ (old('difficulty', $route->difficulty) == 'moeilijk') ? 'selected' : '' }}>moeilijk</option>
             </select>
             @error('difficulty')
             <div class="text-red-500">{{ $message }}</div>
