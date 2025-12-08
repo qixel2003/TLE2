@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_picture')->nullable();
-            $table->integer('role')->default(0); // 0 admin (natuurmonumenten), 1 teacher, 2 student
+            $table->integer('role')->default(0); // 0 student, 1 teacher
             $table->rememberToken();
             $table->timestamps();
         });

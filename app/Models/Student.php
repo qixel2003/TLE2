@@ -15,7 +15,6 @@ class Student extends Model
 
     protected $fillable = [
         'user_id',
-        'classroom_id',
         'points',
     ];
 
@@ -24,10 +23,6 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function classroom(): BelongsTo
-    {
-        return $this->belongsTo(Classroom::class);
-    }
 
     public function activeRoutes(): HasMany
     {

@@ -18,9 +18,7 @@ class Active_Route extends Model
         'student_id',
         'role',
         'is_completed',
-        'current_point',
         'points',
-        'start_date',
     ];
 
     public function route(): BelongsTo

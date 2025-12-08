@@ -13,7 +13,6 @@ class Route extends Model
 
     protected $fillable = [
         'name',
-        'picture',
         'location',
         'distance',
         'duration',
