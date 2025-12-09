@@ -2,8 +2,7 @@
 <div class="min-h-screen bg-gradient-to-b from-green-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Ontdek wandelroutes bij jou in de buurt</h1>
-        <div class="h-1 w-24 bg-green-500 mx-auto"></div>
-        <a href="{{ route('routes.create') }}" class="text-green-600 hover:text-green-700 font-semibold">Maak route</a>
+        <x-button href="{{ route('routes.create') }}" class="bg-natuur_groen hover:text-green-700 font-semibold">Maak route</x-button>
     </div>
 
     <div class="max-w-4xl mx-auto mb-12">

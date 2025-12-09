@@ -1,6 +1,5 @@
 <x-layout :heading="'Pas de route aan'">
-
-    <form action="{{ route('routes.update', $route->id) }}" method="post" class="space-y-4 p-6">
+    <form action="{{ route('routes.update', $route->id) }}" method="POST" class="space-y-4 p-6">
         @csrf
         @method('PUT')
 
@@ -63,8 +62,8 @@
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">Bijwerken</button>
-            <a href="{{ route('routes.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded ml-2">Annuleren</a>
+            <x-button type="submit" class="bg-natuur_groen">Bijwerken</x-button>
+            <x-button href="{{ route('routes.index') }}" class="bg-natuur_groen">Annuleren</x-button>
         </div>
     </form>
 </x-layout>

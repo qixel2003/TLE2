@@ -7,26 +7,25 @@ use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
-    public function index()
-    {
-        // Haal alle routes op uit de database
-        $routes = Route::latest()->get();
-
-        // Stuur de data naar de home view
-        return view('routes.index', compact('routes'));
-    }
-
     public function show(Route $route)
     {
         return view('routes.show', compact('route'));
     }
+    public function index()
+    {
+        // Haal alle routes op uit de database
+        $routes = Route::all();
+
+        return view('routes.index', compact('routes'));
+    }
 
     public function edit(Route $route)
     {
-        return view('routes.edit', compact('route'));
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
         // }
+
+        return view('routes.edit', compact('route'));
     }
 
     public function update(Request $request, Route $route)
@@ -37,10 +36,10 @@ class RouteController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'location' => 'required|string',
-            'distance' => 'required|integer',
-            'duration' => 'required|integer',
-            'description' => 'required|string',
+            'location' => 'required|string|max:255',
+            'distance' => 'required|numeric|min:0.1',
+            'duration' => 'required|integer|min:1',
+            'description' => 'required|string|min:255',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
@@ -63,26 +62,28 @@ class RouteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'location' => 'required',
-            'distance' => 'required',
-            'duration' => 'required',
-            'description' => 'required',
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'distance' => 'required|numeric|min:0.1',
+            'duration' => 'required|integer|min:1',
+            'description' => 'required|string|min:10',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        $route = new Route();
-        $route->name = $request->input('name');
-        $route->location = $request->input('location');
-        $route->distance = $request->input('distance');
-        $route->duration = $request->input('duration');
-        $route->description = $request->input('description');
-        $route->difficulty = $request->input('difficulty');
-        $route->picture = null;
-//        $route->active = true;
-        $route->save();
+        Route::create([
+            'name' => $request->input('name'),
+            'location' => $request->input('location'),
+            'distance' => $request->input('distance'),
+            'duration' => $request->input('duration'),
+            'description' => $request->input('description'),
+            'difficulty' => $request->input('difficulty'),
+            'picture' => null,
+            // 'active' => true,
+        ]);
 
-        return redirect()->route('routes.index')->with('success', 'Route succesvol aangemaakt.');
+        return redirect()
+            ->route('routes.index')
+            ->with('success', 'Route succesvol aangemaakt!');
     }
 
 //    public function destroy(Route $route) {

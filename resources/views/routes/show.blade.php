@@ -39,7 +39,7 @@
 
                     <div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full border border-blue-100">
                         <div class="flex items-center">
-                            <span class="mr-2">⏱️</span>
+                            <span class="mr-2">⏰️</span>
                             <span class="font-semibold">{{ $route->duration ?? '0' }} min</span>
                         </div>
                     </div>
@@ -104,7 +104,6 @@
 
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('routes.index') }}" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">Terug naar overzicht</a>
                         <a href="{{ route('routes.index') }}" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">Start Route</a>
                     </div>
                 </div>

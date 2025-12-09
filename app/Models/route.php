@@ -24,4 +24,6 @@ class Route extends Model {
     ];
 //
 //    protected $primaryKey = 'id';
+    public static function latest() {
+    }
 }
