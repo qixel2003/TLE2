@@ -9,40 +9,49 @@ class RouteController extends Controller
 {
     public function index()
     {
-        // 1. Fetch all routes from the database
+        // Haal alle routes op uit de database
         $routes = Route::latest()->get();
 
-        // 2. Pass the fetched data to a view named 'routes.index'
-        return view('home', [
-            'routes' => $routes
-        ]);
+        // Stuur de data naar de home view
+        return view('routes.index', compact('routes'));
     }
-    public function show($id) {
-        $route = Route::find($id);
-        if (!$route) {
-            return redirect()->route('routes.index')->with('error', 'Route niet gevonden.');
-        }
 
-        return view('route', compact('route'));
+    public function show(Route $route)
+    {
+        return view('routes.show', compact('route'));
     }
 
     public function edit(Route $route)
     {
         return view('routes.edit', compact('route'));
+        // if (!Auth::check()) {
+        //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
+        // }
     }
 
     public function update(Request $request, Route $route)
     {
-        $validated = $request->validate([
+        // if (!Auth::check()) {
+        //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
+        // }
+
+        $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string',
-            'distance' => 'required|numeric',
+            'distance' => 'required|integer',
             'duration' => 'required|integer',
             'description' => 'required|string',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        $route->update($validated);
+        $route->update([
+           'name' => $request->input('name'),
+            'location' => $request->input('location'),
+            'distance' => $request->input('distance'),
+            'duration' => $request->input('duration'),
+            'description' => $request->input('description'),
+            'difficulty' => $request->input('difficulty'),
+        ]);
 
         return redirect()->route('routes.show', $route)->with('success', 'Route succesvol bijgewerkt!');
     }
@@ -70,9 +79,14 @@ class RouteController extends Controller
         $route->description = $request->input('description');
         $route->difficulty = $request->input('difficulty');
         $route->picture = null;
-        $route->active = true;
+//        $route->active = true;
         $route->save();
 
-        return redirect()->route('routes.index')->with('success', 'Route succesvol aangemaakt!');
+        return redirect()->route('routes.index')->with('success', 'Route succesvol aangemaakt.');
     }
+
+//    public function destroy(Route $route) {
+//        $route->delete();
+//        return redirect()->('home')->with('succes', 'Route verwijdered');
+//    }
 }

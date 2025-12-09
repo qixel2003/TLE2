@@ -43,7 +43,7 @@
                         @if($route->picture)
                             <img src="{{ $route->picture }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
                         @else
-                            <div class="w-full h-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                            <div class="w-full h-full bg-natuur_groen flex items-center justify-center">
                                 <span class="text-white text-3xl">🌲</span>
                             </div>
                         @endif
