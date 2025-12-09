@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\Classroom;
+use App\Models\User;
 
 class ClassroomController extends Controller
 {
@@ -15,33 +17,42 @@ class ClassroomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
-            'points' => 'required|integer|min:0',
+            //'points' => 'required|integer|min:0',
+            'school_id' => 'required|exists:schools,id',
         ]);
 
         //insert into
         $classroom = new Classroom();
         $classroom->name = $request->input('name');
-        $classroom->points = $request->input('points');
+        //$classroom->points = $request->input('points');
         $classroom->user_id = auth()->id();
+        $classroom->school_id = $request->input('school_id');
         $classroom->save();
 
-        return redirect()->route('classrooms.show', $classroom->id);
+        return redirect()->route('classrooms.show', compact('classroom'));
 
     }
 
-    public function create()
+    public function create(Classroom $classroom )
     {
-        $classroom = Classroom::all();
+        $schools = School::all();
 
-        return view('classrooms.create', compact('classroom'));
+        $users = User::where('role', 2)->get();
+
+        $classroomUsers = $classroom->users()->where('role', 2)->get();
+
+        return view('classrooms.create', compact( 'schools', 'classroomUsers', 'classroom', 'users'));
     }
 
     public function show($id)
     {
-        $classroom = Classroom::with(['user', 'users'])->findOrFail($id);
-        return view('classrooms.show', compact('classroom'));
+        $users = User::where('role', 2)->get();
+        $schools = School::all();
+        $classroom = Classroom::with('users')->findOrFail($id);
+        $classroomUsers = $classroom->users()->where('role', 2)->get();
+        return view('classrooms.show', compact('classroom', 'schools', 'users', 'classroomUsers'));
+
     }
 
     public function edit()
@@ -56,9 +67,10 @@ class ClassroomController extends Controller
     public function update(Request $request, Classroom $classroom)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            //'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
-            'points' => 'required|integer|min:0',
+            //'points' => 'required|integer|min:0',
+            'school_id' => 'required|exists:schools,id',
         ]);
         $classroom->update($request->all());
 
@@ -73,8 +85,23 @@ class ClassroomController extends Controller
         }
 
         $classroom->delete();
-        return redirect('school.dashboard')->with('status', 'Classroom deleted successfully.');
+        return redirect('school')->with('status', 'Classroom deleted successfully.');
 
     }
+
+    public function addStudent(Request $request, Classroom $classroom)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $student = User::find($request->user_id);
+
+        $student->classroom_id = $classroom->id;
+        $student->save();
+
+        return redirect()->back()->with('success', 'Leerling toegevoegd!');
+    }
+
 
 }

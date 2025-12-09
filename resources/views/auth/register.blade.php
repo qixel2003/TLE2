@@ -22,7 +22,7 @@
             <x-input-label for="role" :value="__('Registreren als')" />
             <select id="role" name="role" required class="text-white block mt-1 w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm">
                 <option value="0" {{ old('role') === '0' ? 'selected' : '' }}>Natuurmonumenten</option>
-                <option value="1" {{ old('role') === '1' ? 'selected' : '' }}>School</option>
+                <option value="1" {{ old('role') === '1' ? 'selected' : '' }}>Leraar</option>
                 <option value="2" {{ old('role') === '2' ? 'selected' : '' }}>Leerling</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />

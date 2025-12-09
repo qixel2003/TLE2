@@ -19,29 +19,37 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('classrooms.create') }}"/>
-                        <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                            Maak een nieuwe klas aan
-                        </button>
+                    <a href="{{ route('school.create') }}"/>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                        Meld je school aan!
+                    </button>
                 </div>
             </div>
         </div>
-        <div>
-            @foreach($classrooms as $classroom)
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-semibold">{{ $classroom->name }}</h3>
-                                <p class="text-sm text-gray-500">Aantal leerlingen: {{ $classroom->users()->where('role', 2)->count() }}</p>
-                            </div>
-                            <div>
-                                <a href="{{ route('classrooms.show', $classroom) }}" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Bekijk Klas</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
     </div>
+
+    @foreach($schools as $school)
+        <a href="{{ route('school.show', $school) }}"
+           class="">
+
+            <div
+                class="rounded-lg p-4 text-white bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-md hover:border-blue-600 p-5 flex flex-col justify-between mb-2">
+                <!--toekomstige titel-->
+                <h1 class="text-2xl font-bold mb-4">{{ $school['name'] }}</h1>
+                <div class="shadow-xl p-4 rounded-lg border mb-3 space-y-1 border-gray-800">
+                    <p class="text-sm text-gray-500">Aantal leerlingen: {{ $school->user()->where('role', 2)->count() }}</p>
+                    <p class="text-sm text-gray-500">Aantal punten: {{ $school->points ?? 0 }}</p>
+                    <p class="text-sm text-gray-500">Aantal gelopen routes: {{ $school->points ?? 0 }}</p>
+                </div>
+
+                <div class="p-1 mt-1">
+                    <p><strong>Docent:</strong> {{ optional($school->user->firstWhere('role', 1))->firstname ?? 'Unknown' }}</p>
+                </div>
+            </div>
+        </a>
+    @endforeach
+
+
+
+
 </x-app-layout>

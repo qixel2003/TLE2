@@ -1,12 +1,6 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('classrooms.store') }}">
+    <form method="POST" action="{{ route('school.store') }}">
         @csrf
-
-        <select name="school_id" required>
-            @foreach($schools as $school)
-                <option value="{{ $school->id }}">{{ $school->name }}</option>
-            @endforeach
-        </select>
 
         <!-- Name -->
         <div>
@@ -16,8 +10,12 @@
         </div>
         <div>
             <x-primary-button class="ms-4">
-                {{ __('Voeg klas toe ') }}
+                {{ __('Voeg school toe ') }}
             </x-primary-button>
         </div>
+
+
+
+
     </form>
 </x-guest-layout>

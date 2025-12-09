@@ -18,25 +18,23 @@ class Classroom extends Model
         'user_id',
         'name',
         'points',
+        'school_id'
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\School::class);
     }
 
-    public function school(): BelongsTo
+    public function users(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id')->where('role', 1);
-    }
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        //een op veel
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function students(): HasMany
+    public function student(): BelongsTo
     {
-        return $this->hasMany(User::class, 'classroom_id')->where('role', 2);
+        return $this->belongsTo(Student::class);
     }
+
+
 }

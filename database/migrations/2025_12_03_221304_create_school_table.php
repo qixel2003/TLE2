@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classrooms', function (Blueprint $table) {
+        Schema::create('schools', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->bigInteger('points')->default(0);
-            $table->foreignId('school_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('city')->nullable();
+            $table->string('points')->nullable();
+            $table->foreignId('classroom_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('student_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('classrooms');
+        Schema::dropIfExists('schools');
     }
 };

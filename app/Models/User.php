@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'password',
         'profile_picture',
         'role',
+        'school_id',
         'classroom_id',
     ];
 
@@ -51,9 +53,22 @@ class User extends Authenticatable
         ];
     }
 
-    public function classroom(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function school(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
 
-        return $this->belongsTo(Classroom::class);
+        return $this->hasMany(School::class);
     }
+
+    public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
+        return $this->belongsTo(Student::class);
+    }
+
+    public function classroom(): HasMany
+    {
+        return $this->hasMany(Classroom::class);
+    }
+
+
 }
