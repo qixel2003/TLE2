@@ -16,7 +16,7 @@
 <div class="min-h-full">
 
     <!-- NAVBAR -->
-    <nav class="bg-white" aria-labelledby="main-nav">
+    <nav class="bg-witte_eend" aria-labelledby="main-nav">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
 
@@ -110,7 +110,7 @@
     </nav>
 
     <!-- HEADER -->
-    <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-0 after:border-y after:border-white/10">
+    <header class="relative bg-witte_eend after:pointer-events-none after:absolute after:inset-0 after:border-y after:border-white/10">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold tracking-tight text-white">{{ $heading }}</h1>
         </div>

@@ -28,4 +28,6 @@ class Comment extends Model
 
         return $this->belongsTo(Photo::class);
     }
+
+
 }
