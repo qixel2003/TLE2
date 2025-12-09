@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Checkpoint;
@@ -14,7 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+//    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -28,5 +29,8 @@ Route::get('/checkpoints/{id}', function ($id) {
     $checkpoint = Checkpoint::with('mission')->findOrFail($id);
     return view('checkpoints.show', compact('checkpoint'));
 })->name('missions');
+
+Route::resource('badges', BadgeController::class);
+
 
 require __DIR__ . '/auth.php';
