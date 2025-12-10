@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('route-test');
+        return redirect()->route('routes.index');
     }
 
     /**

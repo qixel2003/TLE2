@@ -94,7 +94,7 @@ class ActiveRouteController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('active-routes.mission', $activeRoute);
+        return redirect()->route('checkpoints');
     }
 
     /**

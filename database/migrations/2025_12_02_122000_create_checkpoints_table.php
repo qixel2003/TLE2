@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('checkpoints', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('location');
-            $table->integer('distance');
-            $table->integer('duration');
-            $table->text('description');
-            $table->string('difficulty'); // makkelijk, gemiddeld, moeilijk
             $table->timestamps();
+            $table->integer('checkpoint');
+            $table->foreignId('route_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mission_id')->constrained()->onDelete('cascade');
+            $table->integer('points');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('checkpoints');
     }
 };

@@ -55,8 +55,9 @@
                                 </li>
                             @endfor
                         </ul>
-                        <form method="POST" action="#" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
 
                             <button
                                 class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -73,8 +74,9 @@
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->drawing ?? 'Geen tekenopdracht.' }}
                         </p>
-                        <form method="POST" action="#" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
 
                             <label class="block text-sm font-medium text-gray-700 mt-3">Upload bestand
                                 (tekening/pdf)</label>
@@ -99,8 +101,9 @@
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->photography ?? 'Geen fotografieopdracht.' }}
                         </p>
-                        <form method="POST" action="#" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PATCH')
 
                             <label class="block text-sm font-medium text-gray-700 mt-3">Upload foto</label>
                             <input

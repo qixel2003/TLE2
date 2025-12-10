@@ -3,10 +3,13 @@
 use App\Http\Controllers\ActiveRouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
+use App\Models\Active_Route;
 use Illuminate\Support\Facades\Route;
 use App\Models\Checkpoint;
 
-Route::get('/', [RouteController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Route::get('/tutorial', function () {
     return view('tutorial');
@@ -16,15 +19,27 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
-Route::get('/routes/create', [RouteController::class, 'create'])->name('routes.create');
-Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');
-Route::get('/routes/{route}', [RouteController::class, 'show'])->name('routes.show');
-Route::get('/routes/{route}/edit', [RouteController::class, 'edit'])->name('routes.edit');
-Route::put('/routes/{route}', [RouteController::class, 'update'])->name('routes.update');
+Route::get('/routes', [RouteController::class, 'index'])
+    ->middleware('auth')
+    ->name('routes.index');
+Route::get('/routes/create', [RouteController::class, 'create'])
+    ->middleware('auth')
+    ->name('routes.create');
+Route::post('/routes', [RouteController::class, 'store'])
+    ->middleware('auth')
+    ->name('routes.store');
+Route::get('/routes/{route}', [RouteController::class, 'show'])
+    ->middleware('auth')
+    ->name('routes.show');
+Route::get('/routes/{route}/edit', [RouteController::class, 'edit'])
+    ->middleware('auth')
+    ->name('routes.edit');
+Route::put('/routes/{route}', [RouteController::class, 'update'])
+    ->middleware('auth')
+    ->name('routes.update');
 //Route::delete('/routes/{route}', [RouteController::class, 'destroy'])->name('routes.destroy');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -50,9 +65,6 @@ Route::patch('/active-routes/{activeRoute}/complete', [ActiveRouteController::cl
     ->middleware('auth')
     ->name('active-routes.complete');
 
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -67,7 +79,23 @@ Route::get('/checkpoints', function () {
 
 Route::get('/checkpoints/{id}', function ($id) {
     $checkpoint = Checkpoint::with('mission')->findOrFail($id);
-    return view('checkpoints.show', compact('checkpoint'));
-})->name('missions');
+
+    // Log user and student information
+    \Log::info('User ID: ' . auth()->id());
+    \Log::info('User: ' . json_encode(auth()->user()));
+    \Log::info('Student: ' . json_encode(auth()->user()->student));
+    \Log::info('Student ID: ' . (auth()->user()->student ? auth()->user()->student->id : 'null'));
+
+    // Get the user's active route
+    $activeRoute = Active_Route::where('student_id', auth()->user()->student->id)
+        ->where('is_completed', false)
+        ->latest()
+        ->first();
+
+    \Log::info('Active Route: ' . json_encode($activeRoute));
+
+    return view('checkpoints.show', compact('checkpoint', 'activeRoute'));
+})->middleware('auth')->name('missions');
+
 
 require __DIR__ . '/auth.php';
