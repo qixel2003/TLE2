@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('prompts', function (Blueprint $table) {
             $table->id();
+            $table->string('drawing');
+            $table->string('photography');
+            $table->foreignId('mission_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -11,10 +11,9 @@ class School extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'city',
+        'location',
         'points',
         'classroom_id',
-        'student_id',
         'user_id',
     ];
 

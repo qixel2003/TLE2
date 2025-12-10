@@ -2,9 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Checkpoint;
+use App\Models\Classroom;
 use App\Models\Mission;
+use App\Models\Prompt;
+use App\Models\Question;
 use App\Models\Route;
+use App\Models\School;
+use App\Models\Student;
 use App\Models\User;
+use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,13 +34,24 @@ class DatabaseSeeder extends Seeder
             'role' => 1,
         ]);
 
-        $student = User::factory()->create([
+        $studentUser = User::factory()->create([
             'firstname' => 'John',
             'lastname' => 'Doe',
             'email' => 'johndoe@hr.nl',
             'password' => Hash::make('Rootrootroot'),
             'role' => 2,
-            'classroom_id' => null,
+        ]);
+
+        // Create the actual Student record
+        $student = Student::create([
+            'user_id' => $studentUser->id,
+            'classroom_id' => null, // Will be set after classroom is created
+        ]);
+
+        School::factory()->create([
+            'name' => 'HR School',
+            'location' => 'Rotterdam',
+            'user_id' => 1,
         ]);
 
         Classroom::factory()->create([
@@ -41,11 +59,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Klas 1A',
             'points' => 0,
             'school_id' => 1
-        ]);
-
-        School::factory()->create([
-            'name' => 'HR School',
-            'user_id' => 1,
         ]);
 
         $route = route::create([
