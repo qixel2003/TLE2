@@ -13,7 +13,6 @@ class Student extends Model
 
     protected $fillable = [
         'user_id',
-        'active_route_id',
         'points',
         'school_id',
         'classroom_id',
