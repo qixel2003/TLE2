@@ -67,7 +67,7 @@
 
             <div class="pt-6 border-t">
                 <div class="flex space-x-4">
-                    <x-button type="submit" class="bg-natuur_groen">Route Aanmaken</x-button>
+                    <button type="submit" class="bg-natuur_groen">Route Aanmaken</button>
                     <x-button href="{{ route('routes.index') }}" class="bg-natuur_groen">Terug</x-button>
                 </div>
             </div>

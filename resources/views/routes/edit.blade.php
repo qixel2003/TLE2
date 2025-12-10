@@ -62,7 +62,7 @@
         </div>
 
         <div class="pt-4">
-            <x-button type="submit" class="bg-natuur_groen">Bijwerken</x-button>
+            <button type="submit" class="bg-natuur_groen">Bijwerken</button>
             <x-button href="{{ route('routes.index') }}" class="bg-natuur_groen">Annuleren</x-button>
         </div>
     </form>

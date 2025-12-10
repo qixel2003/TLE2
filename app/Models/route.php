@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,8 @@ use Illuminate\Support\Arr;
 
 class Route extends Model {
 
-//    use SoftDeletes;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable;
     protected $fillable = [
         'name',
         'location',
@@ -19,11 +21,8 @@ class Route extends Model {
         'duration',
         'description',
         'difficulty',
-        'picture',
 //        'active',
     ];
 //
 //    protected $primaryKey = 'id';
-    public static function latest() {
-    }
 }
