@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('location');
-            $table->integer('distance');
+            $table->integer('distance', 8, 2);
             $table->integer('duration');
             $table->text('description');
             $table->string('difficulty'); // makkelijk, gemiddeld, moeilijk
