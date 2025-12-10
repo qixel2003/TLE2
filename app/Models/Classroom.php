@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Classroom extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<\Database\Factories\ClassroomFactory> */
     use HasFactory, Notifiable;
 
     protected $fillable = [
@@ -31,9 +31,9 @@ class Classroom extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function student(): BelongsTo
+    public function students(): HasMany
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasMany(Student::class);
     }
 
 

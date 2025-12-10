@@ -48,11 +48,12 @@ Route::middleware('auth')->group(function () {
 // student
 Route::middleware('auth')->group(function () {
     Route::get('/student', function () {
-        if (!auth()->check() || (int) auth()->user()->role !== 2) {
-            abort(403, 'Unauthorized action.');
-        }
-
         return view('student.dashboard');
     })->name('student.dashboard');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
+    Route::resource('student', App\Http\Controllers\StudentController::class);
 });
 require __DIR__.'/auth.php';

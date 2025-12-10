@@ -11,15 +11,28 @@ class Student extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $fillable = [
+        'user_id',
+        'active_route_id',
+        'points',
+        'school_id',
+    ];
+
     public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
 
         return $this->belongsTo(School::class);
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
 
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
+
+    public function classroom(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+
 }

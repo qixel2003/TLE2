@@ -26,9 +26,9 @@
     <form method="POST" action="{{ route('classrooms.addStudent', $classroom->id) }}">
         @csrf
 
-        <select name="user_id" required>
-            @foreach($users as $user)
-                <option value="{{ $user->id }}">{{ $user->email }}</option>
+        <select name="student_id" required>
+            @foreach($students as $student)
+                <option value="{{ $student->id }}">{{ $student->user->email }}</option>
             @endforeach
         </select>
 

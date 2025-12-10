@@ -6,6 +6,7 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\Classroom;
 use App\Models\User;
+use App\Models\Student;
 
 class ClassroomController extends Controller
 {
@@ -49,9 +50,10 @@ class ClassroomController extends Controller
     {
         $users = User::where('role', 2)->get();
         $schools = School::all();
+        $students = Student::all();
         $classroom = Classroom::with('users')->findOrFail($id);
         $classroomUsers = $classroom->users()->where('role', 2)->get();
-        return view('classrooms.show', compact('classroom', 'schools', 'users', 'classroomUsers'));
+        return view('classrooms.show', compact('classroom', 'schools', 'users', 'classroomUsers', 'students'));
 
     }
 
@@ -92,15 +94,14 @@ class ClassroomController extends Controller
     public function addStudent(Request $request, Classroom $classroom)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'student_id' => 'required|exists:users,id',
         ]);
 
-        $student = User::find($request->user_id);
 
-        $student->classroom_id = $classroom->id;
-        $student->save();
+        $classroom->student_id = $request->input('student_id');
+        $classroom->save();
 
-        return redirect()->back()->with('success', 'Leerling toegevoegd!');
+        return redirect()->route('classrooms.show', $classroom->id, compact('classroom', ));
     }
 
 

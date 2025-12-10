@@ -59,10 +59,10 @@ class User extends Authenticatable
         return $this->hasMany(School::class);
     }
 
-    public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function student(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
 
-        return $this->belongsTo(Student::class);
+        return $this->hasOne(Student::class);
     }
 
     public function classroom(): HasMany
