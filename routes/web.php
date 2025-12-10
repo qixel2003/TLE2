@@ -4,6 +4,7 @@ use App\Http\Controllers\ActiveRouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Checkpoint;
 
 Route::get('/', [RouteController::class, 'index'])->name('home');
 
@@ -54,8 +55,19 @@ Route::patch('/active-routes/{activeRoute}/complete', [ActiveRouteController::cl
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/checkpoints', function () {
+    $checkpoints = Checkpoint::with('mission')->orderBy('checkpoint')->get();
+    return view('checkpoints.index', compact('checkpoints'));
+})->name('checkpoints');
+
+Route::get('/checkpoints/{id}', function ($id) {
+    $checkpoint = Checkpoint::with('mission')->findOrFail($id);
+    return view('checkpoints.show', compact('checkpoint'));
+})->name('missions');
 
 require __DIR__ . '/auth.php';
