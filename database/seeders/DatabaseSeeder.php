@@ -42,23 +42,24 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
-        // Create the actual Student record
-        $student = Student::create([
-            'user_id' => $studentUser->id,
-            'classroom_id' => null, // Will be set after classroom is created
-        ]);
-
-        School::factory()->create([
+        $school = School::factory()->create([
             'name' => 'HR School',
             'location' => 'Rotterdam',
             'user_id' => 1,
         ]);
 
-        Classroom::factory()->create([
+        $classroom = Classroom::factory()->create([
             'user_id' => 1,
             'name' => 'Klas 1A',
             'points' => 0,
             'school_id' => 1
+        ]);
+
+        // Create the actual Student record
+        $student = Student::create([
+            'user_id' => $studentUser->id,
+            'school_id' => $school->id,
+            'classroom_id' => $classroom->id,
         ]);
 
         $route = route::create([
