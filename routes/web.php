@@ -4,6 +4,7 @@ use App\Http\Controllers\ActiveRouteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use App\Models\Active_Route;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Checkpoint;
 
@@ -99,3 +100,39 @@ Route::get('/checkpoints/{id}', function ($id) {
 
 
 require __DIR__ . '/auth.php';
+// School routes
+Route::middleware('auth')->group(function () {
+
+    Route::get('/school', function () {
+        if (auth()->user()->role !== 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return app(SchoolController::class)->dashboard();
+    })->name('school.dashboard');
+
+    // Resource routes voor school
+
+});Route::resource('school', SchoolController::class)->except(['index']);
+
+
+
+// classroom
+Route::middleware('auth')->group(function () {
+    Route::get('classrooms/{classroom}/edit', [\App\Http\Controllers\ClassroomController::class, 'edit'])->name('classrooms.edit');
+    Route::resource('classrooms', App\Http\Controllers\ClassroomController::class);
+    Route::post('classrooms/{classroom}/addStudent', [\App\Http\Controllers\ClassroomController::class, 'addStudent'])->name('classrooms.addStudent');
+});
+
+// student
+Route::middleware('auth')->group(function () {
+    Route::get('/student', function () {
+        return view('student.dashboard');
+    })->name('student.dashboard');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
+    Route::resource('student', App\Http\Controllers\StudentController::class);
+});
+require __DIR__.'/auth.php';

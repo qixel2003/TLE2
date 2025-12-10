@@ -2,16 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Checkpoint;
 use App\Models\Mission;
-use App\Models\Prompt;
-use App\Models\Question;
-use App\Models\route;
-use App\Models\Student;
+use App\Models\Route;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,13 +17,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $student = User::create([
-            'name' => 'Student',
-            'lastname' => 'Example',
-            'email' => 'student@example.com',
-            'password' => Hash::make('password'),
-            'role' => 0, // Student role
-            'email_verified_at' => now()
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'firstname' => 'Jane',
+            'lastname' => 'Doe',
+            'email' => 'janedoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 1,
+        ]);
+
+        $student = User::factory()->create([
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'johndoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 2,
+            'classroom_id' => null,
+        ]);
+
+        Classroom::factory()->create([
+            'user_id' => 1,
+            'name' => 'Klas 1A',
+            'points' => 0,
+            'school_id' => 1
+        ]);
+
+        School::factory()->create([
+            'name' => 'HR School',
+            'user_id' => 1,
         ]);
 
         $route = route::create([
@@ -40,11 +57,6 @@ class DatabaseSeeder extends Seeder
             'difficulty' => 'Easy',
         ]);
 
-        Student::create([
-            'user_id' => $student->id,
-            'points' => 0,
-        ]);
-
         $mission = Mission::create([
             'title' => 'Bos Verkenningsmissie',
             'description' => 'Volg de route en ontdek wat er onderweg gebeurt.',
@@ -52,7 +64,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Prompt::create([
-
             'mission_id' => $mission->id,
             'drawing' => 'Teken iets dat je ziet op de route.',
             'photography' => 'Maak een foto van iets interessants.',
