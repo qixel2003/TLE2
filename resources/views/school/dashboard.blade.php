@@ -41,7 +41,6 @@
                 <!--toekomstige titel-->
                 <h1 class="text-2xl font-bold mb-4">{{ $school['name'] }}</h1>
                 <div class="shadow-xl p-4 rounded-lg border mb-3 space-y-1 border-gray-800">
-                    <p class="text-sm text-gray-500">Aantal leerlingen: {{ $school->user()->where('role', 2)->count() }}</p>
                     <p class="text-sm text-gray-500">Aantal punten: {{ $school->points ?? 0 }}</p>
                     <p class="text-sm text-gray-500">Aantal gelopen routes: {{ $school->points ?? 0 }}</p>
                 </div>

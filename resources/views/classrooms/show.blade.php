@@ -50,7 +50,6 @@
             </h3>
             <p>{{ $student->user->email }}</p>
             <p>Punten: {{ $student->points }}</p>
-            <p>Routes: {{ $student->active_route_id ?? 'Nog geen routes gestart' }}</p>
         </div>
     @endforeach
 
