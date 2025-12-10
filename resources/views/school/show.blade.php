@@ -2,8 +2,7 @@
     <div class="max-w-2xl mx-auto bg-gray-900 text-gray-200 p-6 rounded-xl mt-10 shadow-md">
         <h1 class="text-3xl font-bold mb-4">{{ $school->name }}</h1>
 
-        <p><strong>Docent:</strong> {{ optional($school->user->firstWhere('role', 1))->firstname ?? 'Unknown' }}</p>
-        <p class="text-sm text-gray-500">Aantal leerlingen: {{ $school->user()->where('role', 2)->count() }}</p>
+        <p><strong>Docent:</strong> {{ optional($school->user->firstWhere('role', 1))->firstname ?? 'Niet bekend' }}</p>
 
         <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
             <a href="/rocks/{{ $school->id }}/edit" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-4 py-2 transition">Edit</a>
@@ -38,8 +37,7 @@
                         <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between items-center">
                             <div>
                                 <h3 class="text-lg font-semibold">{{ $classroom->name }}</h3>
-                                <p class="text-sm text-gray-500">Aantal
-                                    leerlingen: {{ $classroom->users()->where('role', 2)->count() }}</p>
+                                <p class="text-sm text-gray-500">Aantal leerlingen:{{ $classroom->students->count() > 0 ? $classroom->students->count() : 'Er zitten nog geen leerlingen in deze klas' }}</p>
                             </div>
                             <div>
                                 <a href="{{ route('classrooms.show', $classroom) }}"

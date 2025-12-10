@@ -52,6 +52,7 @@ class SchoolController extends Controller
     {
         $classrooms = Classroom::all();
         $school = School::with('user')->findOrFail($id);
+
         return view('school.show', compact('school', 'classrooms'));
     }
 

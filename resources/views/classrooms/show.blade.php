@@ -3,8 +3,9 @@
         <h1 class="text-3xl font-bold mb-4">{{ $classroom->name }}</h1>
 
 
-        <p><strong>Docent:</strong> {{ optional($classroom->users)->firstname ?? 'Unknown' }}</p>
-        <p class="text-sm text-gray-500">Aantal leerlingen: {{ $classroom->users()->where('role', 2)->count() }}</p>
+        <p><strong>Leraar:</strong> {{ $classroom->teacher->firstname ?? 'Niet bekend' }}</p>
+        <p class="text-sm text-gray-500">Aantal leerlingen: {{ $classroom->students->count() > 0 ? $classroom->students->count() : 'Er zitten nog geen leerlingen in deze klas' }}</p>
+        <p class="text-sm text-gray-500">Punten totaal: {{ $classroom->points > 0 ? $classroom->points : 'Deze klas heeft nog geen punten verdiend' }}</p>
         <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
             <a href="/classrooms/{{ $classroom->id }}/edit" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-4 py-2 transition">Edit</a>
 
@@ -42,12 +43,16 @@
     <!-- loopen leerlingen -->
     <h2 class="text-xl text-white font-bold mb-2">Leerlingen in deze klas:</h2>
 
-    @foreach($classroomUsers as $student)
-        <div
-            class="rounded-lg p-4 text-white bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-md hover:border-blue-600 p-5 flex flex-col justify-between mb-2">
-            <h3 class="text-lg font-semibold">{{ $student->firstname }} {{ $student->lastname }}</h3>
-            <p>{{ $student->email }}</p>
+    @foreach($classroom->students as $student)
+        <div class="rounded-lg p-4 text-white bg-gray-900 border border-gray-800 shadow-md hover:border-blue-600 mb-2">
+            <h3 class="text-lg font-semibold">
+                {{ $student->user->firstname }} {{ $student->user->lastname }}
+            </h3>
+            <p>{{ $student->user->email }}</p>
+            <p>Punten: {{ $student->points }}</p>
+            <p>Routes: {{ $student->active_route_id ?? 'Nog geen routes gestart' }}</p>
         </div>
     @endforeach
+
 
 </x-app-layout>

@@ -21,6 +21,15 @@ class ClassroomController extends Controller
             'name' => 'required|string|max:255',
             //'points' => 'required|integer|min:0',
             'school_id' => 'required|exists:schools,id',
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                function ($attribute, $value, $fail) {
+                    if (User::find($value)->role !== 1) {
+                        $fail('De geselecteerde gebruiker is geen leraar.');
+                    }
+                },
+            ],
         ]);
 
         //insert into
@@ -52,8 +61,8 @@ class ClassroomController extends Controller
         $schools = School::all();
         $students = Student::all();
         $classroom = Classroom::with('users')->findOrFail($id);
-        $classroomUsers = $classroom->users()->where('role', 2)->get();
-        return view('classrooms.show', compact('classroom', 'schools', 'users', 'classroomUsers', 'students'));
+        $classroom->load('students.user');
+        return view('classrooms.show', compact('classroom', 'schools', 'users', 'students'));
 
     }
 
@@ -94,14 +103,15 @@ class ClassroomController extends Controller
     public function addStudent(Request $request, Classroom $classroom)
     {
         $request->validate([
-            'student_id' => 'required|exists:users,id',
+            'student_id' => 'required|exists:students,id',
         ]);
 
 
-        $classroom->student_id = $request->input('student_id');
-        $classroom->save();
+        $student = Student::findOrFail($request->student_id);
+        $student->classroom_id = $classroom->id;
+        $student->save();
 
-        return redirect()->route('classrooms.show', $classroom->id, compact('classroom', ));
+        return redirect()->route('classrooms.show', $classroom->id);
     }
 
 
