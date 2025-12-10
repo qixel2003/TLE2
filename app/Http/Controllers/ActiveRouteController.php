@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Active_Route;
-use App\Models\Route;
+use App\Models\route;
 use Illuminate\Http\Request;
 
 class ActiveRouteController extends Controller
@@ -27,7 +27,7 @@ class ActiveRouteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Route $route)
+    public function store(Request $request, route $route)
     {
         // Checks if the authenticated user has a student profile
         $student = auth()->user()->student;

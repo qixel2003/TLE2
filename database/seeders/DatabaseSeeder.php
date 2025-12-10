@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Route;
+use App\Models\route;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        $route = Route::create([
+        $route = route::create([
             'name' => 'Sample Route',
             'location' => 'Sample Location',
             'distance' => 5,

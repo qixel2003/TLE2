@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Route;
+use App\Models\route;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
-    public function show(Route $route)
+    public function show(route $route)
     {
         return view('routes.show', compact('route'));
     }
@@ -15,12 +15,12 @@ class RouteController extends Controller
     public function index()
     {
         // Haal alle routes op uit de database
-        $routes = Route::all();
+        $routes = route::all();
 
         return view('routes.index', compact('routes'));
     }
 
-    public function edit(Route $route)
+    public function edit(route $route)
     {
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
@@ -29,7 +29,7 @@ class RouteController extends Controller
         return view('routes.edit', compact('route'));
     }
 
-    public function update(Request $request, Route $route)
+    public function update(Request $request, route $route)
     {
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
@@ -74,7 +74,7 @@ class RouteController extends Controller
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        Route::create([
+        route::create([
             'name'=> $request->name,
             'location'=> $request->location,
             'distance'=> $request->distance,
