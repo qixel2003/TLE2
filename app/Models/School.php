@@ -13,7 +13,6 @@ class School extends Model
         'name',
         'location',
         'points',
-        'school_id',
         'classroom_id',
         'user_id',
     ];
