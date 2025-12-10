@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
-        School::factory()->create([
+        $school = School::factory()->create([
             'name' => 'HR School',
             'location' => 'Rotterdam',
             'user_id' => 1,
@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
         // Create the actual Student record
         $student = Student::create([
             'user_id' => $studentUser->id,
+            'school_id' => $school->id,
             'classroom_id' => $classroom->id,
         ]);
 
