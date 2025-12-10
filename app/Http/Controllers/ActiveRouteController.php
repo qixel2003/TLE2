@@ -43,6 +43,7 @@ class ActiveRouteController extends Controller
             return redirect()->back()->with('error', 'You have already started this route.');
         }
 
+        //Create Active Route if all clear
         $activeRoute = Active_Route::create([
             'route_id' => $route->id,
             'student_id' => $student->id,
@@ -93,7 +94,7 @@ class ActiveRouteController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('active-routes.mission', $activeRoute);
     }
 
     /**
@@ -113,4 +114,30 @@ class ActiveRouteController extends Controller
 
         return view('active-routes.select', compact('activeRoute'));
     }
+
+    public function mission(Active_Route $activeRoute)
+    {
+        // Check to ensure the active route belongs to the authenticated user
+        if ($activeRoute->student_id !== auth()->user()->student->id) {
+            abort(403);
+        }
+
+        return view('route-mission', compact('activeRoute'));
+    }
+
+    public function complete(Active_Route $activeRoute)
+    {
+        // Check to ensure the active route belongs to the authenticated user
+        if ($activeRoute->student_id !== auth()->user()->student->id) {
+            abort(403);
+        }
+
+        $activeRoute->update([
+            'is_completed' => true,
+        ]);
+
+        return view('route-finished', compact('activeRoute'));
+    }
 }
+
+

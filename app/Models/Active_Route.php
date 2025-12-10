@@ -32,4 +32,14 @@ class Active_Route extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function getRoleName(): string
+    {
+        return match($this->role) {
+            0 => 'Historicus',
+            1 => 'Tekenaar',
+            2 => 'Fotograaf',
+            default => 'Onbekend'
+        };
+    }
 }

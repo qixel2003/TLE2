@@ -26,6 +26,12 @@ Route::get('/active-routes/{active_route}/select', [ActiveRouteController::class
 Route::patch('/active-routes/{active_route}/role', [ActiveRouteController::class, 'updateRole'])
     ->middleware('auth')
     ->name('active-routes.update-role');
+Route::get('/active-routes/{activeRoute}/mission', [ActiveRouteController::class, 'mission'])
+    ->middleware('auth')
+    ->name('active-routes.mission');
+Route::patch('/active-routes/{activeRoute}/complete', [ActiveRouteController::class, 'complete'])
+    ->middleware('auth')
+    ->name('active-routes.complete');
 
 
 
