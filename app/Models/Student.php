@@ -16,6 +16,7 @@ class Student extends Model
         'active_route_id',
         'points',
         'school_id',
+        'classroom_id',
     ];
 
     public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo

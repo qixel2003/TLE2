@@ -20,23 +20,20 @@ Route::middleware('auth')->group(function () {
 
 // School routes
 Route::middleware('auth')->group(function () {
-    Route::get('school/{school}/edit', [\App\Http\Controllers\SchoolController::class, 'edit'])->name('school.edit');
-    Route::resource('school', App\Http\Controllers\SchoolController::class);
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/school', function () {
-        if (!auth()->check() || (int) auth()->user()->role !== 1) {
+        if (auth()->user()->role !== 1) {
             abort(403, 'Unauthorized action.');
         }
 
-        return view('school.dashboard');
+        return app(SchoolController::class)->dashboard();
     })->name('school.dashboard');
-});
 
-Route::get('/school', [SchoolController::class, 'dashboard'])
-    ->name('school.dashboard')
-    ->middleware('auth');
+    // Resource routes voor school
+
+});Route::resource('school', SchoolController::class)->except(['index']);
+
+
 
 // classroom
 Route::middleware('auth')->group(function () {
