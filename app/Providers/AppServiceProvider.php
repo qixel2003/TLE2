@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Badge;
+use App\Models\BadgeProgress;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,4 +23,5 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
 }

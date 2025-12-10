@@ -54,4 +54,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Student::class);
     }
+    public function badgeProgress()
+    {
+        return $this->hasMany(\App\Models\BadgeProgress::class);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(\App\Models\Badge::class, 'badge_progress')
+            ->withPivot(['current_value', 'unlocked_at'])
+            ->withTimestamps();
+    }
+
 }

@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\RouteCompleted;
 use App\Events\MissionCompleted;
 use App\Listeners\CheckForBadges;
-use RouteCompleted;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-
-class EventServiceProviders extends AppServiceProvider
+class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         RouteCompleted::class => [
@@ -16,15 +16,7 @@ class EventServiceProviders extends AppServiceProvider
         MissionCompleted::class => [
             CheckForBadges::class,
         ],
-//        AnimalSpotted::class => [
-//            CheckForBadges::class,
-//        ],
-//        PhotoPosted::class => [
-//            CheckForBadges::class,
-//        ],
     ];
-    public function boot(): void
-    {
-        //
-    }
+
+    public function boot(): void {}
 }

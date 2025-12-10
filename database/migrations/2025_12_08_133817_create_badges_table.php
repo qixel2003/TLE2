@@ -30,6 +30,21 @@ return new class extends Migration
             $table->timestamp('earned_at')->nullable();
         });
 
+        Schema::create('badge_progress', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('badge_id')->constrained()->cascadeOnDelete();
+
+            $table->integer('current_value')->default(0);
+            $table->timestamp('unlocked_at')->nullable();
+
+            $table->timestamps();
+
+            // Een gebruiker kan maar één record per badge hebben
+            $table->unique(['user_id', 'badge_id']);
+        });
+
     }
 
     /**
@@ -39,5 +54,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('badges');
         Schema::dropIfExists('user_badges');
+        Schema::dropIfExists('badge_progress');
     }
 };

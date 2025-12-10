@@ -2,24 +2,31 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Models\Badge;
+use App\Services\BadgeService;
 
 class CheckForBadges
 {
-    /**
-     * Create the event listener.
-     */
-    public function handle($event): void
+    protected BadgeService $badgeService;
+
+    public function __construct(BadgeService $badgeService)
     {
-        app(BadgeService::class)->evaluate($event->user, $event);
-    }
-    public function __construct()
-    {
-        //
+        $this->badgeService = $badgeService;
     }
 
-    /**
-     * Handle the event.
-     */
+    public function handle($event)
+    {
+
+        $eventType = class_basename($event);
+
+        $badges = Badge::where('requirement_type', $eventType)->get();
+
+        foreach ($badges as $badge) {
+            $this->badgeService->addProgress(
+                $event->user->id,
+                $badge->id,
+                1
+            );
+        }
+    }
 }
