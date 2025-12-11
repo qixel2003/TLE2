@@ -1,0 +1,195 @@
+/* General Reset and Setup */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0087c5; /* Main background color (blue) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container mimicking a phone screen */
+.container {
+    width: 375px; /* Common mobile width for demonstration */
+    height: 667px; /* Common mobile height for demonstration */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+/* Top Blue Header */
+.header {
+    background-color: #0087c5;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Scroll Effect: Header shrinks when scrolled down */
+.header.scrolled {
+    padding: 10px 0; /* Reduced padding (header shrinks) */
+    font-size: 1.1em; /* Reduced font size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add a shadow when scrolling */
+}
+
+/* Main Content Card (White Area) */
+.role-selection-card {
+    background-color: white;
+    padding: 20px;
+    flex-grow: 1; /* Takes up all available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* --- CRITICAL ADDITION: Enables scrolling within this content area --- */
+    overflow-y: auto;
+}
+
+.role-selection-card h2 {
+    color: #0087c5;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Styling for all roles */
+.role-list {
+    width: 100%;
+    max-width: 300px; /* A bit narrower than the card */
+    margin-bottom: 30px;
+}
+
+/* ------------------------------------------------ */
+/* --- UPDATED ROLE-ITEM STYLES (NON-SHIFTING) --- */
+/* ------------------------------------------------ */
+
+.role-item {
+    /* 1. Core Fix: Box-sizing to prevent padding/border from increasing element size */
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    width: 100%;
+
+    /* 2. Reserve space for the selected state, but make it transparent */
+    padding: 10px; /* Base padding (same as selected state) */
+    border: 2px solid transparent; /* Base border (same size as selected state, but transparent) */
+    background-color: transparent; /* Base background */
+
+    /* Set the default margin for spacing */
+    margin-bottom: 15px;
+}
+
+/* Fix for the dashed separator on unselected items */
+.role-item:not(:last-child) {
+    /* Create space for the dashed line to appear below the item */
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* Use a pseudo-element for the dashed line to keep it separate from the border/padding */
+.role-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Position it in the margin space */
+    left: 10%;
+    right: 10%;
+    border-bottom: 1px dashed #eee;
+}
+
+.role-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* --- Highlighting for Selected Role (Only changes colors/look) --- */
+.role-item.selected {
+    /* We only change the colors/look, as the size is already reserved by the base class */
+    background-color: #e6f7ff;
+    border-color: #0087c5; /* Change border from transparent to blue */
+    border-radius: 12px;
+
+    /* Reset margin to standard spacing */
+    margin-bottom: 15px;
+}
+
+/* Remove the pseudo-element dashed line when selected */
+.role-item.selected:not(:last-child)::after {
+    display: none;
+}
+
+.role-item.selected i {
+    color: #005f8c;
+}
+
+/* ------------------------------------------------ */
+
+
+/* General icon and text styles (unchanged) */
+.role-item i {
+    font-size: 2em;
+    color: #333;
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 30px;
+    text-align: center;
+}
+
+.role-title {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.role-description {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+/* Continue Button (Green) */
+.continue-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 60px;
+    border-radius: 30px; /* Increased rounding */
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.continue-button:hover {
+    background-color: #45a049;
+}
+
+/* Bottom Green Navigation Bar */
+.bottom-nav {
+    background-color: #4CAF50;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.bottom-nav i {
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
