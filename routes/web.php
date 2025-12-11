@@ -46,10 +46,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 });
 
-Route::get('/route-test', [RouteController::class, 'index'])
-    ->middleware('auth')
-    ->name('route-test');
-
 Route::post('/routes/{route}/start', [ActiveRouteController::class, 'store'])
     ->middleware('auth')
     ->name('routes.start');
@@ -80,12 +76,6 @@ Route::get('/checkpoints', function () {
 
 Route::get('/checkpoints/{id}', function ($id) {
     $checkpoint = Checkpoint::with('mission')->findOrFail($id);
-
-    // Log user and student information
-    \Log::info('User ID: ' . auth()->id());
-    \Log::info('User: ' . json_encode(auth()->user()));
-    \Log::info('Student: ' . json_encode(auth()->user()->student));
-    \Log::info('Student ID: ' . (auth()->user()->student ? auth()->user()->student->id : 'null'));
 
     // Get the user's active route
     $activeRoute = Active_Route::where('student_id', auth()->user()->student->id)
