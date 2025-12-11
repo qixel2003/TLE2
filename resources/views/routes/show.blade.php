@@ -1,5 +1,5 @@
-
-<x-layout :heading="'Details'">
+@extends('layouts.natuurMonumenten')
+@section('content')
 
     <div class="max-w-4xl mx-auto px-4 py-8">
         <div class="mb-8">
@@ -77,4 +77,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection
