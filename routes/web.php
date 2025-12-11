@@ -21,8 +21,13 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 Route::get('/role', function () {
-    return view('role');
-})->name('Role');
+    $activeRoute = Active_Route::where('student_id', auth()->user()->student->id)
+        ->where('is_completed', false)
+        ->latest()
+        ->firstOrFail();
+
+    return view('role', compact('activeRoute'));
+})->middleware('auth')->name('role');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -63,9 +68,6 @@ Route::get('/active-routes/{active_route}/select', [ActiveRouteController::class
 Route::patch('/active-routes/{active_route}/role', [ActiveRouteController::class, 'updateRole'])
     ->middleware('auth')
     ->name('active-routes.update-role');
-Route::get('/active-routes/{activeRoute}/mission', [ActiveRouteController::class, 'mission'])
-    ->middleware('auth')
-    ->name('active-routes.mission');
 Route::patch('/active-routes/{activeRoute}/complete', [ActiveRouteController::class, 'complete'])
     ->middleware('auth')
     ->name('active-routes.complete');
