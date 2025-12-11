@@ -104,10 +104,7 @@
 
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <form method="POST" action="{{ route('routes.start', $route) }}" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
-                            @csrf
-                            <button type="submit">Start Route</button>
-                        </form>
+                        <a href="{{ route('routes.index') }}" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">Start Route</a>
                     </div>
                 </div>
             </div>
