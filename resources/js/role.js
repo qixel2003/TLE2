@@ -24,16 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
+    // Sorry Jade I had to change the alert code because it wouldn't submit the role change otherwise.
     // 2. Handle Continue Button Click
-    continueBtn.addEventListener('click', () => {
-        if (selectedRole) {
-            alert(`U bent de ${selectedRole}! De quest kan beginnen.`);
-            // In a real application, you would redirect the user:
-            // window.location.href = `/start-quest?role=${selectedRole}`;
-        } else {
+    continueBtn.addEventListener('click', (e) => {
+        if (!selectedRole) {
+            e.preventDefault(); // Prevent form submission
             alert('Selecteer alstublieft een rol voordat u verder gaat.');
+            return;
         }
+
+        // Add hidden input with selected role to the form
+        const form = continueBtn.closest('form');
+        let roleInput = form.querySelector('input[name="role"]');
+
+        if (!roleInput) {
+            roleInput = document.createElement('input');
+            roleInput.type = 'hidden';
+            roleInput.name = 'role';
+            form.appendChild(roleInput);
+        }
+
+        // Map role names to numbers (adjust these values as needed)
+        const roleMap = {
+            'fotograaf': 1,
+            'historicus': 2,
+            'tekenaar': 3,
+            'scout': 4
+        };
+
+        roleInput.value = roleMap[selectedRole];
     });
 
 

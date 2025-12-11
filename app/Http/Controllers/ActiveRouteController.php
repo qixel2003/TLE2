@@ -52,7 +52,7 @@ class ActiveRouteController extends Controller
             'points' => 0,
         ]);
 
-        return redirect()->route('active-routes.select', $activeRoute);
+        return redirect()->route('role', $activeRoute);
     }
 
     /**

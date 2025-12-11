@@ -36,9 +36,10 @@ class Active_Route extends Model
     public function getRoleName(): string
     {
         return match($this->role) {
-            0 => 'Historicus',
-            1 => 'Tekenaar',
-            2 => 'Fotograaf',
+            1 => 'Fotograaf',
+            2 => 'Historicus',
+            3 => 'Tekenaar',
+            4 => 'Scout',
             default => 'Onbekend'
         };
     }
