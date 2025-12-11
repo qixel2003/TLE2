@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Route;
+use App\Models\route;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RouteFactory extends Factory
 {
-    protected $model = Route::class;
+    protected $model = route::class;
 
     public function definition(): array
     {

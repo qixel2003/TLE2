@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('picture', 256)->nullable();
             $table->string('location');
             $table->integer('distance');
             $table->integer('duration');

@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Student extends Model
@@ -15,27 +13,26 @@ class Student extends Model
 
     protected $fillable = [
         'user_id',
-        'classroom_id',
         'points',
+        'school_id',
+        'classroom_id',
     ];
 
-    public function user(): BelongsTo
+    public function school(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
+
+        return $this->belongsTo(School::class);
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+
         return $this->belongsTo(User::class);
     }
 
-    public function classroom(): BelongsTo
+    public function classroom(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Classroom::class);
     }
 
-    public function activeRoutes(): HasMany
-    {
-        return $this->hasMany(Active_Route::class);
-    }
-
-    public function currentActiveRoute(): ?Active_Route
-    {
-        return $this->activeRoutes()->where('completed', false)->first();
-    }
 }

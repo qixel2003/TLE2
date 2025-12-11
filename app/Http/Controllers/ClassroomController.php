@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\School;
+use Illuminate\Http\Request;
+use App\Models\Classroom;
+use App\Models\User;
+use App\Models\Student;
+
+class ClassroomController extends Controller
+{
+    public function index(Request $request)
+    {
+
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            //'points' => 'required|integer|min:0',
+            'school_id' => 'required|exists:schools,id',
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                function ($attribute, $value, $fail) {
+                    if (User::find($value)->role !== 1) {
+                        $fail('De geselecteerde gebruiker is geen leraar.');
+                    }
+                },
+            ],
+        ]);
+
+        //insert into
+        $classroom = new Classroom();
+        $classroom->name = $request->input('name');
+        //$classroom->points = $request->input('points');
+        $classroom->user_id = auth()->id();
+        $classroom->school_id = $request->input('school_id');
+        $classroom->save();
+
+        return redirect()->route('classrooms.show', compact('classroom'));
+
+    }
+
+    public function create(Classroom $classroom )
+    {
+        $schools = School::all();
+
+        $users = User::where('role', 2)->get();
+
+        $classroomUsers = $classroom->users()->where('role', 2)->get();
+
+        return view('classrooms.create', compact( 'schools', 'classroomUsers', 'classroom', 'users'));
+    }
+
+    public function show($id)
+    {
+        $users = User::where('role', 2)->get();
+        $schools = School::all();
+        $students = Student::all();
+        $classroom = Classroom::with('users')->findOrFail($id);
+        $classroom->load('students.user');
+        return view('classrooms.show', compact('classroom', 'schools', 'users', 'students'));
+
+    }
+
+    public function edit()
+    {
+        if (!auth()->check() || (int)auth()->user()->role !== 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        //return view('classrooms.edit', compact('classroom'));
+    }
+
+    public function update(Request $request, Classroom $classroom)
+    {
+        $request->validate([
+            //'user_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            //'points' => 'required|integer|min:0',
+            'school_id' => 'required|exists:schools,id',
+        ]);
+        $classroom->update($request->all());
+
+        $classroom->save();
+        return redirect()->route('classrooms.show', $classroom->id);
+    }
+
+    public function destroy(Classroom $classroom)
+    {
+        if (!auth()->check() || (int)auth()->user()->role !== 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $classroom->delete();
+        return redirect('school')->with('status', 'Classroom deleted successfully.');
+
+    }
+
+    public function addStudent(Request $request, Classroom $classroom)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+        ]);
+
+
+        $student = Student::findOrFail($request->student_id);
+        $student->classroom_id = $classroom->id;
+        $student->save();
+
+        return redirect()->route('classrooms.show', $classroom->id);
+    }
+
+
+}

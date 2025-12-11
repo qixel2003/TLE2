@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 
 class Mission extends Model
@@ -14,9 +17,26 @@ class Mission extends Model
     protected $fillable = [
         'title',
         'description',
-        'question',
-        'answer',
-        'drawing_prompt',
-        'photography_prompt',
+        'user_id',
     ];
+
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    public function checkpoints(): HasMany
+    {
+        return $this->hasMany(Checkpoint::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function prompts(): HasOne
+    {
+        return $this->hasOne(Prompt::class);
+    }
 }

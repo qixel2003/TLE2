@@ -13,23 +13,34 @@ class Active_Route extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'active_routes';
+
     protected $fillable = [
         'route_id',
         'student_id',
         'role',
         'is_completed',
-        'current_point',
         'points',
-        'start_date',
     ];
 
     public function route(): BelongsTo
     {
-        return $this->belongsTo(Route::class);
+        return $this->belongsTo(route::class);
     }
 
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    public function getRoleName(): string
+    {
+        return match($this->role) {
+            1 => 'Fotograaf',
+            2 => 'Historicus',
+            3 => 'Tekenaar',
+            4 => 'Scout',
+            default => 'Onbekend'
+        };
     }
 }
