@@ -15,7 +15,7 @@ class RouteController extends Controller
     public function index()
     {
         // Haal alle routes op uit de database
-        $routes = route::all();
+        $routes = Route::all();
 
         return view('routes.index', compact('routes'));
     }
