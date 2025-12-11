@@ -89,11 +89,6 @@
                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
                          alt="User avatar"/>
 
-                    <div class="ml-3">
-                        <div class="text-base font-medium text-gray-800">Tom Cook</div>
-                        <div class="text-sm font-medium text-gray-500">tom@example.com</div>
-                    </div>
-
                     <button type="button"
                             class="ml-auto p-1 text-gray-400 hover:text-gray-600 focus:outline-none">
                         <span class="sr-only">View notifications</span>
