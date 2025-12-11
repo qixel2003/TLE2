@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-witte_eend font-[Poppins] min-h-screen flex flex-col">
+<body class="bg-witte_eend font-Poppins min-h-screen flex flex-col">
 
 <!-- Top Bar -->
 <header class="bg-blauwe_vogel text-witte_eend text-center py-4 shadow-md">
@@ -16,23 +16,28 @@
 </header>
 
 <!-- Page Content -->
-<main class="flex-1 px-4 py-6">
+<main class="flex-1 px-4 py-6 border-solid border-kinder_blauw border-8">
     @yield('content')
 </main>
 
-<nav class="fixed bottom-0 left-0 right-0 bg-natuur_groen text-witte_eend py-3 shadow-inner w-full">
+<nav
+    class="fixed bottom-0 left-0 right-0 bg-natuur_groen text-witte_eend py-3 shadow-inner w-full border-t-8 border-kinder_blauw">
     <div class="flex justify-between items-center text-2xl max-w-3xl mx-auto w-full px-4">
 
         <a href="/home" class="flex-1 flex flex-col items-center">
-            <span>home</span>
+            <span>hoofdpagina</span>
         </a>
 
         <a href="/routes" class="flex-1 flex flex-col items-center">
-            <span>map</span>
+            <span>kaart</span>
+        </a>
+
+        <a href="/" class="flex-1 flex flex-col items-center">
+            <span>statistieken</span>
         </a>
 
         <a href="/profile" class="flex-1 flex flex-col items-center">
-            <span>person</span>
+            <span>profiel</span>
         </a>
     </div>
 </nav>
