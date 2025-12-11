@@ -20,6 +20,14 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/role', function () {
+    return view('role');
+})->name('Role');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/routes', [RouteController::class, 'index'])
     ->middleware('auth')
     ->name('routes.index');
@@ -102,8 +110,6 @@ Route::middleware('auth')->group(function () {
     // Resource routes voor school
 
 });Route::resource('school', SchoolController::class)->except(['index']);
-
-
 
 // classroom
 Route::middleware('auth')->group(function () {
