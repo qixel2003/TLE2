@@ -83,8 +83,6 @@ Route::get('/checkpoints/{id}', function ($id) {
         ->latest()
         ->first();
 
-    \Log::info('Active Route: ' . json_encode($activeRoute));
-
     return view('checkpoints.show', compact('checkpoint', 'activeRoute'));
 })->middleware('auth')->name('missions');
 
