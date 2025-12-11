@@ -105,6 +105,26 @@ class ActiveRouteController extends Controller
         //
     }
 
+    public function select(Active_Route $activeRoute)
+    {
+        // Check to ensure the active route belongs to the authenticated user
+        if ($activeRoute->student_id !== auth()->user()->student->id) {
+            abort(403);
+        }
+
+        return view('active-routes.select', compact('activeRoute'));
+    }
+
+    public function mission(Active_Route $activeRoute)
+    {
+        // Check to ensure the active route belongs to the authenticated user
+        if ($activeRoute->student_id !== auth()->user()->student->id) {
+            abort(403);
+        }
+
+        return view('route-mission', compact('activeRoute'));
+    }
+
     public function complete(Active_Route $activeRoute)
     {
         // Check to ensure the active route belongs to the authenticated user
