@@ -20,6 +20,7 @@ class Route extends Model {
         'distance',
         'duration',
         'description',
+        'picture',
         'difficulty',
 //        'active',
     ];

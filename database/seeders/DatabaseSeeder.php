@@ -63,16 +63,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $route = route::create([
-            'name' => 'Sample Route',
-            'location' => 'Sample Location',
-            'distance' => 5,
-            'duration' => 50,
-            'description' => 'This is a sample route for testing purposes.',
-            'difficulty' => 'Easy',
+            'name' => 'Groene wandelroute vanaf Rotterdam Centraal Station naar Buitenplaats De Tempel',
+            'location' => 'Rotterdams platteland',
+            'distance' => 15,
+            'duration' => 310,
+            'description' => 'We starten onze wandeling in het centrum van Rotterdam: aan de voorkant van het centraal station.
+Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.
+Halverwege de route kom je langs Buitenplaats De Tempel. Op de zondag (april - oktober) kun je tussen 12.00 - 16.00 uur terecht voor een hapje en drankje bij de foodtruck in de theetuin.',
+            'difficulty' => 'gemiddeld',
         ]);
 
         $mission = Mission::create([
-            'title' => 'Bos Verkenningsmissie',
+            'title' => 'Plattelands Verkenningsmissie',
             'description' => 'Volg de route en ontdek wat er onderweg gebeurt.',
             'user_id' => $student->id,
         ]);
@@ -92,7 +94,7 @@ class DatabaseSeeder extends Seeder
 
         Question::create([
             'mission_id' => $mission->id,
-            'question' => 'Welke vogel hoor je het vaakst in dit bos?',
+            'question' => 'Welke vogel hoor je het vaakst op de route?',
             'answer_1' => 'Merel',
             'answer_2' => 'Koolmees',
             'answer_3' => 'Roodborst',

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\route;
+use App\Models\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RouteController extends Controller
 {
-    public function show(route $route)
+    public function show(Route $route)
     {
         return view('routes.show', compact('route'));
     }
@@ -15,12 +16,12 @@ class RouteController extends Controller
     public function index()
     {
         // Haal alle routes op uit de database
-        $routes = route::all();
+        $routes = Route::all();
 
         return view('routes.index', compact('routes'));
     }
 
-    public function edit(route $route)
+    public function edit(Route $route)
     {
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
@@ -29,7 +30,7 @@ class RouteController extends Controller
         return view('routes.edit', compact('route'));
     }
 
-    public function update(Request $request, route $route)
+    public function update(Request $request, Route $route)
     {
         // if (!Auth::check()) {
         //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
@@ -41,8 +42,11 @@ class RouteController extends Controller
             'distance' => 'required|numeric|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
+            'picture' => 'nullable|image|max:2048',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
+
+        $path = $request->file('picture')->store('routes', 'public');
 
         $route->update([
             'name' => $request->input('name'),
@@ -50,6 +54,7 @@ class RouteController extends Controller
             'distance' => $request->input('distance'),
             'duration' => $request->input('duration'),
             'description' => $request->input('description'),
+            'picture' => Storage::url($path),
             'difficulty' => $request->input('difficulty'),
         ]);
 
@@ -71,10 +76,11 @@ class RouteController extends Controller
             'distance' => 'required|integer|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
+            'picture' => 'nullable|image|max:2048',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        route::create([
+        Route::create([
             'name'=> $request->name,
             'location'=> $request->location,
             'distance'=> $request->distance,
