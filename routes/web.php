@@ -10,6 +10,18 @@ Route::get('/tutorial', function () {
     return view('tutorial');
 });
 
+Route::get('/bonus', function () {
+    return view('bonus.index');
+})->name('bonus.index');
+
+Route::get('/bonus/create', function () {
+    return view('bonus.create');
+})->name('bonus.create');
+
+Route::get('/bonus/{bonus}/edit', function ($bonus) {
+    return view('bonus.edit', ['bonus' => $bonus]);
+})->name('bonus.edit');
+
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
