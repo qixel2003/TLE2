@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Badge;
 
 class BadgeSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class BadgeSeeder extends Seeder
                 'name' => 'Groene Verkenner',
                 'slug' => 'groene-verkenner',
                 'description' => 'Voltooi 1 route.',
+                'icon' => 'badges/badge.png',
                 'requirement_type' => 'RouteCompleted',
                 'requirement_value' => 1,
             ],
