@@ -46,9 +46,9 @@
                                 <div class="bg-white text-gray-800 rounded-xl p-3 flex flex-col items-center shadow">
                                     <div class="w-16 h-16 mb-2">
                                         <img
-                                            src="{{ $badge->icon ?? asset('images/badges/badge.png') }}"
+                                            src="{{ $badge->icon}}"
                                             alt="{{ $badge->name }}"
-                                            class="w-full h-full object-contain">
+                                            class="w-full h-full object-contain"/>
                                     </div>
 
                                     <p class="text-sm font-semibold text-center">
