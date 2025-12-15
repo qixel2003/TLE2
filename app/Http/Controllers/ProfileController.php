@@ -12,18 +12,28 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user's profile.
      */
-    public function index (Request $request): View
+    public function index(Request $request): View
     {
+        $user = $request->user();
+
         return view('profile.index', [
-            'user' => $request->user(),
+            'user'   => $user,
+            'badges' => $user->unlockedBadges,
         ]);
     }
+
+    /**
+     * Show the form for editing the user's profile.
+     */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user'   => $user,
+            'badges' => $user->unlockedBadges,
         ]);
     }
 
@@ -55,7 +65,6 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();

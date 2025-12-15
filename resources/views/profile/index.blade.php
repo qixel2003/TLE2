@@ -34,17 +34,39 @@
                         </div>
                 </div>
                     <x-custom-buttons.blue-button>Bekijk details</x-custom-buttons.blue-button>
-
                 </div>
             </div>
 
             <div class="p-4 sm:p-8 bg-sinas_sap text-witte_eend shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    <p>badges</p>
-                    <x-custom-buttons.pink-button>Bekijk alle</x-custom-buttons.pink-button>
-                    {{--                    @include('profile.partials.delete-user-form')--}}
+                    <h2 class="text-xl font-bold mb-4">Badges</h2>
+                @if(($badges ?? collect())->count())
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                            @foreach($badges as $badge)
+                                <div class="bg-white text-gray-800 rounded-xl p-3 flex flex-col items-center shadow">
+                                    <div class="w-16 h-16 mb-2">
+                                        <img
+                                            src="{{ $badge->icon ?? asset('images/badges/badge.png') }}"
+                                            alt="{{ $badge->name }}"
+                                            class="w-full h-full object-contain">
+                                    </div>
+
+                                    <p class="text-sm font-semibold text-center">
+                                        {{ $badge->name }}
+                                    </p>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-sm italic mb-4">Nog geen badges verdiend</p>
+                    @endif
+
+                    <x-custom-buttons.pink-button>
+                        Bekijk alle
+                    </x-custom-buttons.pink-button>
                 </div>
             </div>
+
         </div>
     </div>
 </x-layout>
