@@ -11,9 +11,22 @@
             <div class="p-4 sm:p-8 bg-natuur_groen text-witte_eend shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <p>Naam: {{ $user->firstname }} {{ $user->lastname }} </p>
-                    <p>Klas: {{ $user->student->classroom->name}}</p>
-                    <p>School: {{ $user->student->school->name}}</p>
-                    <p>Punten: {{ $user->student->points}}</p>
+                    @if($authStudent)
+                        <p>Klas: {{ $user->student->classroom->name ?? 0}}</p>
+                        <p>School: {{ $user->student->school->name ?? 0}}</p>
+                        <p>Punten: {{ $user->student->points ?? 0}}</p>
+                    @else
+                        @if($authTeacher)
+                            @foreach($user->school as $school)
+                                <p><strong>School account
+                                        beheerder:</strong> {{ optional($school->user->firstWhere('role', 1))->email ?? 'Niet bekend' }}
+                                </p>
+                                <a href="{{ route('school.dashboard') }}"> <x-custom-buttons.dark-blue-button> School pagina </x-custom-buttons.dark-blue-button></a>
+                            @endforeach
+                        @endif
+                    @endif
+
+
                 </div>
             </div>
 
@@ -22,38 +35,44 @@
 
 
                     <h2>Routes</h2>
-                    @foreach($active_routes as $active_route)
-                        <div class="flex flex-row gap-5">
-                            <div>
-                                <h3>Aantal:</h3>
-                                <p>{{ $active_route->count() }}</p>
+                    <h2>Mijn actieve routes</h2>
+
+                    @if($authStudent && $authStudent->activeRoutes->count() > 0)
+                        @foreach($authStudent->activeRoutes as $active_route)
+                            <div class="flex flex-row gap-5">
+                                <div>
+                                    <h3>Route:</h3>
+                                    <p>{{ $active_route->route->name ?? 'Geen naam' }}</p>
+                                </div>
+                                <div>
+                                    <h3>Graad:</h3>
+                                    <p>{{ $active_route->route->difficulty ?? 'NVT' }}</p>
+                                </div>
+                                <div>
+                                    <h3>Kilometers:</h3>
+                                    <p>{{ $active_route->route->distance ?? 'NVT' }} km</p>
+                                </div>
+                                <div>
+                                    <h3>Tijd:</h3>
+                                    <p>{{ $active_route->route->duration ?? 'NVT' }} min</p>
+                                </div>
+                                <div>
+                                    <h3>Status:</h3>
+                                    <p>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3>Route:</h3>
-                                <p>{{ $active_route->route->name }}</p>
-                            </div><div>
-                                <h3>Graad:</h3>
-                                <p>{{ $active_route->route->difficulty }}</p>
-                            </div>
-                            <div>
-                                <h3>Kilometers:</h3>
-                                <p>{{ $active_route->route->distance }}</p>
-                            </div>
-                            <div>
-                                <h3>Minuten:</h3>
-                                <p>{{ $active_route->route->duration }}</p>
-                            </div>
-                            <div>
-                                <h3>Status:</h3>
-                                <p>{{ (bool)$active_route->is_completed ? 'Afgerond' : 'Bezig'}}</p>
-                            </div>
-                        </div>
-                        <a class="" href="{{ route('routes.show', $active_route->route_id) }}">
-                            <x-custom-buttons.blue-button>
-                                Bekijk route
-                            </x-custom-buttons.blue-button>
-                        </a>
-                    @endforeach
+
+                            <a href="{{ route('routes.show', $active_route->route_id) }}">
+                                <x-custom-buttons.blue-button>
+                                    Bekijk route
+                                </x-custom-buttons.blue-button>
+                            </a>
+                        @endforeach
+                    @else
+                        <p>Geen actieve routes gevonden.</p>
+                    @endif
+
+
                 </div>
             </div>
 

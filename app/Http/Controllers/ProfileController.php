@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Active_Route;
-use App\Models\Route;
+use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,7 +23,10 @@ class ProfileController extends Controller
         $students = Student::all();
         $active_routes = Active_Route::with('route')->get();
         $user = $request->user();
-        return view('profile.index', compact('students', 'user', 'active_routes'));
+        $school = School::all();
+        $authTeacher = (auth()->check() && auth()->user()->role == 1);
+        $authStudent = auth()->user()->student ? auth()->user()->student->load('activeRoutes.route') : null;
+        return view('profile.index', compact('students', 'user', 'active_routes', 'authStudent', 'school', 'authTeacher'));
     }
     public function edit(Request $request): View
     {

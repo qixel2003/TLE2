@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\School;
+use App\Models\Active_Route;
 
 class StudentController extends Controller
 {
@@ -13,6 +14,7 @@ class StudentController extends Controller
         $schools = School::all();
         return view('student.dashboard', compact('schools'));
     }
+
 
     public function store(Request $request)
     {

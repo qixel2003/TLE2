@@ -50,6 +50,7 @@
             </h3>
             <p>{{ $student->user->email }}</p>
             <p>Punten: {{ $student->points }}</p>
+            <a href="{{ route('profile.index') }}">Profiel</a>
         </div>
     @endforeach
 
