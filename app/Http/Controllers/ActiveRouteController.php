@@ -34,7 +34,7 @@ class ActiveRouteController extends Controller
 
         // Check if route is already active for this student
         $existingActiveRoute = Active_Route::where('route_id', $route->id)
-            ->where('student_id', $student->id)
+            ->where('user_id', $student->id)
             ->where('is_completed', false)
             ->first();
 
@@ -90,11 +90,10 @@ class ActiveRouteController extends Controller
             'role' => 'required|integer|min:0',
         ]);
 
-        $activeRoute->update([
-            'role' => $request->role,
-        ]);
+        $activeRoute->role = $request->role;
+        $activeRoute->save();
 
-        return redirect()->route('checkpoints');
+        return redirect()->route('checkpoints', ['id' => $activeRoute->id]);
     }
 
     /**

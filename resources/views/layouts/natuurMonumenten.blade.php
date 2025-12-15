@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Natuurmonumenten' }}</title>
+    <link rel="stylesheet"
+          href={{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')}}>
 
     @vite('resources/css/app.css')
 </head>
@@ -25,19 +27,19 @@
     <div class="flex justify-between items-center text-2xl max-w-3xl mx-auto w-full px-4">
 
         <a href="/home" class="flex-1 flex flex-col items-center">
-            <span>hoofdpagina</span>
+            <i class="fas fa-home"></i>
         </a>
 
         <a href="/routes" class="flex-1 flex flex-col items-center">
-            <span>kaart</span>
+            <i class="fas fa-camera"></i>
         </a>
 
         <a href="/" class="flex-1 flex flex-col items-center">
-            <span>statistieken</span>
+            <i class="fas fa-chart-bar"></i>
         </a>
 
         <a href="/profile" class="flex-1 flex flex-col items-center">
-            <span>profiel</span>
+            <i class="fas fa-user-alt"></i>
         </a>
     </div>
 </nav>

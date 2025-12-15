@@ -29,7 +29,8 @@
                     <i class="fas fa-camera"></i>
                     <div>
                         <span class="role-title">Fotograaf</span>
-                        <p class="role-description">Legt alles vast wat belangrijk kan zijn voor de quest: sporen, plekken,
+                        <p class="role-description">Legt alles vast wat belangrijk kan zijn voor de quest: sporen,
+                            plekken,
                             dieren en ontdekkingen.</p>
                     </div>
                 </div>
@@ -47,7 +48,8 @@
                     <i class="fas fa-pencil-alt"></i>
                     <div>
                         <span class="role-title">Tekenaar</span>
-                        <p class="role-description">Maakt snelle schetsen van vondsten, vormen, patronen of situaties die
+                        <p class="role-description">Maakt snelle schetsen van vondsten, vormen, patronen of situaties
+                            die
                             belangrijk zijn voor de zoektocht.</p>
                     </div>
                 </div>
@@ -63,6 +65,8 @@
             </div>
 
             <button type="submit" class="continue-button" id="continueBtn">Verder</button>
+            <input type="hidden" name="role" id="selectedRole">
+
         </form>
     </main>
 

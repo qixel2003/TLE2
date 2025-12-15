@@ -1,3 +1,7 @@
+@php
+    $roleName = $activeRoute->role ?? null;
+@endphp
+
 @vite('resources/css/app.css')
 @extends('layouts.natuurMonumenten')
 @section('content')

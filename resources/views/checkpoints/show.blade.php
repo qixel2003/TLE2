@@ -1,3 +1,7 @@
+@php
+    $roleName = $activeRoute->getRoleName();
+@endphp
+
 @vite('resources/css/app.css')
 @extends('layouts.natuurMonumenten')
 @section('content')
@@ -24,57 +28,89 @@
             </div>
 
             @if ($checkpoint->mission && $checkpoint->mission->questions->count() > 0)
-                @foreach($checkpoint->mission->questions as $q)
-                    <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                        <h2 class="text-2xl font-semibold mb-3">
-                            Vraag: {{ $q->question }}
-                        </h2>
+                @if($activeRoute->role === 2)
+                    @foreach($checkpoint->mission->questions as $q)
+                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <h2 class="text-2xl font-semibold mb-3">
+                                Vraag: {{ $q->question }}
+                            </h2>
 
-                        <ul class="space-y-2">
-                            @for ($i = 1; $i <= 4; $i++)
-                                @php
-                                    $answerKey = 'answer_' . $i;
-                                    $correctKey = 'correct_answer_' . $i;
-                                @endphp
+                            <ul class="space-y-2">
+                                @for ($i = 1; $i <= 4; $i++)
+                                    @php
+                                        $answerKey = 'answer_' . $i;
+                                        $correctKey = 'correct_answer_' . $i;
+                                    @endphp
 
-                                <li class="p-3 border rounded bg-white">
-                                    <button
-                                        type="button"
-                                        class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        data-answer-index="{{ $i }}"
-                                    >
-                                        <span>{{ $q->{$answerKey} }}</span>
+                                    <li class="p-3 border rounded bg-white">
+                                        <button
+                                            type="button"
+                                            class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            data-answer-index="{{ $i }}"
+                                        >
+                                            <span>{{ $q->{$answerKey} }}</span>
+                                            
+                                        </button>
+                                    </li>
+                                @endfor
+                            </ul>
+                            <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                @method('PATCH')
 
-                                        @if (!empty($q->{$correctKey}))
-                                            <span
-                                                class="ml-4 inline-block px-2 py-1 bg-green-100 text-green-800 rounded text-sm">
-                        Correct
-                    </span>
-                                        @endif
-                                    </button>
-                                </li>
-                            @endfor
-                        </ul>
-                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
+                                <button
+                                    type="submit"
+                                    class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    Antwoord indienen
+                                </button>
+                            </form>
+                        </div>
+                    @endforeach
+                @endif
+                @if($activeRoute->role === 4)
+                    <div class="mt-4 p-4 bg-white border rounded">
+                        <h3 class="text-lg font-semibold mb-2">Verkenningsopdracht:</h3>
+
+                        <p class="text-gray-700 mb-4">
+                            Hoeveel bloemen van dezelfde soort zie je op deze plek?
+                        </p>
+
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}">
                             @csrf
                             @method('PATCH')
 
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Aantal bloemen
+                            </label>
+
+                            <input
+                                type="number"
+                                name="flower_count"
+                                min="0"
+                                placeholder="Bijvoorbeeld: 7"
+                                class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+
                             <button
-                                class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 type="submit"
+                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
                         </form>
                     </div>
-                @endforeach
-                @if($checkpoint->mission->prompts)
+                @endif
+
+                @if($activeRoute->role === 3 && $checkpoint->mission->prompts)
                     <div class="mt-4 p-4 bg-white border rounded">
                         <h3 class="text-lg font-semibold mb-2">Tekenopdracht:</h3>
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->drawing ?? 'Geen tekenopdracht.' }}
                         </p>
-                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
 
@@ -88,20 +124,23 @@
                             />
 
                             <button
-                                class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 type="submit"
+                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
                         </form>
                     </div>
+                @endif
 
+                @if($activeRoute->role === 1 && $checkpoint->mission->prompts)
                     <div class="mt-4 p-4 bg-white border rounded">
                         <h3 class="text-lg font-semibold mb-2">Fotografieopdracht:</h3>
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->photography ?? 'Geen fotografieopdracht.' }}
                         </p>
-                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('active-routes.complete', $activeRoute) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
 
@@ -114,8 +153,8 @@
                             />
 
                             <button
-                                class="w-full text-left flex items-center justify-between px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 type="submit"
+                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
