@@ -9,22 +9,6 @@ use Illuminate\Http\Request;
 class ActiveRouteController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request, Route $route)
@@ -55,30 +39,6 @@ class ActiveRouteController extends Controller
         return redirect()->route('active-routes.select', $activeRoute);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Active_Route $active_Route)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Active_Route $active_Route)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Active_Route $active_Route)
-    {
-        //
-    }
-
     public function updateRole(Request $request, Active_Route $activeRoute)
     {
         // Check to ensure the active route belongs to the authenticated user
@@ -95,14 +55,6 @@ class ActiveRouteController extends Controller
         ]);
 
         return redirect()->route('active-routes.mission', $activeRoute);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Active_Route $active_Route)
-    {
-        //
     }
 
     public function select(Active_Route $activeRoute)
