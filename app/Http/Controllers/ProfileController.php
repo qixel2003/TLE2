@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Active_Route;
+use App\Models\Route;
+use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+
 
 class ProfileController extends Controller
 {
@@ -16,9 +20,10 @@ class ProfileController extends Controller
      */
     public function index (Request $request): View
     {
-        return view('profile.index', [
-            'user' => $request->user(),
-        ]);
+        $students = Student::all();
+        $active_routes = Active_Route::with('route')->get();
+        $user = $request->user();
+        return view('profile.index', compact('students', 'user', 'active_routes'));
     }
     public function edit(Request $request): View
     {

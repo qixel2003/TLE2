@@ -25,4 +25,8 @@ class Route extends Model {
     ];
 //
 //    protected $primaryKey = 'id';
+    public function active_route(): HasMany
+    {
+        return $this->hasMany(Active_Route::class);
+    }
 }

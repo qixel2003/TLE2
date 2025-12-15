@@ -21,15 +21,15 @@ class ClassroomController extends Controller
             'name' => 'required|string|max:255',
             //'points' => 'required|integer|min:0',
             'school_id' => 'required|exists:schools,id',
-            'user_id' => [
-                'required',
-                'exists:users,id',
-                function ($attribute, $value, $fail) {
-                    if (User::find($value)->role !== 1) {
-                        $fail('De geselecteerde gebruiker is geen leraar.');
-                    }
-                },
-            ],
+//            'user_id' => [
+//                'required',
+//                'exists:users,id',
+//                function ($attribute, $value, $fail) {
+//                    if (User::find($value)->role !== 1) {
+//                        $fail('De geselecteerde gebruiker is geen leraar.');
+//                    }
+//                },
+//            ],
         ]);
 
         //insert into

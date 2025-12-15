@@ -52,6 +52,19 @@ class ActiveRouteController extends Controller
             'points' => 0,
         ]);
 
+        $studentId = $request->student_id;
+        $routeId   = $request->route_id;
+
+        $exists = Active_Route::where('student_id', $studentId)
+            ->where('route_id', $routeId)
+            ->exists();
+
+        if ($exists) {
+            return back()->withErrors([
+                'route_id' => 'Deze route is al toegevoegd voor deze student.'
+            ])->withInput();
+        }
+
         return redirect()->route('role', $activeRoute);
     }
 
