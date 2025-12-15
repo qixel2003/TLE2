@@ -5,6 +5,7 @@
 @vite('resources/css/app.css')
 @extends('layouts.natuurMonumenten')
 @section('content')
+
     <div class="max-w-3xl mx-auto">
         <h1 class="text-3xl font-bold mb-6">
             Checkpoint

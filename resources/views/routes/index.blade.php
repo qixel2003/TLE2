@@ -40,8 +40,8 @@
                 @forelse ($routes as $route)
                     <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                         <div class="h-56 overflow-hidden">
-                            @if($route->picture)
-                                <img src="{{ $route->picture }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                            @if($route->image)
+                                <img src="{{ $route->image }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
                             @else
                                 <div class="w-full h-full bg-natuur_groen flex items-center justify-center">
                                     <span class="text-white text-3xl">🌲</span>

@@ -20,8 +20,10 @@ class Route extends Model {
         'distance',
         'duration',
         'description',
+        'image',
         'difficulty',
 //        'active',
+        'image',
     ];
 //
 //    protected $primaryKey = 'id';

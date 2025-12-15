@@ -25,7 +25,7 @@ class Active_Route extends Model
 
     public function route(): BelongsTo
     {
-        return $this->belongsTo(route::class);
+        return $this->belongsTo(Route::class);
     }
 
     public function student(): BelongsTo

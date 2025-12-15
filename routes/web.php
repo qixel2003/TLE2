@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActiveRouteController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use App\Models\Active_Route;
@@ -73,11 +74,16 @@ Route::patch('/active-routes/{activeRoute}/complete', [ActiveRouteController::cl
     ->name('active-routes.complete');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 });
+
 
 Route::get('/checkpoints', function () {
     $checkpoints = Checkpoint::with('mission')->orderBy('checkpoint')->get();
@@ -95,6 +101,9 @@ Route::get('/checkpoints/{id}', function ($id) {
 
     return view('checkpoints.show', compact('checkpoint', 'activeRoute'));
 })->middleware('auth')->name('missions');
+
+
+Route::resource('badges', BadgeController::class);
 
 
 require __DIR__ . '/auth.php';

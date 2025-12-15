@@ -8,8 +8,8 @@
 
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div class="h-72 md:h-80 overflow-hidden">
-                @if($route->picture)
-                    <img src="{{ $route->picture }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                @if($route->image)
+                    <img src="{{ $route->image }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
                 @else
                     <div class="w-full h-full bg-natuur_groen flex items-center justify-center">
                         <span class="text-white text-6xl">🌲</span>
@@ -47,45 +47,12 @@
 
                 <div class="mb-8">
                     <div class="flex items-center mb-4">
-                        <div class="h-1 w-12 bg-green-500 mr-4"></div>
                         <h2 class="text-2xl font-bold text-gray-800">Routebeschrijving</h2>
                     </div>
                     <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
                         <p class="text-gray-700 leading-relaxed whitespace-pre-line">
                             {{ $route->description ?? 'Geen beschrijving beschikbaar' }}
                         </p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                        <div class="flex items-center mb-3">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
-                                <span class="text-green-600">🚶‍♂️</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-gray-800">Type route</h3>
-                                <p class="text-gray-600">Wandelroute</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                        <div class="flex items-center mb-3">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <span class="text-blue-600">♿</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-gray-800">Toegankelijkheid</h3>
-                                <p class="text-gray-600">
-                                    @if(($route->difficulty ?? '') == 'makkelijk')
-                                        Goed toegankelijk
-                                    @else
-                                        Beperkt toegankelijk
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

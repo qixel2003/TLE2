@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Active_Route;
-use App\Models\route;
+use App\Models\Route;
 use Illuminate\Http\Request;
+use App\Events\RouteCompleted;
+
 
 class ActiveRouteController extends Controller
 {
@@ -27,7 +29,7 @@ class ActiveRouteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, route $route)
+    public function store(Request $request, Route $route)
     {
         // Checks if the authenticated user has a student profile
         $student = auth()->user()->student;
@@ -134,6 +136,8 @@ class ActiveRouteController extends Controller
         $activeRoute->update([
             'is_completed' => true,
         ]);
+
+        RouteCompleted::dispatch(auth()->user(), $activeRoute->route);
 
         return view('route-finished', compact('activeRoute'));
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('distance');
             $table->integer('duration');
             $table->text('description');
+            $table->string('image')->nullable();
             $table->string('difficulty'); // makkelijk, gemiddeld, moeilijk
             $table->timestamps();
         });
