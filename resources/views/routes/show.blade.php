@@ -8,8 +8,8 @@
 
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div class="h-72 md:h-80 overflow-hidden">
-                @if($route->picture)
-                    <img src="{{ $route->picture }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
+                @if($route->image)
+                    <img src="{{ $route->image }}" alt="{{ $route->name }}" class="w-full h-full object-cover">
                 @else
                     <div class="w-full h-full bg-natuur_groen flex items-center justify-center">
                         <span class="text-white text-6xl">🌲</span>

@@ -39,24 +39,37 @@ class RouteController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'distance' => 'required|numeric|min:0.1',
+            'distance' => 'required|integer|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
-            'picture' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        $path = $request->file('picture')->store('routes', 'public');
-
-        $route->update([
-            'name' => $request->input('name'),
-            'location' => $request->input('location'),
-            'distance' => $request->input('distance'),
-            'duration' => $request->input('duration'),
-            'description' => $request->input('description'),
-            'picture' => Storage::url($path),
-            'difficulty' => $request->input('difficulty'),
+        $data = $request->only([
+            'name',
+            'location',
+            'distance',
+            'duration',
+            'description',
+            'difficulty',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('routes', 'public');
+            $data['image'] = Storage::url($path);
+
+            if (!empty($route->picture)) {
+                if (str_starts_with($route->picture, '/storage/')) {
+                    $old = substr($route->picture, strlen('/storage/'));
+                    Storage::disk('public')->delete($old);
+                } elseif (preg_match('#/storage/(.+)$#', $route->picture, $m)) {
+                    Storage::disk('public')->delete($m[1]);
+                }
+            }
+        }
+
+        $route->update($data);
 
         return redirect()->route('routes.show', $route)->with('success', 'Route succesvol bijgewerkt!');
     }
@@ -66,39 +79,34 @@ class RouteController extends Controller
         return view('routes.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Route $route)
     {
-        // dd($request);
-
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'distance' => 'required|integer|min:0.1',
+            'distance' => 'required|numeric|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
-            'picture' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:2048',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
-        Route::create([
-            'name'=> $request->name,
-            'location'=> $request->location,
-            'distance'=> $request->distance,
-            'duration'=> $request->duration,
-            'description'=> $request->description,
-            'difficulty'=> $request->difficulty,
-        ]);
+        $data = [
+            'name' => $request->name,
+            'location' => $request->location,
+            'distance' => $request->distance,
+            'duration' => $request->duration,
+            'description' => $request->description,
+            'difficulty' => $request->difficulty,
+        ];
 
-//        $route = new Route();
-//        $route->name = $request->input('name');
-//        $route->location = $request->input('location');
-//        $route->distance = $request->input('distance');
-//        $route->duration = $request->input('duration');
-//        $route->description = $request->input('description');
-//        $route->difficulty = $request->input('difficulty');
-//        $route->picture = $request->input('picture');
-////        $route->active = true;
-//        $route->save();
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('routes', 'public');
+            $data['image'] = Storage::url($path);
+        }
+
+        Route::create($data);
+
         return redirect()->route('routes.index')->with('success', 'Guide created successfully!');
     }
 

@@ -11,9 +11,11 @@ use App\Models\Route;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -68,9 +70,10 @@ class DatabaseSeeder extends Seeder
             'distance' => 15,
             'duration' => 310,
             'description' => 'We starten onze wandeling in het centrum van Rotterdam: aan de voorkant van het centraal station.
-Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.
-Halverwege de route kom je langs Buitenplaats De Tempel. Op de zondag (april - oktober) kun je tussen 12.00 - 16.00 uur terecht voor een hapje en drankje bij de foodtruck in de theetuin.',
+                Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.
+                Halverwege de route kom je langs Buitenplaats De Tempel. Op de zondag (april - oktober) kun je tussen 12.00 - 16.00 uur terecht voor een hapje en drankje bij de foodtruck in de theetuin.',
             'difficulty' => 'gemiddeld',
+            'image' => $this->seedRouteImage('route-rotterdam.png')
         ]);
 
         $mission = Mission::create([
@@ -106,5 +109,19 @@ Halverwege de route kom je langs Buitenplaats De Tempel. Op de zondag (april - o
             'correct_answer_3' => 0,
             'correct_answer_4' => 0,
         ]);
+    }
+
+    private function seedRouteImage(string $filename): string
+    {
+        $sourcePath = database_path("seeders/images/{$filename}");
+
+        if (!File::exists($sourcePath)) {
+            return '/storage/routes/placeholder.jpg';
+        }
+
+        $destinationPath = "routes/{$filename}";
+        Storage::disk('public')->put($destinationPath, File::get($sourcePath));
+
+        return Storage::url($destinationPath);
     }
 }

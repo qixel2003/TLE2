@@ -1,5 +1,5 @@
 <x-layout :heading="'Nieuwe Route Aanmaken'">
-        <form action="{{ route('routes.store') }}" method="POST" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+        <form action="{{ route('routes.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
             @csrf
             <div class="border-b pb-4 mb-6">
                 <h1 class="text-3xl font-bold text-gray-800">Nieuwe Route Aanmaken</h1>
@@ -38,6 +38,15 @@
                 <input type="number" name="duration" id="duration" value="{{ old('duration') }}"
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
                 @error('duration')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div>
+                <label for="image" class="block font-semibold text-black">Foto</label>
+                <input type="file" name="image" id="image" value="{{ old('image') }}"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
+                @error('image')
                 <div class="text-red-500">{{ $message }}</div>
                 @enderror
             </div>

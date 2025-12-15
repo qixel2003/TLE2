@@ -1,5 +1,5 @@
 <x-layout :heading="'Pas de route aan'">
-    <form action="{{ route('routes.update', $route->id) }}" method="POST" class="space-y-4 p-6">
+    <form action="{{ route('routes.update', $route->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6">
         @csrf
         @method('PUT')
 
@@ -36,6 +36,14 @@
             <label for="duration" class="block font-semibold">Tijd (in minuten)</label>
             <input type="number" name="duration" id="duration" value="{{ old('duration', $route->duration) }}" class="border border-gray-300 rounded p-2 w-full">
             @error('duration')
+            <div class="text-red-500">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div>
+            <label for="image" class="block font-semibold text-black">Foto</label>
+            <input type="file" name="image" id="image" value="{{ old('image', $route->image) }}" class="border border-gray-300 rounded p-2 w-full">
+            @error('image')
             <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
