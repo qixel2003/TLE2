@@ -47,7 +47,7 @@
 
                 <div class="flex flex-wrap gap-3 mb-8">
 
-                    <div class="bg-green-50 text-green-700 px-4 py-2 rounded-full border border-green-100">
+                    <div class="bg-lnatuur_groen px-4 py-2 rounded-full border border-green-100">
                         <div class="flex items-center">
                             <span class="mr-2">📏</span>
                             <span class="font-semibold">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full border border-blue-100">
+                    <div class="bg-lkinder_blauw px-4 py-2 rounded-full border border-blue-100">
                         <div class="flex items-center">
                             <span class="mr-2">⏰️</span>
                             <span class="font-semibold">
@@ -73,7 +73,7 @@
                     </h2>
 
                     <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                        <p class="text-gray-700 leading-relaxed whitespace-pre-line">
+                        <p class="text-gray-700 leading-relaxed">
                             {{ $route->description ?? 'Geen beschrijving beschikbaar' }}
                         </p>
                     </div>
@@ -93,7 +93,7 @@
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <form method="POST"
                           action="{{ route('routes.start', $route) }}"
-                          class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
+                          class="flex-1 bg-natuur_groen hover:bg-lnatuur_groen text-witte_eend font-semibold py-3 px-6 rounded-lg text-center transition duration-200 shadow-md hover:shadow-lg">
                         @csrf
                         <button type="submit">Start Route</button>
                     </form>
