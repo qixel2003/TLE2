@@ -2,7 +2,6 @@
     $roleName = $activeRoute->role ?? null;
 @endphp
 
-@vite('resources/css/app.css')
 @extends('layouts.natuurMonumenten')
 @section('content')
     <h1 class="text-3xl font-bold mb-6">Checkpoints</h1>
