@@ -54,4 +54,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Student::class);
     }
+
+    public function isTeacher(): bool {
+        return $this->role === 1; // Teacher
+    }
+
+    public function isAdmin(): bool {
+        return $this->role === 2; // Admin
+    }
+
+    public function isStudent(): bool {
+        return $this->role === 0; // Student
+    }
 }

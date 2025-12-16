@@ -11,13 +11,28 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="max-w-2xl mx-auto mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="max-w-7xl mx-auto">
+            @auth
+                @if(!auth()->user()->isStudent())
+                    <div class="text-center mb-6">
+                        <a href="{{ route('messages.create') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+                            Maak een nieuwe bonusopdracht
+                        </a>
+                    </div>
+                @endif
+            @endauth
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($messages as $message)
                     <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                         @if($message->photo)
                             <div class="h-48 overflow-hidden">
-{{--                                ngl, geen idee hoe ik img werkt :')--}}
                                 <img src="{{ asset('storage/' . $message->photo) }}" alt="{{ $message->title }}" class="w-full h-full object-cover">
                             </div>
                         @endif
@@ -37,12 +52,17 @@
 
                                 <div class="flex items-center space-x-2">
                                     <a href="{{ route('messages.show', $message->id) }}" class="text-green-600 hover:text-green-700 font-semibold">Bekijk</a>
-                                    <a href="{{ route('messages.edit', $message->id) }}" class="text-blue-600 hover:text-blue-700 font-semibold">Bewerk</a>
-                                    <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je deze opdracht wilt verwijderen?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-700 font-semibold">Verwijder</button>
-                                    </form>
+
+                                    @auth
+                                        @if(!auth()->user()->isStudent() && (auth()->id() === $message->user_id || auth()->user()->isAdmin()))
+                                            <a href="{{ route('messages.edit', $message->id) }}" class="text-blue-600 hover:text-blue-700 font-semibold">Bewerk</a>
+                                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="inline" onsubmit="return confirm('Weet je zeker dat je deze opdracht wilt verwijderen?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-700 font-semibold">Verwijder</button>
+                                            </form>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
 
@@ -54,7 +74,9 @@
                         <h3 class="text-2xl font-bold text-gray-700 mb-2">Geen bonus opdrachten gevonden</h3>
                         <p class="text-gray-600 mb-6">Maak een nieuwe bonus opdracht aan zodat leerlingen de opdrachten kunnen maken.</p>
                         @auth
-                            <a href="{{ route('messages.create') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg">Maak een bonusopdracht aan.</a>
+                            @if(!auth()->user()->isStudent())
+                                <a href="{{ route('messages.create') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg">Maak een bonusopdracht aan</a>
+                            @endif
                         @endauth
                     </div>
                 @endforelse

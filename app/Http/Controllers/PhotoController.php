@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends Controller
 {
@@ -47,13 +48,23 @@ class PhotoController extends Controller
         return redirect()->route('messages.show', $request->message_id)->with('success', 'Je antwoord is succesvol ingediend!');
     }
 
-    public function approve(Photo $photo) {
-        // Alleen goedkeuren als de status nog niet goedgekeurd is
+    public function approve(Photo $photo)
+    {
+        if (!Auth::check() || Auth::user()->isStudent()) {
+            return back()->with('error', 'Je hebt geen rechten om foto\'s goed te keuren.');
+        }
+
         $photo->update(['status' => 'goedgekeurd']);
         return back()->with('success', 'Foto goedgekeurd!');
     }
 
-    public function reject(Photo $photo) {
+    public function reject(Photo $photo)
+    {
+        // Alleen teachers en admins mogen afkeuren
+        if (!Auth::check() || Auth::user()->isStudent()) {
+            return back()->with('error', 'Je hebt geen rechten om foto\'s af te keuren.');
+        }
+
         $photo->update(['status' => 'afgewezen']);
         return back()->with('success', 'Foto afgewezen!');
     }

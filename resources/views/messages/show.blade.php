@@ -10,6 +10,12 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
+                @if(session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
 
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -22,9 +28,12 @@
                 <div class="p-6 md:p-8">
                     <div class="flex justify-between items-start mb-4">
                         <h1 class="text-3xl font-bold text-gray-800">{{ $message->title }}</h1>
-                        @if(auth()->id() === $message->user_id)
-                            <a href="{{ route('messages.edit', $message->id) }}" class="text-blue-600 hover:text-blue-700 font-semibold">Bewerk</a>
-                        @endif
+
+                        @auth
+                            @if(!auth()->user()->isStudent() && (auth()->id() === $message->user_id || auth()->user()->isAdmin()))
+                                <a href="{{ route('messages.edit', $message->id) }}" class="text-blue-600 hover:text-blue-700 font-semibold">Bewerk</a>
+                            @endif
+                        @endauth
                     </div>
 
                     <div class="mb-6">
@@ -38,61 +47,27 @@
                                 <p><span class="font-medium">Datum:</span> {{ $message->created_at->format('d M Y') }}</p>
                             </div>
 
-                            @if(auth()->id() === $message->user_id)
-                                <form action="{{ route('messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze opdracht wilt verwijderen?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-700 font-semibold">Verwijder</button>
-                                </form>
-                            @endif
+                            @auth
+                                @if(!auth()->user()->isStudent() && (auth()->id() === $message->user_id || auth()->user()->isAdmin()))
+                                    <form action="{{ route('messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze opdracht wilt verwijderen?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-700 font-semibold">Verwijder</button>
+                                    </form>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-6">
-                <a href="{{ route('photos.create', ['message_id' => $message->id]) }}"
-                   class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
-                    Bonus opdracht inleveren
-                </a>
-            </div>
-
-        @auth
-                @if(auth()->user()->hasRole('student'))
-                    <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Lever je antwoord in</h2>
-                        <form action="{{ route('photos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                            @csrf
-                            <input type="hidden" name="message_id" value="{{ $message->id }}">
-
-                            <div>
-                                <label for="title" class="block font-semibold text-black mb-2">Titel van je inzending</label>
-                                <input type="text" name="title" id="title" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                @error('title')
-                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="description" class="block font-semibold text-black mb-2">Beschrijving</label>
-                                <textarea name="description" id="description" rows="3"
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
-                                @error('description')
-                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="image_path" class="block font-semibold text-black mb-2">Foto van je antwoord *</label>
-                                <input type="file" name="image_path" id="image_path" accept="image/*" required
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                @error('image_path')
-                                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Inleveren</button>
-                        </form>
+            @auth
+                @if(auth()->user()->isStudent())
+                    <div class="mt-6">
+                        <a href="{{ route('photos.create', ['message_id' => $message->id]) }}"
+                           class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            Bonus opdracht inleveren
+                        </a>
                     </div>
                 @endif
             @endauth
