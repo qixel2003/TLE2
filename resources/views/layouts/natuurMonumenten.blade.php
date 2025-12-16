@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'WandelWild' }}</title>
+    <title>{{ $title ?? 'Natuurmonumenten' }}</title>
     <link rel="stylesheet"
           href={{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')}}>
 
@@ -13,7 +13,7 @@
 <body class="bg-witte_eend font-Poppins min-h-screen flex flex-col">
 
 <!-- Top Bar -->
-<header class="bg-blauwe_vogel text-witte_eend text-center py-4 shadow-md">
+<header class="bg-inkt_vis text-witte_eend text-center py-4 shadow-md">
     <h1 class="text-xl font-semibold">WandelWild</h1>
 </header>
 
@@ -30,11 +30,11 @@
             <i class="fas fa-home"></i>
         </a>
 
-        <a href="/routes" class="flex-1 flex flex-col items-center">
+        <a href="/photos" class="flex-1 flex flex-col items-center">
             <i class="fas fa-camera"></i>
         </a>
 
-        <a href="/" class="flex-1 flex flex-col items-center">
+        <a href="/tutorial" class="flex-1 flex flex-col items-center">
             <i class="fas fa-chart-bar"></i>
         </a>
 

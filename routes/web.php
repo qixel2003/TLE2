@@ -3,6 +3,8 @@
 use App\Http\Controllers\ActiveRouteController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\StudentController;
@@ -17,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/tutorial', function () {
     return view('tutorial');
-});
+})->name('tutorial');
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -105,6 +107,21 @@ Route::get('/checkpoints/{id}', function ($id) {
 
 
 Route::resource('badges', BadgeController::class);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/photos', [PhotoController::class, 'index'])->name('photos.index');
+    Route::get('/photos/create', [PhotoController::class, 'create'])->name('photos.create');
+    Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
+    Route::get('/photos/{photo}', [PhotoController::class, 'show'])->name('photos.show');
+    Route::get('/photos/{photo}/edit', [PhotoController::class, 'edit'])->name('photos.edit');
+});
+Route::resource('photos', PhotoController::class);
+
+Route::post('/photos/{photo}/comments', [CommentController::class, 'store'])
+    ->name('comments.store')
+    ->middleware('auth');
+
 
 
 require __DIR__ . '/auth.php';
