@@ -14,7 +14,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-// Routes voor wandelroutes - gebruik INDIVIDUELE routes
 Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
 Route::get('/routes/create', [RouteController::class, 'create'])->name('routes.create');
 Route::post('/routes', [RouteController::class, 'store'])->name('routes.store');

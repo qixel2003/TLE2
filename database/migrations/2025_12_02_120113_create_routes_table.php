@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('picture', 256)->nullable();
             $table->string('location');
-            $table->integer('distance');
+            $table->integer('distance', 8, 2);
             $table->integer('duration');
             $table->text('description');
             $table->string('difficulty'); // makkelijk, gemiddeld, moeilijk

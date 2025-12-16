@@ -31,6 +31,7 @@
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <x-nav-bar-link href="{{ route('welcome') }}" :active="request()->is('/')">Welcome</x-nav-bar-link>
+                            <x-nav-bar-link href="{{ route('login') }}" :active="request()->is('/')">Welcome</x-nav-bar-link>
 {{--                            <x-nav-bar-link href="{{route('')}}" :active="request()->is('')}}"></x-nav-bar-link>--}}
 {{--                            <x-nav-bar-link href="{{route('')}}" :active="request()->is('')}}"></x-nav-bar-link>--}}
 {{--                            <x-nav-bar-link href="{{route('')}}" :active="request()->is('')}}"></x-nav-bar-link>--}}
@@ -54,19 +55,19 @@
                         <span class="absolute -inset-0.5"></span>
                         <span class="sr-only">Open main menu</span>
 
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="1.5" aria-hidden="true"
-                             class="size-6 in-aria-expanded:hidden">
-                            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+{{--                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                             stroke-width="1.5" aria-hidden="true"--}}
+{{--                             class="size-6 in-aria-expanded:hidden">--}}
+{{--                            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"--}}
+{{--                                  stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                        </svg>--}}
 
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             stroke-width="1.5" aria-hidden="true"
-                             class="size-6 not-in-aria-expanded:hidden">
-                            <path d="M6 18 18 6M6 6l12 12"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+{{--                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"--}}
+{{--                             stroke-width="1.5" aria-hidden="true"--}}
+{{--                             class="size-6 not-in-aria-expanded:hidden">--}}
+{{--                            <path d="M6 18 18 6M6 6l12 12"--}}
+{{--                                  stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                        </svg>--}}
                     </button>
                 </div>
 
@@ -98,11 +99,11 @@
                             class="ml-auto p-1 text-gray-400 hover:text-gray-600 focus:outline-none">
                         <span class="sr-only">View notifications</span>
 
-                        <svg class="size-6" fill="none" stroke="currentColor"
-                             stroke-width="1.5" viewBox="0 0 24 24">
-                            <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31..."
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+{{--                        <svg class="size-6" fill="none" stroke="currentColor"--}}
+{{--                             stroke-width="1.5" viewBox="0 0 24 24">--}}
+{{--                            <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31..."--}}
+{{--                                  stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                        </svg>--}}
                     </button>
                 </div>
             </div>
