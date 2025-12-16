@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('photos', function (Blueprint $table) {
+        Schema::table('bonuses', function (Blueprint $table) {
             $table->enum('status', ['afwachting', 'goedgekeurd', 'afgewezen'])->default('afwachting');
         });
     }
 
     public function down()
     {
-        Schema::table('photos', function (Blueprint $table) {
+        Schema::table('bonuses', function (Blueprint $table) {
             $table->dropColumn('status');
         });
     }

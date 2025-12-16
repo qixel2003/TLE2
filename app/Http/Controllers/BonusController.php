@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Photo;
+use App\Models\Bonus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BonusController extends Controller
 {
-    /**
-     * Show the form for creating a new photo submission.
-     */
     public function create()
     {
         // Controleer of message_id is meegegeven
@@ -18,7 +15,7 @@ class BonusController extends Controller
             return redirect()->route('messages.index')->with('error', 'Geen opdracht geselecteerd.');
         }
 
-        return view('bonus.create');
+        return view('bonuses.create');
     }
 
     /**
@@ -30,7 +27,6 @@ class BonusController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|min:10|max:1000',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:9000',
-            'message_id' => 'required|exists:messages,id',
         ]);
 
         $imagePath = null;

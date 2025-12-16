@@ -1,7 +1,6 @@
 <x-layout :heading="'Nieuwe opdracht aanmaken'">
-    <form action="{{ route('photos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+    <form action="{{ route('bonuses.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
         @csrf
-        <input type="hidden" name="message_id" value="{{ request('message_id') ?? old('message_id') }}">
 
         <div class="border-b pb-4 mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Opdracht inleveren</h1>

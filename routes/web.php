@@ -32,10 +32,9 @@ Route::get('/messages/{message}/edit', [MessageController::class, 'edit'])->name
 Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
-Route::get('/photos/create', [BonusController::class, 'create'])->name('photos.create');
-Route::post('/photos', [BonusController::class, 'store'])->name('photos.store');
-Route::post('/photos/{photo}/approve', [BonusController::class, 'approve'])->name('photos.approve');
-Route::post('/photos/{photo}/reject', [BonusController::class, 'reject'])->name('photos.reject');
+Route::resource('bonus', BonusController::class)->only(['create', 'store', 'show']);
+Route::post('/bonus/{bonus}/approve', [BonusController::class, 'approve'])->name('bonus.approve');
+Route::post('/bonus/{bonus}/reject', [BonusController::class, 'reject'])->name('bonus.reject');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {

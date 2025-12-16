@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
-use App\Models\Photo;
+use App\Models\Bonus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,12 +15,12 @@ class MessageController extends Controller
     }
 
     public function show(Message $message) {
-        $studentPhotos = Photo::with('user')
+        $studentBonuses = Bonus::with('user')
             ->where('user_id', '!=', $message->user_id)
             ->latest()
             ->get();
 
-        return view('messages.show', compact('message', 'studentPhotos'));
+        return view('messages.show', compact('message', 'studentBonuses'));
         }
 
     public function create() {

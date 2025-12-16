@@ -74,30 +74,51 @@
 
             <div class="mt-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Ingediende antwoorden</h2>
-                @if($studentPhotos && $studentPhotos->count() > 0)
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach($studentPhotos as $photo)
-                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                                @if($photo->image_path)
-                                    <div class="h-48 overflow-hidden">
-                                        <img src="{{ asset('storage/' . $photo->image_path) }}" alt="{{ $photo->title }}" class="w-full h-full object-cover">
-                                    </div>
+                @if($studentBonuses && $studentBonuses->count() > 0) <!-- ✅ $studentBonuses ipv $studentPhotos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($studentBonuses as $bonus) <!-- ✅ $bonus ipv $photo -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                        @if($bonus->image_path) <!-- ✅ $bonus->image_path -->
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ asset('storage/' . $bonus->image_path) }}" alt="{{ $bonus->title }}" class="w-full h-full object-cover">
+                        </div>
+                        @endif
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $bonus->title }}</h3> <!-- ✅ $bonus->title -->
+                            @if($bonus->description) <!-- ✅ $bonus->description -->
+                            <p class="text-gray-600 text-sm mb-3">{{ Str::limit($bonus->description, 100) }}</p>
+                            @endif
+                            <div class="text-sm text-gray-500 border-t pt-3">
+                                <p><span class="font-medium">Leerling:</span> {{ $bonus->user->name ?? 'Onbekend' }}</p> <!-- ✅ $bonus->user -->
+                                <p><span class="font-medium">Ingediend:</span> {{ $bonus->created_at->format('d M Y H:i') }}</p>
+
+                                <!-- ✅ Status toevoegen -->
+                                @if($bonus->status)
+                                    <p class="mt-1">
+                                        <span class="font-medium">Status:</span>
+                                        <span class="px-2 py-1 text-xs rounded-full {{ $bonus->status === 'goedgekeurd' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                                    {{ $bonus->status }}
+                                                </span>
+                                    </p>
                                 @endif
-                                <div class="p-4">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $photo->title }}</h3>
-                                    @if($photo->description)
-                                        <p class="text-gray-600 text-sm mb-3">{{ Str::limit($photo->description, 100) }}</p>
+
+                                <!-- ✅ Link naar bonus show voor docenten -->
+                                @auth
+                                    @if(!auth()->user()->isStudent())
+                                        <div class="mt-2">
+                                            <a href="{{ route('bonus.show', $bonus->id) }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                Bekijk details & beoordeel →
+                                            </a>
+                                        </div>
                                     @endif
-                                    <div class="text-sm text-gray-500 border-t pt-3">
-                                        <p><span class="font-medium">Leerling:</span> {{ $photo->user->name ?? 'Onbekend' }}</p>
-                                        <p><span class="font-medium">Ingediend:</span> {{ $photo->created_at->format('d M Y H:i') }}</p>
-                                    </div>
-                                </div>
+                                @endauth
                             </div>
-                        @endforeach
+                        </div>
                     </div>
+                    @endforeach
+                </div>
                 @else
-                    <div class="text-blue-800 px-4 py-3 rounded">
+                    <div class="bg-blue-50 text-blue-800 px-4 py-3 rounded">
                         <p>Nog geen antwoorden ingediend.</p>
                     </div>
                 @endif
