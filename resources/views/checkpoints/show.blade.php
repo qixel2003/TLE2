@@ -31,7 +31,7 @@
             @if ($checkpoint->mission && $checkpoint->mission->questions->count() > 0)
                 @if($activeRoute->role === 2)
                     @foreach($checkpoint->mission->questions as $q)
-                        <div class="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <div class="mb-6 p-4 bg-gray-50">
                             <h2 class="text-2xl font-semibold mb-3">
                                 Vraag: {{ $q->question }}
                             </h2>
@@ -71,7 +71,7 @@
                     @endforeach
                 @endif
                 @if($activeRoute->role === 4)
-                    <div class="mt-4 p-4 bg-white border rounded">
+                    <div class="mt-4 p-4 bg-white">
                         <h3 class="text-lg font-semibold mb-2">Verkenningsopdracht:</h3>
 
                         <p class="text-gray-700 mb-4">
@@ -105,7 +105,7 @@
                 @endif
 
                 @if($activeRoute->role === 3 && $checkpoint->mission->prompts)
-                    <div class="mt-4 p-4 bg-white border rounded">
+                    <div class="mt-4 p-4 bg-white">
                         <h3 class="text-lg font-semibold mb-2">Tekenopdracht:</h3>
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->drawing ?? 'Geen tekenopdracht.' }}
@@ -135,7 +135,7 @@
                 @endif
 
                 @if($activeRoute->role === 1 && $checkpoint->mission->prompts)
-                    <div class="mt-4 p-4 bg-white border rounded">
+                    <div class="mt-4 p-4 bg-white">
                         <h3 class="text-lg font-semibold mb-2">Fotografieopdracht:</h3>
                         <p class="text-gray-700">
                             {{ $checkpoint->mission->prompts->photography ?? 'Geen fotografieopdracht.' }}
