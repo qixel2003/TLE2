@@ -72,7 +72,6 @@ Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
 Route::post('/photos/{photo}/approve', [PhotoController::class, 'approve'])->name('photos.approve');
 Route::post('/photos/{photo}/reject', [PhotoController::class, 'reject'])->name('photos.reject');
 
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
             return view('dashboard');

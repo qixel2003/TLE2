@@ -109,6 +109,4 @@ class User extends Authenticatable
     public function isStudent(): bool {
         return $this->role === 1; // Student
     }
-
-
 }
