@@ -11,53 +11,80 @@
             Je hebt je route afgerond!
         </p>
 
-        <div class="bg-white p-6 rounded-lg flex flex-col snap-center">
+        <section class="bg-white p-6 rounded-lg flex flex-col">
 
-            <h2 class="text-2xl font-semibold mb-4">
+            <h2 class="text-2xl font-semibold mb-6 text-center">
                 Route statistieken
             </h2>
 
-            <div class="grid grid-cols-2 gap-4 text-sm">
+            <dl class="grid grid-cols-2 gap-6 text-sm">
 
                 <div>
-                    <p class="font-semibold">Route naam:</p>
-                    <p>{{ $activeRoute->route->name }}</p>
+                    <dt class="font-semibold text-gray-800">
+                        Route naam
+                    </dt>
+                    <dd>
+                        {{ $activeRoute->route->name }}
+                    </dd>
                 </div>
 
                 <div>
-                    <p class="font-semibold">Je rol:</p>
-                    <p>{{ $activeRoute->getRoleName() }}</p>
+                    <dt class="font-semibold text-gray-800">
+                        Je rol
+                    </dt>
+                    <dd>
+                        {{ $activeRoute->getRoleName() }}
+                    </dd>
                 </div>
 
                 <div>
-                    <p class="font-semibold">Locatie:</p>
-                    <p>{{ $activeRoute->route->location }}</p>
+                    <dt class="font-semibold text-gray-800">
+                        Locatie
+                    </dt>
+                    <dd>
+                        {{ $activeRoute->route->location }}
+                    </dd>
                 </div>
 
                 <div>
-                    <p class="font-semibold">Afstand:</p>
-                    <p>{{ $activeRoute->route->distance }} km</p>
+                    <dt class="font-semibold text-gray-800">
+                        Afstand
+                    </dt>
+                    <dd>
+                        {{ $activeRoute->route->distance }} km
+                    </dd>
                 </div>
 
                 <div>
-                    <p class="font-semibold">Duratie:</p>
-                    <p>{{ $activeRoute->route->duration }} minuten</p>
+                    <dt class="font-semibold text-gray-800">
+                        Duur
+                    </dt>
+                    <dd>
+                        {{ $activeRoute->route->duration }} minuten
+                    </dd>
                 </div>
 
                 <div>
-                    <p class="font-semibold">Moeilijkheidsgraad:</p>
-                    <p>{{ ucfirst($activeRoute->route->difficulty) }}</p>
+                    <dt class="font-semibold text-gray-800">
+                        Moeilijkheidsgraad
+                    </dt>
+                    <dd>
+                        {{ ucfirst($activeRoute->route->difficulty) }}
+                    </dd>
                 </div>
 
-            </div>
+            </dl>
 
-            <div class="mt-6 text-center">
-                <a href="{{ route('routes.index') }}"
-                    class="inline-block bg-natuur_groen hover:bg-green-700 text-witte_eend font-semibold py-2 px-6 rounded-lg">
+            <div class="mt-8 text-center">
+                <a
+                    href="{{ route('routes.index') }}"
+                    class="inline-block bg-natuur_groen hover:bg-green-700 text-witte_eend
+                           font-semibold py-2 px-6 rounded-lg
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                     Terug naar Home
                 </a>
             </div>
 
-        </div>
+        </section>
     </div>
 @endsection

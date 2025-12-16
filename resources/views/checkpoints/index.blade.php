@@ -3,46 +3,70 @@
 @endphp
 
 @extends('layouts.natuurMonumenten')
+
 @section('content')
-    <h1 class="text-3xl font-bold mb-6">Checkpoints</h1>
+    <section aria-labelledby="checkpoints-titel">
 
-    @if ($checkpoints->isEmpty())
-        <p class="text-gray-600">Geen checkpoints gevonden.</p>
-    @else
-        <ul class="space-y-4">
-            @foreach ($checkpoints as $checkpoint)
-                <li class="p-4 bg-white rounded-lg shadow border border-gray-200">
+        <h1 id="checkpoints-titel" class="text-3xl font-bold mb-6">
+            Checkpoints
+        </h1>
 
-                    <div class="flex items-center justify-between mb-1">
-                        <strong class="text-lg">
-                            Checkpoint
-                        </strong>
+        @if ($checkpoints->isEmpty())
+            <p class="text-gray-700">
+                Geen checkpoints gevonden.
+            </p>
+        @else
+            <ul class="space-y-4" role="list">
 
-                        <span class="inline-block px-2 py-1 text-sm bg-blue-100 text-blue-700 rounded">
-                        {{ $checkpoint->points }} points
-                    </span>
-                    </div>
-
-                    <div class="mt-2">
-                        <span class="font-semibold text-gray-700">Missie:</span>
-
-                        @if($checkpoint->mission_id)
-                            <span class="text-gray-800">
-        {{ $checkpoint->mission->title ?? 'Geen titel' }}
-    </span>
-                        @else
-                            <em class="text-gray-500">Geen missie gelinkt.</em>
-                        @endif
-                    </div>
-
-                    <a
-                        href="/checkpoints/{{ $checkpoint->id }}"
-                        class="inline-block mt-3 text-blue-600 hover:text-blue-800 font-medium"
+                @foreach ($checkpoints as $checkpoint)
+                    <li
+                        class="p-4 bg-white rounded-lg shadow border border-gray-200"
+                        aria-labelledby="checkpoint-{{ $checkpoint->id }}-titel"
                     >
-                        Bekijk Missie →
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-    @endif
+
+                        <div class="flex items-center justify-between mb-1">
+                            <h2
+                                id="checkpoint-{{ $checkpoint->id }}-titel"
+                                class="text-lg font-semibold"
+                            >
+                                Checkpoint
+                            </h2>
+
+                            <span
+                                class="inline-block px-2 py-1 text-sm bg-blue-100 text-blue-800 rounded"
+                                aria-label="{{ $checkpoint->points }} punten"
+                            >
+                                {{ $checkpoint->points }} punten
+                            </span>
+                        </div>
+
+                        <div class="mt-2">
+                            <span class="font-semibold text-gray-800">
+                                Missie:
+                            </span>
+
+                            @if($checkpoint->mission_id)
+                                <span class="text-gray-900">
+                                    {{ $checkpoint->mission->title ?? 'Geen titel' }}
+                                </span>
+                            @else
+                                <em class="text-gray-700">
+                                    Geen missie gelinkt.
+                                </em>
+                            @endif
+                        </div>
+
+                        <a
+                            href="{{ url('/checkpoints/' . $checkpoint->id) }}"
+                            class="inline-block mt-3 font-medium underline text-blue-700 hover:text-blue-900
+                                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                            Bekijk missie
+                        </a>
+                    </li>
+                @endforeach
+
+            </ul>
+        @endif
+    </section>
 @endsection
