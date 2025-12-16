@@ -8,7 +8,7 @@
 
     <div class="max-w-3xl mx-auto">
         <h1 class="text-3xl font-bold mb-6">
-            Checkpoint
+            Missie
         </h1>
 
         <div class="p-6 bg-white rounded-lg shadow border border-gray-200 mb-6">
@@ -50,7 +50,7 @@
                                             data-answer-index="{{ $i }}"
                                         >
                                             <span>{{ $q->{$answerKey} }}</span>
-                                            
+
                                         </button>
                                     </li>
                                 @endfor
