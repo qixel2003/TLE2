@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Support\Facades\Route;
@@ -32,10 +32,10 @@ Route::get('/messages/{message}/edit', [MessageController::class, 'edit'])->name
 Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
-Route::get('/photos/create', [PhotoController::class, 'create'])->name('photos.create');
-Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
-Route::post('/photos/{photo}/approve', [PhotoController::class, 'approve'])->name('photos.approve');
-Route::post('/photos/{photo}/reject', [PhotoController::class, 'reject'])->name('photos.reject');
+Route::get('/photos/create', [BonusController::class, 'create'])->name('photos.create');
+Route::post('/photos', [BonusController::class, 'store'])->name('photos.store');
+Route::post('/photos/{photo}/approve', [BonusController::class, 'approve'])->name('photos.approve');
+Route::post('/photos/{photo}/reject', [BonusController::class, 'reject'])->name('photos.reject');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {

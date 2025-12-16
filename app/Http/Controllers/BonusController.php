@@ -6,7 +6,7 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PhotoController extends Controller
+class BonusController extends Controller
 {
     /**
      * Show the form for creating a new photo submission.
@@ -18,7 +18,7 @@ class PhotoController extends Controller
             return redirect()->route('messages.index')->with('error', 'Geen opdracht geselecteerd.');
         }
 
-        return view('photos.create');
+        return view('bonus.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PhotoController extends Controller
             $imagePath = $request->file('image_path')->store('student_submissions', 'public');
         }
 
-        Photo::create([
+        Bonus::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
@@ -48,24 +48,24 @@ class PhotoController extends Controller
         return redirect()->route('messages.show', $request->message_id)->with('success', 'Je antwoord is succesvol ingediend!');
     }
 
-    public function approve(Photo $photo)
+    public function approve(Bonus $bonus)
     {
         if (!Auth::check() || Auth::user()->isStudent()) {
             return back()->with('error', 'Je hebt geen rechten om foto\'s goed te keuren.');
         }
 
-        $photo->update(['status' => 'goedgekeurd']);
+        $bonus->update(['status' => 'goedgekeurd']);
         return back()->with('success', 'Foto goedgekeurd!');
     }
 
-    public function reject(Photo $photo)
+    public function reject(Bonus $bonus)
     {
         // Alleen teachers en admins mogen afkeuren
         if (!Auth::check() || Auth::user()->isStudent()) {
             return back()->with('error', 'Je hebt geen rechten om foto\'s af te keuren.');
         }
 
-        $photo->update(['status' => 'afgewezen']);
+        $bonus->update(['status' => 'afgewezen']);
         return back()->with('success', 'Foto afgewezen!');
     }
 }

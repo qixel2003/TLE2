@@ -64,7 +64,7 @@
             @auth
                 @if(auth()->user()->isStudent())
                     <div class="mt-6">
-                        <a href="{{ route('photos.create', ['message_id' => $message->id]) }}"
+                        <a href="{{ route('bonus.create', ['message_id' => $message->id]) }}"
                            class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                             Bonus opdracht inleveren
                         </a>
