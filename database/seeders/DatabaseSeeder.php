@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
         $school = School::factory()->create([
             'name' => 'HR School',
-            'location' => 'Rotterdam',
+            'city' => 'Rotterdam',
             'user_id' => 1,
         ]);
 
