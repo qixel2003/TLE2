@@ -13,7 +13,7 @@
 <body class="bg-witte_eend font-Poppins min-h-screen flex flex-col">
 
 <!-- Top Bar -->
-<header class="bg-blauwe_vogel text-witte_eend text-center py-4 shadow-md">
+<header class="bg-inkt_vis text-witte_eend text-center py-4 shadow-md">
     <h1 class="text-xl font-semibold">Natuurmonumenten</h1>
 </header>
 
