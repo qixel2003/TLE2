@@ -16,7 +16,6 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -88,6 +87,15 @@ class User extends Authenticatable
                     ->pluck('badge_id')
             )->get()
         );
+    }
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 

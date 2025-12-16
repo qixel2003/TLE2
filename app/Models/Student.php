@@ -35,4 +35,10 @@ class Student extends Model
         return $this->belongsTo(Classroom::class);
     }
 
+    public function activeRoutes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Active_Route::class);
+    }
+
+
 }

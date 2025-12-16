@@ -1,69 +1,63 @@
-<!doctype html>
-<html lang="nl" class="h-full bg-witte_eend">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.natuurMonumenten')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+@section('content')
+    <div class="max-w-3xl mx-auto">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h1 class="text-3xl font-bold mb-6">Gefeliciteerd!</h1>
-                    <p class="text-lg mb-4">Je hebt je route afgerond!</p>
+        <h1 class="text-3xl font-bold mb-4 text-center">
+            Gefeliciteerd!
+        </h1>
 
-                    <div class="bg-gray-100 p-4 rounded-lg mt-6">
-                        <h2 class="text-2xl font-semibold mb-4">Route Statistieken</h2>
+        <p class="text-lg mb-6 text-center">
+            Je hebt je route afgerond!
+        </p>
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <p class="font-semibold">Route Naam:</p>
-                                <p>{{ $activeRoute->route->name }}</p>
-                            </div>
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
 
-                            <div>
-                                <p class="font-semibold">je Rol:</p>
-                                <p>{{ $activeRoute->getRoleName() }}</p>
-                            </div>
+            <h2 class="text-2xl font-semibold mb-4">
+                Route statistieken
+            </h2>
 
-                            <div>
-                                <p class="font-semibold">Locatie:</p>
-                                <p>{{ $activeRoute->route->location }}</p>
-                            </div>
+            <div class="grid grid-cols-2 gap-4 text-sm">
 
-                            <div>
-                                <p class="font-semibold">Afstand:</p>
-                                <p>{{ $activeRoute->route->distance }} km</p>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold">Duratie:</p>
-                                <p>{{ $activeRoute->route->duration }} minuten</p>
-                            </div>
-
-                            <div>
-                                <p class="font-semibold">Moeilijkheidsgraad:</p>
-                                <p>{{ ucfirst($activeRoute->route->difficulty) }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6">
-                        <a href="{{ route('routes.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Terug naar Home
-                        </a>
-                    </div>
+                <div>
+                    <p class="font-semibold">Route naam:</p>
+                    <p>{{ $activeRoute->route->name }}</p>
                 </div>
+
+                <div>
+                    <p class="font-semibold">Je rol:</p>
+                    <p>{{ $activeRoute->getRoleName() }}</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Locatie:</p>
+                    <p>{{ $activeRoute->route->location }}</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Afstand:</p>
+                    <p>{{ $activeRoute->route->distance }} km</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Duratie:</p>
+                    <p>{{ $activeRoute->route->duration }} minuten</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold">Moeilijkheidsgraad:</p>
+                    <p>{{ ucfirst($activeRoute->route->difficulty) }}</p>
+                </div>
+
             </div>
+
+            <div class="mt-6 text-center">
+                <a href="{{ route('routes.index') }}"
+                    class="inline-block bg-natuur_groen hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg">
+                    Terug naar Home
+                </a>
+            </div>
+
         </div>
     </div>
-</body>
-</html>>
-
+@endsection

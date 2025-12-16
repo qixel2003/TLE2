@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Active_Route;
+use App\Models\School;
+use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,16 +15,17 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile.
+     * Display the user's profile form.
      */
-    public function index(Request $request): View
+    public function index (Request $request): View
     {
+        $students = Student::all();
+        $active_routes = Active_Route::with('route')->get();
         $user = $request->user();
-
-        return view('profile.index', [
-            'user'   => $user,
-            'badges' => $user->unlockedBadges,
-        ]);
+        $school = School::all();
+        $authTeacher = (auth()->check() && auth()->user()->role == 1);
+        $authStudent = auth()->user()->student ? auth()->user()->student->load('activeRoutes.route') : null;
+        return view('profile.index', compact('students', 'user', 'active_routes', 'authStudent', 'school', 'authTeacher'));
     }
 
     /**
@@ -32,7 +36,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         return view('profile.edit', [
-            'user'   => $user,
+            'user' => $request->user(),
             'badges' => $user->unlockedBadges,
         ]);
     }
@@ -65,6 +69,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
+
         $user->delete();
 
         $request->session()->invalidate();
