@@ -33,6 +33,7 @@ Route::put('/messages/{message}', [MessageController::class, 'update'])->name('m
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
 Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
+Route::post('/photos/create', [PhotoController::class, 'create'])->name('photos.create');
 Route::post('/photos/{photo}/approve', [PhotoController::class, 'approve'])->name('photos.approve');
 Route::post('/photos/{photo}/reject', [PhotoController::class, 'reject'])->name('photos.reject');
 

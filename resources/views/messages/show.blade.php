@@ -50,6 +50,10 @@
                 </div>
             </div>
 
+            <div>
+
+            </div>
+
 
             @auth
                 @if(auth()->user()->hasRole('student'))
@@ -85,7 +89,6 @@
                                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Inleveren</button>
                         </form>
                     </div>

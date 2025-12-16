@@ -24,7 +24,7 @@ class PhotoController extends Controller
         }
 
         Photo::create([
-            'user_id' => auth()->id(),
+//            'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'image_path' => $imagePath,
@@ -42,6 +42,10 @@ class PhotoController extends Controller
     public function reject(Photo $photo) {
         $photo->update(['status' => 'afgewezen']);
         return back()->with('success', 'Foto afgewezen!');
+    }
+
+    public function create() {
+        return view('messages.create');
     }
 }
 
