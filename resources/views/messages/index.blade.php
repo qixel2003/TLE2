@@ -3,9 +3,6 @@
     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">Bonus opdrachten</h1>
-            @auth
-                <a href="{{ route('messages.create') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg">Maak een opdracht aan</a>
-            @endauth
         </div>
 
         @if(session('success'))
