@@ -75,7 +75,7 @@
                     <li class="bg-lkinder_blauw px-4 py-2 rounded-full">
                         <span aria-hidden="true" class="mr-2">⏰</span>
                         <span class="font-semibold">
-                            Duur: {{ $route->duration ?? '0' }} minuten
+                            Duur: {{--{{ $route->duration ?? '0' }} minuten--}} 1,5 uur
                         </span>
                     </li>
 
@@ -110,13 +110,12 @@
                         >
 
                         <p class="leading-relaxed">
-                            De polder lijkt rustig… maar er gebeurt van alles. Vogels vliegen onrustig rond,
-                            insecten krioelen tussen de bloemen en kikkers bewegen onder het wateroppervlak.
+                            De polder lijkt rustig… maar er gebeurt van alles. Vogels vliegen rond,
+                            insecten krioelen snel tussen de bloemen en kikkers bewegen rap onder het wateroppervlak. Polders en bosjes vormen veilige plekken voor dieren tegen hun vijanden.
                         </p>
 
                         <p class="mt-4">
-                            Jij bent hier niet zomaar een wandelaar. Elke stap telt: blijf op de paden,
-                            laat de bloemen bloeien en verstoor de natuur niet.
+                            Jij bent hier niet zomaar een wandelaar. Elke stap telt. Help jij de kwetsbare dieren tegen gevaar?
                         </p>
 
                         <div class="clear-both"></div>
