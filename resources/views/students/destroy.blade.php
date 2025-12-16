@@ -1,8 +1,8 @@
-<form action="{{ route('classrooms.destroy', $classrooms->id) }}" method="POST">
+<form action="{{ route('students.destroy', $student->id) }}" method="POST">
     @csrf
     @method('DELETE')
 
     <x-custom-buttons.yellow-button>
-        Verwijder klas
+        Verwijder leerling
     </x-custom-buttons.yellow-button>
 </form>

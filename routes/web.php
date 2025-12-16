@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ActiveRouteController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\StudentController;
 use App\Models\Active_Route;
 use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
@@ -84,7 +86,6 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 });
 
-
 Route::get('/checkpoints', function () {
     $checkpoints = Checkpoint::with('mission')->orderBy('checkpoint')->get();
     return view('checkpoints.index', compact('checkpoints'));
@@ -129,12 +130,25 @@ Route::middleware('auth')->group(function () {
     Route::post('classrooms/{classroom}/addStudent', [\App\Http\Controllers\ClassroomController::class, 'addStudent'])->name('classrooms.addStudent');
 });
 
+Route::delete(
+    '/classrooms/{classroom}/students/{student}',
+    [ClassroomController::class, 'destroyStudent']
+)->name('classrooms.students.destroy');
+
+
 // student
 Route::middleware('auth')->group(function () {
     Route::get('/student', function () {
         return view('student.dashboard');
     })->name('student.dashboard');
 });
+
+Route::get('/students/{student}', [StudentController::class, 'show'])
+    ->name('students.show');
+
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])
+    ->name('students.destroy');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
