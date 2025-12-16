@@ -5,7 +5,7 @@ WandelWild is a web application designed to connect Natuurmonumenten to schools 
 ## ERD
 
 We built the application based on the following Entity Relationship Diagram (ERD):
-![ERD](resources/images/ERD-2.png)
+![ERD](public/images/ERD-2.png)
 
 ## Installation and Deployment
 

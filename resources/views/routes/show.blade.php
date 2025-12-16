@@ -5,7 +5,7 @@
 
         <div class="mb-8">
             <a href="{{ route('routes.index') }}"
-               class="inline-flex items-center text-green-600 hover:text-green-700 font-semibold">
+               class="inline-flex items-center text-green-600 hover:text-kinder_blauw font-semibold">
                 Terug naar alle routes
             </a>
         </div>
@@ -47,7 +47,7 @@
 
                 <div class="flex flex-wrap gap-3 mb-8">
 
-                    <div class="bg-lnatuur_groen px-4 py-2 rounded-full border border-green-100">
+                    <div class="bg-lnatuur_groen px-4 py-2 rounded-full ">
                         <div class="flex items-center">
                             <span class="mr-2">📏</span>
                             <span class="font-semibold">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-lkinder_blauw px-4 py-2 rounded-full border border-blue-100">
+                    <div class="bg-lkinder_blauw px-4 py-2 rounded-full ">
                         <div class="flex items-center">
                             <span class="mr-2">⏰️</span>
                             <span class="font-semibold">
@@ -72,12 +72,56 @@
                         Routebeschrijving
                     </h2>
 
-                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <div class="bg-gray-50 rounded-xl p-6 shadow-lg">
                         <p class="text-gray-700 leading-relaxed">
                             {{ $route->description ?? 'Geen beschrijving beschikbaar' }}
                         </p>
                     </div>
                 </div>
+
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                        Verhaal
+                    </h2>
+
+                    <div class="bg-gray-50 rounded-xl p-6 bg-inkt_vis text-witte_eend">
+
+                        <img
+                            src="{{ asset('images/free-icon-bird-3338342.png') }}"
+                            alt="Een vogel icoon"
+                            class="w-20 h-20 float-right ml-4 mb-2"
+                        >
+
+                        <p class="text-gray-700 leading-relaxed">
+                            De polder lijkt rustig… maar er gebeurt van alles. Vogels vliegen onrustig rond, insecten krioelen tussen de bloemen, langs de sloot en kikkers bewegen onder het wateroppervlak. Polders en bosjes vormen veilige plekken voor dieren.
+                        </p>
+                        <p class="mt-4">
+                            Jij bent hier niet zomaar een wandelaar. Elke stap telt: blijf op de paden, laat de bloemen bloeien en verstoor de natuur niet. Zo help jij de polder levendig en gezond te houden.
+                        </p>
+
+                        <div class="clear-both"></div>
+                    </div>
+                </div>
+
+                {{-- missie --}}
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                        Jouw missie
+                    </h2>
+
+                    <img
+                        src="{{ asset('images/free-icon-goal-5987327.png') }}"
+                        alt="Een vogel icoon"
+                        class="w-20 h-20 float-right ml-2 mb-2 mt-9 mr-2"
+                    >
+
+                    <div class="bg-gray-50 rounded-xl p-6 bg-roze_bloem text-witte_eend mb-4">
+                        <p class="text-gray-700 leading-relaxed">
+                            Tijdens deze route ga je op ontdekkingstocht door de polder. Spot water, vogels én bloemen. Begrijp hoe ze samenleven en ontdek hoe jouw gedrag de natuur kan beschermen. Let goed op de aanwijzingen langs het pad en gebruik je zintuigen om de natuur te ervaren.
+                        </p>
+                    </div>
+
+
 
                 <div class="border-t border-gray-200 pt-6">
                     <div class="flex justify-between items-center text-sm text-gray-500">
