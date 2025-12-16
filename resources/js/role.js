@@ -7,24 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
 
+    /**
+     * Selecteert een rol (klik + toetsenbord)
+     */
+    const selectRole = (item) => {
+        roleItems.forEach(i => {
+            i.classList.remove('selected');
+            i.setAttribute('aria-pressed', 'false');
+        });
 
-    // 1. Handle Role Selection
+        item.classList.add('selected');
+        item.setAttribute('aria-pressed', 'true');
+
+        selectedRole = item.getAttribute('data-role');
+        console.log(`Rol geselecteerd: ${selectedRole}`);
+    };
+
+    // 1. Handle Role Selection (Mouse + Keyboard)
     roleItems.forEach(item => {
+
+        // Muis / touch
         item.addEventListener('click', () => {
-            // Remove 'selected' class from all items
-            roleItems.forEach(i => i.classList.remove('selected'));
+            selectRole(item);
+        });
 
-            // Add 'selected' class to the clicked item (Handles the visual highlight)
-            item.classList.add('selected');
-
-            // Store the selected role
-            selectedRole = item.getAttribute('data-role');
-
-            console.log(`Rol geselecteerd: ${selectedRole}`);
+        // Toetsenbord (Enter / Spatie)
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault(); // voorkomt scroll bij spatie
+                selectRole(item);
+            }
         });
     });
 
-    // Sorry Jade I had to change the alert code because it wouldn't submit the role change otherwise.
     // 2. Handle Continue Button Click
     continueBtn.addEventListener('click', (e) => {
         if (!selectedRole) {
@@ -33,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Add hidden input with selected role to the form
         const form = continueBtn.closest('form');
         let roleInput = form.querySelector('input[name="role"]');
 
@@ -44,37 +58,29 @@ document.addEventListener('DOMContentLoaded', () => {
             form.appendChild(roleInput);
         }
 
-        // Map role names to numbers (adjust these values as needed)
         const roleMap = {
-            'fotograaf': 1,
-            'historicus': 2,
-            'tekenaar': 3,
-            'scout': 4
+            fotograaf: 1,
+            historicus: 2,
+            tekenaar: 3,
+            scout: 4
         };
 
         roleInput.value = roleMap[selectedRole];
     });
 
-
-    // 3. Scroll Event Listener (Handles header shrinking effect)
-
-    /**
-     * Checks the scroll position of the container and applies/removes the 'scrolled' class.
-     */
+    // 3. Scroll Event Listener (Header shrinking effect)
     const handleScroll = () => {
-        // We check if the main container is scrolled down more than 50 pixels
-        if (container.scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (container && header) {
+            if (container.scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
     };
 
-    // Attach the scroll event listener to the main container element
-    // NOTE: This assumes you have added 'overflow-y: auto;' to .role-selection-card
-    // or .container in your CSS to enable scrolling!
-    container.addEventListener('scroll', handleScroll);
-
-    // Initial check in case the page load context is unusual
-    handleScroll();
+    if (container) {
+        container.addEventListener('scroll', handleScroll);
+        handleScroll();
+    }
 });

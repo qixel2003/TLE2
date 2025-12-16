@@ -1,17 +1,30 @@
 @extends('layouts.natuurMonumenten')
 
 @section('content')
-        <div class="role-selection-card">
-            <h2>Kies je rol!</h2>
+    <div class="role-selection-card">
 
-            <form method="POST" action="{{ route('active-routes.update-role', $activeRoute) }}">
-                @csrf
-                @method('PATCH')
+        <h1 class="text-2xl font-bold mb-6 text-center">
+            Kies je rol
+        </h1>
 
-                <div class="role-list">
+        <form method="POST" action="{{ route('active-routes.update-role', $activeRoute) }}">
+            @csrf
+            @method('PATCH')
 
-                    <div class="role-item" data-role="fotograaf" role="button" tabindex="0">
-                        <i class="fas fa-camera"></i>
+            <ul
+                class="role-list"
+                role="group"
+                aria-labelledby="rol-keuze-titel"
+            >
+                <li>
+                    <div
+                        class="role-item"
+                        data-role="fotograaf"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                    >
+                        <i class="fas fa-camera" aria-hidden="true"></i>
                         <div>
                             <span class="role-title">Fotograaf</span>
                             <p class="role-description">
@@ -20,10 +33,17 @@
                             </p>
                         </div>
                     </div>
+                </li>
 
-
-                    <div class="role-item" data-role="historicus" role="button" tabindex="1">
-                        <i class="fas fa-scroll"></i>
+                <li>
+                    <div
+                        class="role-item"
+                        data-role="historicus"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                    >
+                        <i class="fas fa-scroll" aria-hidden="true"></i>
                         <div>
                             <span class="role-title">Historicus</span>
                             <p class="role-description">
@@ -32,9 +52,17 @@
                             </p>
                         </div>
                     </div>
+                </li>
 
-                    <div class="role-item" data-role="tekenaar" role="button" tabindex="2">
-                        <i class="fas fa-pencil-alt"></i>
+                <li>
+                    <div
+                        class="role-item"
+                        data-role="tekenaar"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                    >
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                         <div>
                             <span class="role-title">Tekenaar</span>
                             <p class="role-description">
@@ -43,9 +71,17 @@
                             </p>
                         </div>
                     </div>
+                </li>
 
-                    <div class="role-item" data-role="scout" role="button" tabindex="3">
-                        <i class="fas fa-user-circle"></i>
+                <li>
+                    <div
+                        class="role-item"
+                        data-role="scout"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                    >
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <div>
                             <span class="role-title">Scout</span>
                             <p class="role-description">
@@ -54,15 +90,20 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </li>
+            </ul>
 
-                <button type="submit" class="continue-button" id="continueBtn">
-                    Verder
-                </button>
+            <button
+                type="submit"
+                class="continue-button mt-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                id="continueBtn"
+            >
+                Verder
+            </button>
 
-                <input type="hidden" name="role" id="selectedRole">
-            </form>
-        </div>
+            <input type="hidden" name="role" id="selectedRole">
+        </form>
+    </div>
 @endsection
 
 @vite('resources/js/role.js')
