@@ -156,6 +156,7 @@
 
                 {{-- Start route --}}
                 <div class="mt-8 pt-6 border-t border-gray-200">
+                    @if(auth()->user()->isStudent())
                     <form method="POST" action="{{ route('routes.start', $route) }}">
                         @csrf
                         <button
@@ -168,6 +169,11 @@
                             Start route
                         </button>
                     </form>
+                    @else
+                        <p class="text-center text-gray-500">
+                            Log in als student om deze route te starten.
+                        </p>
+                    @endif
                 </div>
 
             </div>

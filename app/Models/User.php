@@ -53,6 +53,10 @@ class User extends Authenticatable
         ];
     }
 
+    const ROLE_ADMIN = 0;
+    const ROLE_STUDENT = 2;
+    const ROLE_TEACHER = 1;
+
     public function school(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
 
@@ -99,14 +103,18 @@ class User extends Authenticatable
     }
 
     public function isTeacher(): bool {
-        return $this->role === 2; // Teacher
+        return $this->role === self::ROLE_TEACHER;
     }
 
     public function isAdmin(): bool {
-        return $this->role === 0; // Admin
+        return $this->role === self::ROLE_ADMIN;
     }
 
     public function isStudent(): bool {
-        return $this->role === 1; // Student
+        return $this->role === self::ROLE_STUDENT;
+    }
+
+    public function hasRole(int $role): bool {
+        return $this->role === $role;
     }
 }
