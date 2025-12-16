@@ -171,3 +171,232 @@
     font-size: 1.5em;
     cursor: pointer;
 }
+
+/*tutorial css*/
+
+#tutorial-container {
+    /* Set up a container for the cards */
+    position: relative; /* **Crucial** for positioning the cards absolutely inside it */
+    width: 300px; /* Define the width of your card area */
+    height: 400px; /* Define the height of your card area */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tutorial-card {
+    /* Makes the card "float" and stack on top of each other */
+    position: absolute; /* **Crucial** to take it out of the normal flow and stack them */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Styling for the card appearance */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+
+    /* Hide the card by default */
+    opacity: 0;
+    visibility: hidden;
+
+    /* Smooth transition for showing/hiding */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    /* Center the content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tutorial-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 50%;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* Class to make a card visible (added by JavaScript) */
+.tutorial-card.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#next-step-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Styling for the container that holds the buttons */
+.clickable {
+    display: flex; /* **Crucial** - enables flexible layout */
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 15px; /* Adds space between the buttons */
+    margin-top: 20px; /* Separates the buttons from the tutorial card */
+    width: 300px; /* Match the width of your tutorial-container if needed */
+}
+
+/* Styling for all buttons inside the container */
+.clickable button {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 2px solid #007bff; /* Primary color border */
+    border-radius: 6px;
+    background-color: #fff;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Specific styling for the Next/Home button (to make them stand out) */
+#next-step-btn, #home-btn {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Hover effects */
+.clickable button:hover:not([disabled]) {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* Style for disabled button (Previous/Next at start/end) */
+.clickable button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#tutorial-container {
+    position: relative;
+    width: 300px;
+    height: 300px; /* Made slightly smaller since text is now in the bubble */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 12px;
+    z-index: 1; /* Keep behind mascot */
+}
+
+#tutorial-container,
+.clickable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.tutorial-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95); /* Start slightly smaller for effect */
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.tutorial-card.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1); /* Zoom in effect */
+}
+
+/* --- NEW MASCOT STYLES --- */
+
+#mascot-wrapper {
+    position: fixed; /* Fixed so it stays in place on screen, or use absolute relative to a container */
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
+    pointer-events: none; /* Let clicks pass through if needed */
+}
+
+/* The Floating Animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.mascot-img {
+    width: 100px; /* Adjust size */
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
+}
+
+/* The Speech Bubble (Pop-up) */
+.speech-bubble {
+    background: #ffffff;
+    border: 2px solid #007bff;
+    border-radius: 15px;
+    padding: 15px;
+    width: 250px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    /* Animation for the bubble appearing */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* The little triangle at the bottom of the bubble */
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 30px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #007bff transparent;
+    display: block;
+    width: 0;
+}
+
+.speech-bubble p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Class to trigger bubble animation */
+.speech-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+}
