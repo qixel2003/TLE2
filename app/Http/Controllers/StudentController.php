@@ -53,4 +53,5 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->back()->with('success', 'Leerling verwijderd.');
     }
+
 }
