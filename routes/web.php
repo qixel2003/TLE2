@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/tutorial', function () {
     return view('tutorial');
-});
+})->name('tutorial');
 
 Route::get('/welcome', function () {
     return view('welcome');

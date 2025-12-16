@@ -34,7 +34,7 @@
             <i class="fas fa-camera"></i>
         </a>
 
-        <a href="/" class="flex-1 flex flex-col items-center">
+        <a href="/tutorial" class="flex-1 flex flex-col items-center">
             <i class="fas fa-chart-bar"></i>
         </a>
 

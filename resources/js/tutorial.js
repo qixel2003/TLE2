@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function goToHomePage() {
-        window.location.href = '/';
+        window.location.href = 'routes';
     }
 
     // 5. Add event listener to the button

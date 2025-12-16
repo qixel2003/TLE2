@@ -32,3 +32,10 @@ These are possible issues you may encounter using the application:
     ```bash
     php artisan key:generate
     ```
+  
+## Credits
+Made with:
+- [Laravel (PHP Framework)](https://laravel.com/)
+- [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [AlpineJS](https://alpinejs.dev/)
