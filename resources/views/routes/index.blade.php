@@ -9,11 +9,12 @@
             </h1>
 
             <div class="h-1 w-24 bg-green-500 mx-auto mb-4"></div>
-
-            <a href="{{ route('routes.create') }}"
-               class="text-natuur_groen hover:text-lnatuur_groen font-semibold">
-                Maak route
-            </a>
+            @if(auth()->user()->isTeacher())
+                <a href="{{ route('routes.create') }}"
+                   class="text-natuur_groen hover:text-lnatuur_groen font-semibold">
+                    Maak route
+                </a>
+            @endif
         </div>
 
         <div class="max-w-4xl mx-auto mb-12">
