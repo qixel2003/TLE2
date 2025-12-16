@@ -50,11 +50,14 @@
                 </div>
             </div>
 
-            <div>
-                <a href="{{ route('photos.create') }}" class="inline-block bg-green-600">
+            <div class="mt-6">
+                <a href="{{ route('photos.create', ['message_id' => $message->id]) }}"
+                   class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                    Bonus opdracht inleveren
+                </a>
             </div>
 
-            @auth
+        @auth
                 @if(auth()->user()->hasRole('student'))
                     <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
                         <h2 class="text-2xl font-bold text-gray-800 mb-4">Lever je antwoord in</h2>
