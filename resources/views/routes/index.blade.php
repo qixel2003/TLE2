@@ -11,7 +11,7 @@
             <div class="h-1 w-24 bg-green-500 mx-auto mb-4"></div>
 
             <a href="{{ route('routes.create') }}"
-               class="text-green-600 hover:text-green-700 font-semibold">
+               class="text-natuur_groen hover:text-lnatuur_groen font-semibold">
                 Maak route
             </a>
         </div>
@@ -99,12 +99,12 @@
 
                             <div class="flex justify-between items-center">
                                 <a href="{{ route('routes.show', $route) }}"
-                                   class="text-green-600 hover:text-green-700 font-semibold">
+                                   class="text-natuur_groen hover:text-lnatuur_groen font-semibold">
                                     Bekijk route
                                 </a>
 
                                 <a href="{{ route('routes.edit', $route) }}"
-                                   class="text-blue-600 hover:text-blue-700 font-semibold">
+                                   class="text-kinder_blauw hover:text-lkinder_blauw font-semibold">
                                     Bewerken
                                 </a>
 
