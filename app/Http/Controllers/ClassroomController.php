@@ -114,5 +114,23 @@ class ClassroomController extends Controller
         return redirect()->route('classrooms.show', $classroom->id);
     }
 
+    public function destroyStudent(Classroom $classroom, Student $student)
+    {
+        if ((int) auth()->user()->role !== 1) {
+            abort(403);
+        }
+
+        // extra veiligheid: check of student in deze klas zit
+        if ($student->classroom_id !== $classroom->id) {
+            abort(404);
+        }
+
+        $student->classroom_id = null;
+        $student->save();
+
+        return redirect()->back()->with('success', 'Leerling uit klas verwijderd.');
+    }
+
+
 
 }

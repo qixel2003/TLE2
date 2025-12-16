@@ -15,6 +15,18 @@ class StudentController extends Controller
         return view('student.dashboard', compact('schools'));
     }
 
+    public function show(Student $student)
+    {
+
+        $student->load('activeRoutes.route');
+        $totalKm = $student->activeRoutes->sum(fn($ar) => $ar->route->distance ?? 0);
+        $totalMinutes = $student->activeRoutes->sum(fn($ar) => $ar->route->duration ?? 0);
+        $totalRoutes = $student->activeRoutes->count();
+
+        return view('students.show', compact('student', 'totalKm', 'totalMinutes', 'totalRoutes'));
+    }
+
+
 
     public function store(Request $request)
     {
@@ -32,4 +44,13 @@ class StudentController extends Controller
     return redirect()->route('student.index', $student->id);
     }
 
+    public function destroy(Student $student)
+    {
+        if (!auth()->check() || (int)auth()->user()->role !== 1) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $student->delete();
+        return redirect()->back()->with('success', 'Leerling verwijderd.');
+    }
 }
