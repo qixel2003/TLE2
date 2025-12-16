@@ -27,3 +27,4 @@ class Photo extends Model
     {
         return $this->hasMany(Comment::class);
     }
+}
