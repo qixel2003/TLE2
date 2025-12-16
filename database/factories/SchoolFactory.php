@@ -15,7 +15,7 @@ class SchoolFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'location' => $this->faker->city(),
+            'city' => $this->faker->city(),
             'points' => 0,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
