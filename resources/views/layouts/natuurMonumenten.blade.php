@@ -30,7 +30,7 @@
             <i class="fas fa-home"></i>
         </a>
 
-        <a href="/routes" class="flex-1 flex flex-col items-center">
+        <a href="/photos" class="flex-1 flex flex-col items-center">
             <i class="fas fa-camera"></i>
         </a>
 
