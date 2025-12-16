@@ -8,14 +8,28 @@ use Illuminate\Http\Request;
 class PhotoController extends Controller
 {
     /**
+     * Show the form for creating a new photo submission.
+     */
+    public function create()
+    {
+        // Controleer of message_id is meegegeven
+        if (!request()->has('message_id')) {
+            return redirect()->route('messages.index')->with('error', 'Geen opdracht geselecteerd.');
+        }
+
+        return view('photos.create');
+    }
+
+    /**
      * Store a newly created photo submission from a student.
      */
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
+            'description' => 'required|string|min:10|max:1000',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:9000',
+            'message_id' => 'required|exists:messages,id',
         ]);
 
         $imagePath = null;
@@ -24,7 +38,7 @@ class PhotoController extends Controller
         }
 
         Photo::create([
-//            'user_id' => auth()->id(),
+            'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'image_path' => $imagePath,
@@ -34,7 +48,7 @@ class PhotoController extends Controller
     }
 
     public function approve(Photo $photo) {
-        //alleen goedkeuren als de status nog niet goedgekeurd is
+        // Alleen goedkeuren als de status nog niet goedgekeurd is
         $photo->update(['status' => 'goedgekeurd']);
         return back()->with('success', 'Foto goedgekeurd!');
     }
@@ -43,9 +57,4 @@ class PhotoController extends Controller
         $photo->update(['status' => 'afgewezen']);
         return back()->with('success', 'Foto afgewezen!');
     }
-
-    public function create() {
-        return view('messages.create');
-    }
 }
-

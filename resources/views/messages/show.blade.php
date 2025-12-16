@@ -51,9 +51,8 @@
             </div>
 
             <div>
-
+                <a href="{{ route('photos.create') }}" class="inline-block bg-green-600">
             </div>
-
 
             @auth
                 @if(auth()->user()->hasRole('student'))

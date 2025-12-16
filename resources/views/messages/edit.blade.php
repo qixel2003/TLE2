@@ -9,7 +9,7 @@
         </div>
 
         <div>
-            <label for="title" class="block font-semibold text-black mb-2">Titel</label>
+            <label for="title" class="block font-semibold text-black mb-2">Titel *</label>
             <input type="text" name="title" id="title" value="{{ old('title', $message->title) }}"
                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
                    required>
@@ -19,11 +19,11 @@
         </div>
 
         <div>
-            <label for="messages" class="block font-semibold text-black mb-2">Beschrijving / Vraag</label>
-            <textarea name="messages" id="messages" rows="4"
+            <label for="message" class="block font-semibold text-black mb-2">Beschrijving / Vraag *</label>
+            <textarea name="message" id="message" rows="4"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
-                      required>{{ old('messages', $message->messages) }}</textarea>
-            @error('messages')
+                      required>{{ old('message', $message->message) }}</textarea>
+            @error('message')
             <div class="text-red-500 mt-1">{{ $message }}</div>
             @enderror
         </div>
@@ -41,12 +41,13 @@
             @error('photo')
             <div class="text-red-500 mt-1">{{ $message }}</div>
             @enderror
+            <p class="text-sm text-gray-500 mt-1">Laat leeg om huidige foto te behouden.</p>
         </div>
 
         <div class="pt-6 border-t">
             <div class="flex space-x-4">
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Bijwerken</button>
-                <a href="{{ route('messages.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Annuleren</a>
+                <a href="{{ route('messages.show', $message->id) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Annuleren</a>
             </div>
         </div>
     </form>
