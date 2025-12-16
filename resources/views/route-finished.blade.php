@@ -11,7 +11,7 @@
             Je hebt je route afgerond!
         </p>
 
-        <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
+        <div class="bg-white p-6 rounded-lg flex flex-col snap-center">
 
             <h2 class="text-2xl font-semibold mb-4">
                 Route statistieken
@@ -53,7 +53,7 @@
 
             <div class="mt-6 text-center">
                 <a href="{{ route('routes.index') }}"
-                    class="inline-block bg-natuur_groen hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg">
+                    class="inline-block bg-natuur_groen hover:bg-green-700 text-witte_eend font-semibold py-2 px-6 rounded-lg">
                     Terug naar Home
                 </a>
             </div>
