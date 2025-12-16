@@ -17,11 +17,11 @@
         </div>
 
         <div class="max-w-4xl mx-auto mb-12">
-            <form method="GET" class="bg-white rounded-2xl shadow-lg p-6">
+            <form method="GET" class="bg-kinder_blauw rounded-2xl shadow-lg p-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Plaats</label>
+                        <label class="block text-witte_eend font-semibold mb-2">Plaats</label>
                         <select name="location"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
                             <option value="">Alle plaatsen</option>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Afstand</label>
+                        <label class="block text-witte_eend font-semibold mb-2">Afstand</label>
                         <select name="distance"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
                             <option value="">Alle afstanden</option>
@@ -43,7 +43,7 @@
 
                     <div class="flex items-end">
                         <button
-                            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
+                            class="w-full bg-witte_eend hover:bg-green-700 text-black font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:shadow-lg">
                             Filter
                         </button>
                     </div>
@@ -83,7 +83,7 @@
                                     </p>
                                 </div>
 
-                                <span class="text-yellow-500 text-lg">
+                                <span class="text-natuur_groen text-lg">
                                     {{ $route->difficulty }}
                                 </span>
                             </div>
