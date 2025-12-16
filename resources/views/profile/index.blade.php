@@ -30,6 +30,7 @@
                 </div>
             </div>
 
+            @if(auth()->user()->isStudent())
             <div class="p-4 sm:p-8 bg-inkt_vis text-witte_eend shadow sm:rounded-lg">
                 <div class="max-w-xl flex flex-col gap-5">
 
@@ -75,6 +76,7 @@
 
                 </div>
             </div>
+            @endif
 
             <div class="p-4 sm:p-8 bg-sinas_sap text-witte_eend shadow sm:rounded-lg">
                 <div class="max-w-xl">
