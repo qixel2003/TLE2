@@ -62,7 +62,7 @@
 
                                 <button
                                     type="submit"
-                                    class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="w-full px-3 py-2 bg-natuur_groen text-witte_eend mt-3 hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 >
                                     Antwoord indienen
                                 </button>
@@ -96,7 +96,7 @@
 
                             <button
                                 type="submit"
-                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                class="w-full px-3 py-2 bg-natuur_groen text-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
@@ -126,7 +126,7 @@
 
                             <button
                                 type="submit"
-                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                class="w-full px-3 py-2 bg-natuur_groen text-witte_eend mt-3 hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
@@ -155,7 +155,7 @@
 
                             <button
                                 type="submit"
-                                class="w-full px-3 py-2 bg-witte_eend hover:bg-gray-200 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                class="w-full px-3 py-2 bg-natuur_groen text-witte_eend hover:bg-gray-200 mt-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                             >
                                 Antwoord indienen
                             </button>
