@@ -1,8 +1,7 @@
 @extends('layouts.natuurMonumenten')
 
 @section('content')
-    <form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data"
-          class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+    <form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
         @csrf
         <div class="border-b pb-4 mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Nieuwe Opdracht Aanmaken</h1>
@@ -40,12 +39,8 @@
 
         <div class="pt-6 border-t">
             <div class="flex space-x-4">
-                <button type="submit"
-                        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-                    Bonus opdracht Aanmaken
-                </button>
-                <a href="{{ route('messages.index') }}"
-                   class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Terug</a>
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Bonus opdracht Aanmaken</button>
+                <a href="{{ route('messages.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Terug</a>
             </div>
         </div>
     </form>
