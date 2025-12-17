@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <div class="max-w-7xl mx-auto px-4 py-10">
 
         <x-slot name="heading">
@@ -64,4 +66,4 @@
         </div>
 
     </div>
-</x-layout>
+@endsection

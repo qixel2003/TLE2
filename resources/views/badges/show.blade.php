@@ -1,7 +1,9 @@
-<x-layout>
-        <x-slot name="heading">
+@extends('layouts.natuurMonumenten')
+
+@section('content')
+    <x-slot name="heading">
         Badge Details
-        </x-slot>
+    </x-slot>
     <div class="max-w-3xl mx-auto px-4 py-10">
 
         {{-- Locked/Unlocked banner --}}
@@ -70,4 +72,4 @@
             </a>
         </div>
     </div>
-</x-layout>
+@endsection

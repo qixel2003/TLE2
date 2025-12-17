@@ -25,7 +25,7 @@
                 aria-label="Stap 1: Route kiezen"
             >
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZETPBwcVfMQdVmy3OqUN4FWTCfepeREI72w&s"
+                    src="{{ asset('images/img/route.png') }}"
                     alt="Een overzicht van beschikbare routes"
                 >
             </div>
@@ -37,7 +37,7 @@
                 aria-label="Stap 2: Route starten"
             >
                 <img
-                    src="https://via.placeholder.com/150/0000FF/808080?text=Start+Knop"
+                    src="{{ asset('images/img/start.png') }}"
                     alt="De startknop van de route"
                 >
             </div>
@@ -49,19 +49,19 @@
                 aria-label="Stap 3: Rol kiezen"
             >
                 <img
-                    src="https://via.placeholder.com/150/FF0000/FFFFFF?text=Rollen"
+                    src="{{ asset('images/img/role.png') }}"
                     alt="Overzicht van beschikbare rollen"
                 >
             </div>
 
             <div
                 class="tutorial-card"
-                data-explanation="Zoek naar de QR-code bij het natuurmonument en scan deze om te beginnen."
+                data-explanation="Start de route, voltooi de missie en verzamel punten om de nummer 1 te worden"
                 role="group"
-                aria-label="Stap 4: QR-code scannen"
+                aria-label="Stap 4: start quest"
             >
                 <img
-                    src="https://via.placeholder.com/150/FFFF00/000000?text=QR+Code"
+                    src="{{ asset('images/img/win.png') }}"
                     alt="Een QR-code om de route te starten"
                 >
             </div>
@@ -117,7 +117,7 @@
             </div>
 
             <img
-                src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+                src="{{ asset('images/img/fox.png') }}"
                 class="mascot-img"
                 alt="Een mascotte die uitleg geeft"
             >

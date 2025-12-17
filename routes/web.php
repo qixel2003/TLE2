@@ -197,3 +197,13 @@ Route::get('/classrooms/{classroom}/leaderboard', [ClassroomController::class, '
     ->name('classrooms.leaderboard');
 
 require __DIR__.'/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
+    Route::resource('student', App\Http\Controllers\StudentController::class);
+});
+
+use App\Http\Controllers\LeaderboardController;
+
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
+
+require __DIR__ . '/auth.php';

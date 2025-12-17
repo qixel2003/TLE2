@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <x-slot:heading>
         {{ $photo->title }}
     </x-slot:heading>
@@ -51,4 +53,4 @@
         </div>
     @endauth
 
-</x-layout>
+@endsection
