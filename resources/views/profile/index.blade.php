@@ -89,12 +89,12 @@
 
                                     <div>
                                         <dt class="font-semibold">Afstand</dt>
-                                        <dd>{{ $active_route->route->distance ?? 'NVT' }} km</dd>
+                                        <dd>{{ $active_route->route->getFormattedDistance() ?? 'NVT' }}</dd>
                                     </div>
 
                                     <div>
                                         <dt class="font-semibold">Duur</dt>
-                                        <dd>{{ $active_route->route->duration ?? 'NVT' }} min</dd>
+                                        <dd>{{ $active_route->route->getFormattedDuration() ?? 'NVT' }}</dd>
                                     </div>
 
                                     <div>
