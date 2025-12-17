@@ -73,12 +73,12 @@
         </a>
 
         <a
-            href="/tutorial"
+            href="{{ auth()->user()->student && auth()->user()->student->classroom ? route('classrooms.leaderboard', auth()->user()->student->classroom->id) : '#' }}"
             class="flex-1 flex flex-col items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-witte_eend"
             aria-label="Tutorial"
         >
             <i class="fas fa-chart-bar" aria-hidden="true"></i>
-            <span class="sr-only">Tutorial</span>
+            <span class="sr-only">Leaderboard</span>
         </a>
 
         <a
