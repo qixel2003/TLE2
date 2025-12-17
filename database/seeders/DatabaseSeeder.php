@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $mission = Mission::create([
-            'title' => 'Plattelands Verkenningsmissie',
+            'title' => 'Polders Verkenningsmissie',
             'description' => 'Volg de route en ontdek wat er onderweg gebeurt.',
             'user_id' => $student->id,
         ]);
