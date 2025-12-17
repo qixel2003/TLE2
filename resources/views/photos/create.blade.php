@@ -1,5 +1,8 @@
-<x-layout :heading="'Nieuwe opdracht aanmaken'">
-    <form action="{{ route('photos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+@extends('layouts.natuurMonumenten')
+
+@section('content')
+    <form action="{{ route('photos.store') }}" method="POST" enctype="multipart/form-data"
+          class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
         @csrf
         <input type="hidden" name="message_id" value="{{ request('message_id') ?? old('message_id') }}">
 
@@ -39,9 +42,13 @@
 
         <div class="pt-6 border-t">
             <div class="flex space-x-4">
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Opdracht inleveren</button>
-                <a href="{{ route('messages.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Terug</a>
+                <button type="submit"
+                        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+                    Opdracht inleveren
+                </button>
+                <a href="{{ route('messages.index') }}"
+                   class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Terug</a>
             </div>
         </div>
     </form>
-</x-layout>
+@endsection
