@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <form method="POST" action="{{ route('school.store') }}">
         @csrf
 
@@ -13,9 +15,5 @@
                 {{ __('Voeg school toe ') }}
             </x-primary-button>
         </div>
-
-
-
-
     </form>
-</x-guest-layout>
+@endsection

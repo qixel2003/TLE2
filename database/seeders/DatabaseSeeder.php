@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Badge;
+use App\Models\Bonus;
 use App\Models\Checkpoint;
 use App\Models\Classroom;
+use App\Models\Message;
 use App\Models\Mission;
 use App\Models\Prompt;
 use App\Models\Question;
@@ -11,9 +14,12 @@ use App\Models\Route;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +32,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $teacher = User::factory()->create([
             'firstname' => 'Jane',
             'lastname' => 'Doe',
             'email' => 'janedoe@hr.nl',
@@ -42,9 +48,25 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
+        $studentUserTwo = User::factory()->create([
+            'firstname' => 'James',
+            'lastname' => 'Doe',
+            'email' => 'jamesndoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 2,
+        ]);
+
+        $studentUserThree = User::factory()->create([
+            'firstname' => 'Jimmie',
+            'lastname' => 'Doe',
+            'email' => 'jimmiendoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 2,
+        ]);
+
         $school = School::factory()->create([
             'name' => 'HR School',
-            'location' => 'Rotterdam',
+            'city' => 'Rotterdam',
             'user_id' => 1,
         ]);
 
@@ -60,21 +82,38 @@ class DatabaseSeeder extends Seeder
             'user_id' => $studentUser->id,
             'school_id' => $school->id,
             'classroom_id' => $classroom->id,
+            'points' => 45,
+        ]);
+
+        $studentTwo = Student::create([
+            'user_id' => $studentUserTwo->id,
+            'school_id' => $school->id,
+            'classroom_id' => $classroom->id,
+            'points' => 58,
+        ]);
+
+        $studentThree = Student::create([
+            'user_id' => $studentUserThree->id,
+            'school_id' => $school->id,
+            'classroom_id' => $classroom->id,
+            'points' => 21,
         ]);
 
         $route = route::create([
-            'name' => 'Sample Route',
-            'location' => 'Sample Location',
-            'distance' => 5,
-            'duration' => 50,
-            'description' => 'This is a sample route for testing purposes.',
-            'difficulty' => 'Easy',
+            'name' => 'Groene wandelroute vanaf Rotterdam Centraal Station naar Buitenplaats De Tempel',
+            'location' => 'Rotterdams platteland',
+            'distance' => 15500,
+            'duration' => 310,
+            'description' => 'We starten onze wandeling in het centrum van Rotterdam: aan de voorkant van het centraal station.
+                Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.
+                Halverwege de route kom je langs Buitenplaats De Tempel. Op de zondag (april - oktober) kun je tussen 12.00 - 16.00 uur terecht voor een hapje en drankje bij de foodtruck in de theetuin.',
+            'difficulty' => 'gemiddeld',
+            'image' => $this->seedRouteImage('route-rotterdam.png')
         ]);
 
         $mission = Mission::create([
-            'title' => 'Bos Verkenningsmissie',
+            'title' => 'Polders Verkenningsmissie',
             'description' => 'Volg de route en ontdek wat er onderweg gebeurt.',
-            'user_id' => $student->id,
         ]);
 
         Prompt::create([
@@ -92,7 +131,7 @@ class DatabaseSeeder extends Seeder
 
         Question::create([
             'mission_id' => $mission->id,
-            'question' => 'Welke vogel hoor je het vaakst in dit bos?',
+            'question' => 'Welke vogel hoor je het vaakst op de route?',
             'answer_1' => 'Merel',
             'answer_2' => 'Koolmees',
             'answer_3' => 'Roodborst',
@@ -104,5 +143,62 @@ class DatabaseSeeder extends Seeder
             'correct_answer_3' => 0,
             'correct_answer_4' => 0,
         ]);
+
+        $badges = [
+            [
+                'name' => 'Groene Verkenner',
+                'slug' => 'groene-verkenner',
+                'description' => 'Voltooi 1 route.',
+                'icon' => 'badges/badge.png',
+                'requirement_type' => 'RouteCompleted',
+                'requirement_value' => 1,
+            ],
+            [
+                'name' => 'Super Verkenner',
+                'slug' => 'super-verkenner',
+                'description' => 'Voltooi 5 routes.',
+                'requirement_type' => 'RouteCompleted',
+                'requirement_value' => 5,
+            ],
+            [
+                'name' => 'Vogelspeurder',
+                'slug' => 'vogelspeurder',
+                'description' => 'Spot 1 vogel.',
+                'requirement_type' => 'AnimalSpotted',
+                'requirement_value' => 1,
+            ],
+            [
+                'name' => 'Master Fotograaf',
+                'slug' => 'master-fotograaf',
+                'description' => 'Upload 10 foto’s.',
+                'requirement_type' => 'PhotoPosted',
+                'requirement_value' => 10,
+            ],
+        ];
+
+        foreach ($badges as $badge) {
+            Badge::create($badge);
+        }
+
+        Message::create([
+            'user_id' => $teacher->id,
+            'title' => 'Voorbeeld opdracht',
+            'message' => 'Dit is een voorbeeld beschrijving voor een opdracht die een leraar kan aanmaken voor zijn of haar studenten. Studenten kunnen hierop reageren door hun eigen foto\'s te uploaden en zo extra punten te verdienen!',
+        ]);
+
+    }
+
+    private function seedRouteImage(string $filename): string
+    {
+        $sourcePath = database_path("seeders/images/{$filename}");
+
+        if (!File::exists($sourcePath)) {
+            return '/storage/routes/placeholder.jpg';
+        }
+
+        $destinationPath = "routes/{$filename}";
+        Storage::disk('public')->put($destinationPath, File::get($sourcePath));
+
+        return Storage::url($destinationPath);
     }
 }

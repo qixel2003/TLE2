@@ -21,15 +21,15 @@ class ClassroomController extends Controller
             'name' => 'required|string|max:255',
             //'points' => 'required|integer|min:0',
             'school_id' => 'required|exists:schools,id',
-            'user_id' => [
-                'required',
-                'exists:users,id',
-                function ($attribute, $value, $fail) {
-                    if (User::find($value)->role !== 1) {
-                        $fail('De geselecteerde gebruiker is geen leraar.');
-                    }
-                },
-            ],
+//            'user_id' => [
+//                'required',
+//                'exists:users,id',
+//                function ($attribute, $value, $fail) {
+//                    if (User::find($value)->role !== 1) {
+//                        $fail('De geselecteerde gebruiker is geen leraar.');
+//                    }
+//                },
+//            ],
         ]);
 
         //insert into
@@ -112,6 +112,32 @@ class ClassroomController extends Controller
         $student->save();
 
         return redirect()->route('classrooms.show', $classroom->id);
+    }
+
+    public function destroyStudent(Classroom $classroom, Student $student)
+    {
+        if ((int) auth()->user()->role !== 1) {
+            abort(403);
+        }
+
+        // extra veiligheid: check of student in deze klas zit
+        if ($student->classroom_id !== $classroom->id) {
+            abort(404);
+        }
+
+        $student->classroom_id = null;
+        $student->save();
+
+        return redirect()->back()->with('success', 'Leerling uit klas verwijderd.');
+    }
+
+    public function leaderboard(Classroom $classroom)
+    {
+        $students = $classroom->students()
+            ->orderBy('points', 'desc')
+            ->get();
+
+        return view('classrooms.leaderboard', compact('classroom', 'students'));
     }
 
 

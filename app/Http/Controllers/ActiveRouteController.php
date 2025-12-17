@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Active_Route;
 use App\Models\Route;
 use Illuminate\Http\Request;
+use App\Events\RouteCompleted;
+
 
 class ActiveRouteController extends Controller
 {
@@ -34,7 +36,7 @@ class ActiveRouteController extends Controller
 
         // Check if route is already active for this student
         $existingActiveRoute = Active_Route::where('route_id', $route->id)
-            ->where('student_id', $student->id)
+            ->where('user_id', $student->id)
             ->where('is_completed', false)
             ->first();
 
@@ -51,6 +53,19 @@ class ActiveRouteController extends Controller
             'is_completed' => false,
             'points' => 0,
         ]);
+
+        $studentId = $request->student_id;
+        $routeId   = $request->route_id;
+
+        $exists = Active_Route::where('student_id', $studentId)
+            ->where('route_id', $routeId)
+            ->exists();
+
+        if ($exists) {
+            return back()->withErrors([
+                'route_id' => 'Deze route is al toegevoegd voor deze student.'
+            ])->withInput();
+        }
 
         return redirect()->route('role', $activeRoute);
     }
@@ -90,11 +105,10 @@ class ActiveRouteController extends Controller
             'role' => 'required|integer|min:0',
         ]);
 
-        $activeRoute->update([
-            'role' => $request->role,
-        ]);
+        $activeRoute->role = $request->role;
+        $activeRoute->save();
 
-        return redirect()->route('checkpoints');
+        return redirect()->route('checkpoints', ['id' => $activeRoute->id]);
     }
 
     /**
@@ -135,6 +149,8 @@ class ActiveRouteController extends Controller
         $activeRoute->update([
             'is_completed' => true,
         ]);
+
+        RouteCompleted::dispatch(auth()->user(), $activeRoute->route);
 
         return view('route-finished', compact('activeRoute'));
     }

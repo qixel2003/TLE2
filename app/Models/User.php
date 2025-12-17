@@ -6,6 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
+
 
 class User extends Authenticatable
 {
@@ -49,6 +53,10 @@ class User extends Authenticatable
         ];
     }
 
+    const ROLE_ADMIN = 0;
+    const ROLE_STUDENT = 2;
+    const ROLE_TEACHER = 1;
+
     public function school(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
 
@@ -67,4 +75,46 @@ class User extends Authenticatable
     }
 
 
+    public function badgeProgress(): HasMany
+    {
+        return $this->hasMany(BadgeProgress::class);
+    }
+
+    protected function unlockedBadges(): Attribute
+    {
+        return Attribute::make(
+            get: fn () =>
+            \App\Models\Badge::whereIn(
+                'id',
+                $this->badgeProgress()
+                    ->whereNotNull('unlocked_at')
+                    ->pluck('badge_id')
+            )->get()
+        );
+    }
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function isTeacher(): bool {
+        return $this->role === self::ROLE_TEACHER;
+    }
+
+    public function isAdmin(): bool {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isStudent(): bool {
+        return $this->role === self::ROLE_STUDENT;
+    }
+
+    public function hasRole(int $role): bool {
+        return $this->role === $role;
+    }
 }

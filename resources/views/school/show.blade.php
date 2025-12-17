@@ -1,53 +1,76 @@
-<x-app-layout>
-    <div class="max-w-2xl mx-auto bg-gray-900 text-gray-200 p-6 rounded-xl mt-10 shadow-md">
-        <h1 class="text-3xl font-bold mb-4">{{ $school->name }}</h1>
+@extends('layouts.natuurMonumenten')
 
-        <p><strong>Docent:</strong> {{ optional($school->user->firstWhere('role', 1))->firstname ?? 'Niet bekend' }}</p>
+@section('content')
+    <div class="max-w-md mx-auto mt-8 space-y-6">
 
-        <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
-            <a href="/rocks/{{ $school->id }}/edit" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg px-4 py-2 transition">Edit</a>
+        {{-- School / profiel card --}}
+        <div class="bg-natuur_groen text-witte_eend rounded-2xl p-5 shadow">
+            <h1 class="text-xl font-bold">{{ $school->name }}</h1>
+            <p class="text-sm opacity-90">
+                Docent:
+                {{ optional($school->user->firstWhere('role', 1))->firstname ?? 'Niet bekend' }}
+            </p>
+        </div>
+
+        {{-- Overzicht card --}}
+        <div class="bg-inkt_vis text-witte_eend rounded-xl p-4 flex justify-between items-center">
+            <span class="font-medium">
+                Klassen: {{ $classrooms->count() }}
+            </span>
+            <span class="text-sm">
+                Leerlingen: {{ $classrooms->sum(fn($c) => $c->students->count()) }}
+            </span>
+        </div>
+
+        {{-- Add classroom --}}
+        <a href="{{ route('classrooms.create') }}"
+           class="block  hover:bg-roze_bloem text-white text-center font-bold rounded-xl py-3 shadow transition">
+            +
+        </a>
+
+        {{-- Klassen lijst --}}
+        <div class="space-y-4">
+            @foreach($classrooms as $classroom)
+                <div class="bg-witte_eend dark:bg-gray-800 rounded-xl shadow p-4 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+                            {{ $classroom->name }}
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            Leerlingen:
+                            {{ $classroom->students->count() ?: 'Geen leerlingen' }}
+                        </p>
+                    </div>
+
+                    <a href="{{ route('classrooms.show', $classroom) }}"
+                       class="bg-natuur_groen hover:bg-natuur_groen text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+                        Bekijk
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Acties --}}
+        <div class="flex gap-3 pt-4">
+            <a href="{{ route('school.edit', $school) }}"
+               class="flex-1 bg-inkt_vis hover:bg-kinder_blauw text-witte_eend text-center rounded-lg py-2">
+                Bewerken
+            </a>
 
             <form method="POST" action="{{ route('school.destroy', $school->id) }}" class="flex-1">
                 @csrf
                 @method('DELETE')
-                <x-primary-button type="submit" >Delete</x-primary-button>
+                <button type="submit"
+                        class="w-full bg-sinas_sap hover:bg-lsinas_sap text-witte_eend rounded-lg py-2">
+                    Verwijderen
+                </button>
             </form>
         </div>
 
-        <div class="mt-6">
-            <a href="{{ route('school.dashboard') }}" class="text-blue-400 hover:underline">← Terug</a>
-        </div>
-    </div>
+        <a href="{{ route('school.dashboard') }}"
+           class="block text-center  hover:underline text-sm pt-2">
+            ← Terug
+        </a>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('classrooms.create') }}"/>
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                        Maak een nieuwe klas aan
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div>
-            @foreach($classrooms as $classroom)
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-semibold">{{ $classroom->name }}</h3>
-                                <p class="text-sm text-gray-500">Aantal leerlingen:{{ $classroom->students->count() > 0 ? $classroom->students->count() : 'Er zitten nog geen leerlingen in deze klas' }}</p>
-                            </div>
-                            <div>
-                                <a href="{{ route('classrooms.show', $classroom) }}"
-                                   class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Bekijk
-                                    Klas</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
     </div>
-</x-app-layout>
+@endsection
