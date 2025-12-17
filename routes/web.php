@@ -76,8 +76,6 @@ Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->nam
 
 Route::get('/photos/create', [PhotoController::class, 'create'])->name('photos.create');
 Route::post('/photos', [PhotoController::class, 'store'])->name('photos.store');
-Route::post('/photos/{photo}/approve', [PhotoController::class, 'approve'])->name('photos.approve');
-Route::post('/photos/{photo}/reject', [PhotoController::class, 'reject'])->name('photos.reject');
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
