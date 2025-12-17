@@ -1,5 +1,5 @@
 <!-- resources/views/messages/show.blade.php -->
-<x-layout :heading="$message->title"> 
+<x-layout :heading="$message->title">
     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
@@ -105,7 +105,7 @@
                                             @if(!auth()->user()->isStudent())
                                                 <div class="mt-2">
                                                     <a href="{{ route('bonuses.show', $bonus->id) }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                                                        Bekijk details & beoordeel →
+                                                        Bekijk details & beoordeel bekijken
                                                     </a>
                                                 </div>
                                             @endif
