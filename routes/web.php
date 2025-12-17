@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActiveRouteController;
+use App\Http\Controllers\BonusController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CommentController;
@@ -58,6 +59,12 @@ Route::put('/routes/{route}', [RouteController::class, 'update'])
     ->middleware('auth')
     ->name('routes.update');
 //Route::delete('/routes/{route}', [RouteController::class, 'destroy'])->name('routes.destroy');
+
+Route::get('/bonuses/create', [BonusController::class, 'create'])->name('bonuses.create');
+Route::post('/bonuses', [BonusController::class, 'store'])->name('bonuses.store');
+Route::get('/bonuses/{bonus}', [BonusController::class, 'show'])->name('bonuses.show');
+Route::post('/bonuses/{bonus}/approve', [BonusController::class, 'approve'])->name('bonuses.approve');
+Route::post('/bonuses/{bonus}/reject', [BonusController::class, 'reject'])->name('bonuses.reject');
 
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
