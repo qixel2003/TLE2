@@ -103,11 +103,12 @@
                                    class="text-natuur_groen hover:text-lnatuur_groen font-semibold">
                                     Bekijk route
                                 </a>
-
-                                <a href="{{ route('routes.edit', $route) }}"
-                                   class="text-kinder_blauw hover:text-lkinder_blauw font-semibold">
-                                    Bewerken
-                                </a>
+                                @if(auth()->user()->isTeacher())
+                                    <a href="{{ route('routes.edit', $route) }}"
+                                       class="text-kinder_blauw hover:text-lkinder_blauw font-semibold">
+                                        Bewerken
+                                    </a>
+                                @endif
 
                                 <span class="text-xs text-gray-500">
                                     {{ $route->created_at->format('d M') }}

@@ -181,8 +181,12 @@ Route::post('/photos/{photo}/reject', [PhotoController::class, 'reject'])->name(
         ->name('students.destroy');
 
 
-    Route::middleware('auth')->group(function () {
-        Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
-        Route::resource('student', App\Http\Controllers\StudentController::class);
-    });
+Route::middleware('auth')->group(function () {
+    Route::get('/student', [App\Http\Controllers\StudentController::class, 'index'])->name('student.dashboard');
+    Route::resource('student', App\Http\Controllers\StudentController::class);
+});
+
+Route::get('/classrooms/{classroom}/leaderboard', [ClassroomController::class, 'leaderboard'])
+    ->name('classrooms.leaderboard');
+
 require __DIR__.'/auth.php';

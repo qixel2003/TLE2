@@ -2,7 +2,7 @@
     @csrf
     @method('DELETE')
 
-    <x-custom-buttons.yellow-button>
+    <x-custom-buttons.blue-button>
         Verwijder leerling uit klas
-    </x-custom-buttons.yellow-button>
+    </x-custom-buttons.blue-button>
 </form>

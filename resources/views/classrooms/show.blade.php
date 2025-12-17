@@ -2,15 +2,23 @@
     <div class="max-w-md mx-auto mt-8 space-y-6">
 
         {{-- Classroom header --}}
-        <div class="bg-natuur_groen text-white rounded-2xl p-5 shadow">
+        <div class="bg-natuur_groen text-witte_eend rounded-2xl p-5 shadow">
             <h1 class="text-xl font-bold">{{ $classroom->name }}</h1>
             <p class="text-sm opacity-90">
                 Leraar: {{ $classroom->teacher->firstname ?? 'Niet bekend' }}
             </p>
         </div>
 
+        <div class="bg-inkt_vis hover:bg-linkt_vis text-witte_eend rounded-2xl p-5 shadow">
+        <a href="{{ route('classrooms.leaderboard', $classroom) }}"
+           class="text-blue-600">
+            Bekijk scoreboord
+        </a>
+        </div>
+
+
         {{-- Stats --}}
-        <div class="bg-kinder_blauw text-white rounded-xl p-4 space-y-1">
+        <div class="bg-kinder_blauw text-witte_eend rounded-xl p-4 space-y-1">
             <p class="text-sm">
                 Aantal leerlingen:
                 {{ $classroom->students->count() > 0
@@ -29,7 +37,7 @@
         {{-- Acties --}}
         <div class="flex gap-3">
             <a href="/classrooms/{{ $classroom->id }}/edit"
-               class="flex-1 bg-vitamine_D hover:bg-sinas_sap text-white text-center rounded-lg py-2 font-medium transition">
+               class="flex-1 bg-vitamine_D hover:bg-lvitamine_D text-white text-center rounded-lg py-2 font-medium transition">
                 Bewerken
             </a>
 
@@ -37,7 +45,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                        class="w-full bg-roze_bloem hover:bg-inkt_vis text-white rounded-lg py-2 transition">
+                        class="w-full bg-roze_bloem hover:bg-lroze_bloem text-witte_eend rounded-lg py-2 transition">
                     Verwijder klas
                 </button>
             </form>
@@ -88,7 +96,7 @@
 
                     <div class="flex flex-col gap-2 items-end">
                         <a href="{{ route('student.show', $student->id) }}"
-                           class="bg-blauwe_vogel hover:bg-kinder_blauw text-white text-sm px-3 py-1 rounded-lg transition">
+                           class="bg-vitamine_D hover:bg-lvitamine_D text-white text-sm px-3 py-1 rounded-lg transition">
                             Bekijk info
                         </a>
 

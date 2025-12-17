@@ -5,7 +5,7 @@
 
         {{-- Pagina titel --}}
         <header>
-            <h1 class="text-3xl font-bold mb-4">
+            <h1 class="text-3xl font-bold">
                 Profiel van {{ $user->firstname }} {{ $user->lastname }}
             </h1>
         </header>
@@ -62,58 +62,60 @@
         </section>
 
         {{-- Actieve routes --}}
-        <section
-            class="p-6 bg-inkt_vis text-witte_eend rounded-lg shadow"
-            aria-labelledby="actieve-routes"
-        >
-            <h2 id="actieve-routes" class="text-xl font-semibold mb-4">
-                Mijn actieve routes
-            </h2>
+        @if($authStudent)
+            <section
+                class="p-6 bg-inkt_vis text-witte_eend rounded-lg shadow"
+                aria-labelledby="actieve-routes"
+            >
+                <h2 id="actieve-routes" class="text-xl font-semibold mb-4">
+                    Mijn actieve routes
+                </h2>
 
-            @if($authStudent && $authStudent->activeRoutes->count() > 0)
-                <ul class="space-y-4" role="list">
-                    @foreach($authStudent->activeRoutes as $active_route)
-                        <li class="p-4 bg-white text-gray-800 rounded-lg">
+                @if($authStudent->activeRoutes->count() > 0)
+                    <ul class="space-y-4" role="list">
+                        @foreach($authStudent->activeRoutes as $active_route)
+                            <li class="p-4 bg-white text-gray-800 rounded-lg">
 
-                            <dl class="grid grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <dt class="font-semibold">Route</dt>
-                                    <dd>{{ $active_route->route->name ?? 'Geen naam' }}</dd>
-                                </div>
+                                <dl class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <dt class="font-semibold">Route</dt>
+                                        <dd>{{ $active_route->route->name ?? 'Geen naam' }}</dd>
+                                    </div>
 
-                                <div>
-                                    <dt class="font-semibold">Moeilijkheid</dt>
-                                    <dd>{{ $active_route->route->difficulty ?? 'NVT' }}</dd>
-                                </div>
+                                    <div>
+                                        <dt class="font-semibold">Moeilijkheid</dt>
+                                        <dd>{{ $active_route->route->difficulty ?? 'NVT' }}</dd>
+                                    </div>
 
-                                <div>
-                                    <dt class="font-semibold">Afstand</dt>
-                                    <dd>{{ $active_route->route->distance ?? 'NVT' }} km</dd>
-                                </div>
+                                    <div>
+                                        <dt class="font-semibold">Afstand</dt>
+                                        <dd>{{ $active_route->route->distance ?? 'NVT' }} km</dd>
+                                    </div>
 
-                                <div>
-                                    <dt class="font-semibold">Duur</dt>
-                                    <dd>{{ $active_route->route->duration ?? 'NVT' }} min</dd>
-                                </div>
+                                    <div>
+                                        <dt class="font-semibold">Duur</dt>
+                                        <dd>{{ $active_route->route->duration ?? 'NVT' }} min</dd>
+                                    </div>
 
-                                <div>
-                                    <dt class="font-semibold">Status</dt>
-                                    <dd>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</dd>
-                                </div>
-                            </dl>
+                                    <div>
+                                        <dt class="font-semibold">Status</dt>
+                                        <dd>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</dd>
+                                    </div>
+                                </dl>
 
-                            <a href="{{ route('routes.show', $active_route->route_id) }}" class="mt-3 inline-block">
-                                <x-custom-buttons.blue-button>
-                                    Bekijk route
-                                </x-custom-buttons.blue-button>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <p>Geen actieve routes gevonden.</p>
-            @endif
-        </section>
+                                <a href="{{ route('routes.show', $active_route->route_id) }}" class="mt-3 inline-block">
+                                    <x-custom-buttons.blue-button>
+                                        Bekijk route
+                                    </x-custom-buttons.blue-button>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>Geen actieve routes gevonden.</p>
+                @endif
+            </section>
+        @endif
 
         {{-- Badges --}}
         <section

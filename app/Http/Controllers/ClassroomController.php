@@ -131,6 +131,14 @@ class ClassroomController extends Controller
         return redirect()->back()->with('success', 'Leerling uit klas verwijderd.');
     }
 
+    public function leaderboard(Classroom $classroom)
+    {
+        $students = $classroom->students()
+            ->orderBy('points', 'desc')
+            ->get();
+
+        return view('classrooms.leaderboard', compact('classroom', 'students'));
+    }
 
 
 }
