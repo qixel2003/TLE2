@@ -82,18 +82,21 @@ class DatabaseSeeder extends Seeder
             'user_id' => $studentUser->id,
             'school_id' => $school->id,
             'classroom_id' => $classroom->id,
+            'points' => 45,
         ]);
 
         $studentTwo = Student::create([
             'user_id' => $studentUserTwo->id,
             'school_id' => $school->id,
             'classroom_id' => $classroom->id,
+            'points' => 58,
         ]);
 
         $studentThree = Student::create([
             'user_id' => $studentUserThree->id,
             'school_id' => $school->id,
             'classroom_id' => $classroom->id,
+            'points' => 21,
         ]);
 
         $route = route::create([

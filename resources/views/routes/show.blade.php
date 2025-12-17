@@ -132,7 +132,7 @@
                         src="{{ asset('images/free-icon-goal-5987327.png') }}"
                         alt=""
                         aria-hidden="true"
-                        class="w-20 h-20 float-right ml-2 mb-2 mt-9 mr-2"
+                        class="w-20 h-20 float-right ml-2  mt-4 mr-2"
                     >
 
                     <div class="bg-roze_bloem rounded-xl p-6 text-witte_eend mb-4">
