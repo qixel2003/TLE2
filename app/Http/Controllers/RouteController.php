@@ -42,7 +42,7 @@ class RouteController extends Controller
             'distance' => 'required|integer|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:4096',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
