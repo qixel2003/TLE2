@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <x-slot:heading>
         <h1>Fotospace</h1>
     </x-slot:heading>
@@ -28,5 +30,4 @@
             </a>
         @endforeach
     </div>
-
-</x-layout>
+@endsection
