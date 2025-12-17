@@ -29,7 +29,7 @@ class BonusController extends Controller
             $imagePath = $request->file('image_path')->store('student_submissions', 'public');
         }
 
-        $bonus = Bonus::create([
+        Bonus::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
