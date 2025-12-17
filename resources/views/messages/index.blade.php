@@ -20,16 +20,6 @@
         @endif
 
         <div class="max-w-7xl mx-auto">
-            @auth
-                @if(!auth()->user()->isStudent())
-                    <div class="text-center mb-6">
-                        <a href="{{ route('messages.create') }}"
-                           class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-                            Maak een nieuwe bonusopdracht
-                        </a>
-                    </div>
-                @endif
-            @endauth
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($messages as $message)
@@ -89,18 +79,9 @@
                             kunnen maken.</p>
                         @auth
                             @if(!auth()->user()->isStudent())
-                                <form method="POST"
-                                      action="{{ route('messages.create') }}">
-                                    <button
-                                        type="submit"
-                                        class="mt-4 w-full px-3 py-2 bg-natuur_groen text-witte_eend
-                       font-semibold rounded
-                       hover:bg-lnatuur_groen
-                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                                        Maak
-                                        een bonusopdracht aan
-                                    </button>
-                                </form>
+                                <a href="{{ route('messages.create') }}"
+                                   class="inline-block bg-natuur_groen hover:bg-green-700 text-witte_eend font-semibold py-3 px-6 rounded-lg">Maak
+                                    een bonusopdracht aan</a>
                             @endif
                         @endauth
                     </div>
