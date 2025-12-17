@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <x-slot:heading>
@@ -21,7 +23,10 @@
                                 <p><strong>School account
                                         beheerder:</strong> {{ optional($school->user->firstWhere('role', 1))->email ?? 'Niet bekend' }}
                                 </p>
-                                <a href="{{ route('school.dashboard') }}"> <x-custom-buttons.dark-blue-button> School pagina </x-custom-buttons.dark-blue-button></a>
+                                <a href="{{ route('school.dashboard') }}">
+                                    <x-custom-buttons.dark-blue-button> School pagina
+                                    </x-custom-buttons.dark-blue-button>
+                                </a>
                             @endforeach
                         @endif
                     @endif
@@ -31,57 +36,57 @@
             </div>
 
             @if(auth()->user()->isStudent())
-            <div class="p-4 sm:p-8 bg-inkt_vis text-witte_eend shadow sm:rounded-lg">
-                <div class="max-w-xl flex flex-col gap-5">
+                <div class="p-4 sm:p-8 bg-inkt_vis text-witte_eend shadow sm:rounded-lg">
+                    <div class="max-w-xl flex flex-col gap-5">
 
 
-                    <h2>Routes</h2>
-                    <h2>Mijn actieve routes</h2>
+                        <h2>Routes</h2>
+                        <h2>Mijn actieve routes</h2>
 
-                    @if($authStudent && $authStudent->activeRoutes->count() > 0)
-                        @foreach($authStudent->activeRoutes as $active_route)
-                            <div class="flex flex-row gap-5">
-                                <div>
-                                    <h3>Route:</h3>
-                                    <p>{{ $active_route->route->name ?? 'Geen naam' }}</p>
+                        @if($authStudent && $authStudent->activeRoutes->count() > 0)
+                            @foreach($authStudent->activeRoutes as $active_route)
+                                <div class="flex flex-row gap-5">
+                                    <div>
+                                        <h3>Route:</h3>
+                                        <p>{{ $active_route->route->name ?? 'Geen naam' }}</p>
+                                    </div>
+                                    <div>
+                                        <h3>Graad:</h3>
+                                        <p>{{ $active_route->route->difficulty ?? 'NVT' }}</p>
+                                    </div>
+                                    <div>
+                                        <h3>Kilometers:</h3>
+                                        <p>{{ $active_route->route->distance ?? 'NVT' }} km</p>
+                                    </div>
+                                    <div>
+                                        <h3>Tijd:</h3>
+                                        <p>{{ $active_route->route->duration ?? 'NVT' }} min</p>
+                                    </div>
+                                    <div>
+                                        <h3>Status:</h3>
+                                        <p>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3>Graad:</h3>
-                                    <p>{{ $active_route->route->difficulty ?? 'NVT' }}</p>
-                                </div>
-                                <div>
-                                    <h3>Kilometers:</h3>
-                                    <p>{{ $active_route->route->distance ?? 'NVT' }} km</p>
-                                </div>
-                                <div>
-                                    <h3>Tijd:</h3>
-                                    <p>{{ $active_route->route->duration ?? 'NVT' }} min</p>
-                                </div>
-                                <div>
-                                    <h3>Status:</h3>
-                                    <p>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</p>
-                                </div>
-                            </div>
 
-                            <a href="{{ route('routes.show', $active_route->route_id) }}">
-                                <x-custom-buttons.blue-button>
-                                    Bekijk route
-                                </x-custom-buttons.blue-button>
-                            </a>
-                        @endforeach
-                    @else
-                        <p>Geen actieve routes gevonden.</p>
-                    @endif
+                                <a href="{{ route('routes.show', $active_route->route_id) }}">
+                                    <x-custom-buttons.blue-button>
+                                        Bekijk route
+                                    </x-custom-buttons.blue-button>
+                                </a>
+                            @endforeach
+                        @else
+                            <p>Geen actieve routes gevonden.</p>
+                        @endif
 
 
+                    </div>
                 </div>
-            </div>
             @endif
 
             <div class="p-4 sm:p-8 bg-sinas_sap text-witte_eend shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <h2 class="text-xl font-bold mb-4">Badges</h2>
-                @if(($badges ?? collect())->count())
+                    @if(($badges ?? collect())->count())
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
                             @foreach($badges as $badge)
                                 <div class="bg-white text-gray-800 rounded-xl p-3 flex flex-col items-center shadow">
@@ -109,4 +114,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection
