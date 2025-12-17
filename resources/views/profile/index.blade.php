@@ -112,7 +112,7 @@
                     <div>
                         <p class="text-sm opacity-80">Kilometers</p>
                         <p class="text-lg font-bold">
-                            {{ $authStudent->activeRoutes->sum(fn($r) => $r->route->distance ?? 0) }}
+                            {{ $authStudent->activeRoutes->sum(fn($r) => $r->route->distance/1000 ?? 0) }}
                         </p>
                     </div>
 

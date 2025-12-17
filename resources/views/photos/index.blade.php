@@ -5,10 +5,12 @@
         <h1>Fotospace</h1>
     </x-slot:heading>
 
-    <a href="{{ route('photos.create') }}"
-       class="mb-4 inline-block px-6 py-2 bg-blauwe_vogel text-witte_eend rounded-full hover:bg-inkt_vis transition">
-        Upload Nieuwe Foto
-    </a>
+    @if(auth()->user()->isTeacher())
+        <a href="{{ route('photos.create') }}"
+           class="mb-4 inline-block px-6 py-2 bg-blauwe_vogel text-witte_eend rounded-full hover:bg-inkt_vis transition">
+            Upload Nieuwe Foto
+        </a>
+    @endif
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($photos as $photo)
