@@ -12,8 +12,8 @@
 
         <section
             class="bg-natuur_groen text-witte_eend rounded-2xl p-6 shadow"
-            aria-labelledby="profielgegevens"
-        >
+            aria-labelledby="profielgegevens">
+
             <h2 id="profielgegevens" class="text-xl font-semibold mb-4">
                 Profielgegevens
             </h2>
@@ -118,37 +118,37 @@
                 </div>
 
                 {{-- Route lijst --}}
-                @if($authStudent->activeRoutes->count() > 0)
-                    <div class="space-y-3 mb-6">
-                        @foreach($authStudent->activeRoutes as $active_route)
-                            <div class="bg-white text-gray-800 rounded-xl p-4">
+{{--                @if($authStudent->activeRoutes->count() > 0)--}}
+{{--                    <div class="space-y-3 mb-6">--}}
+{{--                        @foreach($authStudent->activeRoutes as $active_route)--}}
+{{--                            <div class="bg-white text-gray-800 rounded-xl p-4">--}}
 
-                                <p class="font-semibold mb-2">
-                                    {{ $active_route->route->name ?? 'Geen naam' }}
-                                </p>
+{{--                                <p class="font-semibold mb-2">--}}
+{{--                                    {{ $active_route->route->name ?? 'Geen naam' }}--}}
+{{--                                </p>--}}
 
-                                <div class="grid grid-cols-2 text-sm">
-                                    <div>
-                                        <p class="opacity-70">Moeilijkheid</p>
-                                        <p class="font-medium">
-                                            {{ $active_route->route->difficulty ?? 'NVT' }}
-                                        </p>
-                                    </div>
+{{--                                <div class="grid grid-cols-2 text-sm">--}}
+{{--                                    <div>--}}
+{{--                                        <p class="opacity-70">Moeilijkheid</p>--}}
+{{--                                        <p class="font-medium">--}}
+{{--                                            {{ $active_route->route->difficulty ?? 'NVT' }}--}}
+{{--                                        </p>--}}
+{{--                                    </div>--}}
 
-                                    <div>
-                                        <p class="opacity-70">Status</p>
-                                        <p class="font-medium">
-                                            {{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}
-                                        </p>
-                                    </div>
-                                </div>
+{{--                                    <div>--}}
+{{--                                        <p class="opacity-70">Status</p>--}}
+{{--                                        <p class="font-medium">--}}
+{{--                                            {{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}--}}
+{{--                                        </p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <p>Geen actieve routes gevonden.</p>
-                @endif
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                @else--}}
+{{--                    <p>Geen actieve routes gevonden.</p>--}}
+{{--                @endif--}}
 
                 <div class="text-center">
                     <a href="{{ route('routes.index') }}">
