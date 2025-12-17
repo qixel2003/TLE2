@@ -64,6 +64,15 @@
         </a>
 
         <a
+            href="/messages"
+            class="flex-1 flex flex-col items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-witte_eend"
+            aria-label="Message board"
+        >
+            <i class="fas fa-message" aria-hidden="true"></i>
+            <span class="sr-only">Berichten</span>
+        </a>
+
+        <a
             href="/tutorial"
             class="flex-1 flex flex-col items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-witte_eend"
             aria-label="Tutorial"

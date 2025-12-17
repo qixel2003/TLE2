@@ -17,7 +17,6 @@ class Mission extends Model
     protected $fillable = [
         'title',
         'description',
-        'user_id',
     ];
 
     public function questions(): HasMany
@@ -28,11 +27,6 @@ class Mission extends Model
     public function checkpoints(): HasMany
     {
         return $this->hasMany(Checkpoint::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function prompts(): HasOne

@@ -46,6 +46,22 @@ class DatabaseSeeder extends Seeder
             'role' => 2,
         ]);
 
+        $studentUserTwo = User::factory()->create([
+            'firstname' => 'James',
+            'lastname' => 'Doe',
+            'email' => 'jamesndoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 2,
+        ]);
+
+        $studentUserThree = User::factory()->create([
+            'firstname' => 'Jimmie',
+            'lastname' => 'Doe',
+            'email' => 'jimmiendoe@hr.nl',
+            'password' => Hash::make('Rootrootroot'),
+            'role' => 2,
+        ]);
+
         $school = School::factory()->create([
             'name' => 'HR School',
             'city' => 'Rotterdam',
@@ -66,10 +82,22 @@ class DatabaseSeeder extends Seeder
             'classroom_id' => $classroom->id,
         ]);
 
+        $studentTwo = Student::create([
+            'user_id' => $studentUserTwo->id,
+            'school_id' => $school->id,
+            'classroom_id' => $classroom->id,
+        ]);
+
+        $studentThree = Student::create([
+            'user_id' => $studentUserThree->id,
+            'school_id' => $school->id,
+            'classroom_id' => $classroom->id,
+        ]);
+
         $route = route::create([
             'name' => 'Groene wandelroute vanaf Rotterdam Centraal Station naar Buitenplaats De Tempel',
             'location' => 'Rotterdams platteland',
-            'distance' => 15,
+            'distance' => 15500,
             'duration' => 310,
             'description' => 'We starten onze wandeling in het centrum van Rotterdam: aan de voorkant van het centraal station.
                 Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.
@@ -81,7 +109,6 @@ class DatabaseSeeder extends Seeder
         $mission = Mission::create([
             'title' => 'Polders Verkenningsmissie',
             'description' => 'Volg de route en ontdek wat er onderweg gebeurt.',
-            'user_id' => $student->id,
         ]);
 
         Prompt::create([

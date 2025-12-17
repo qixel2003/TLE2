@@ -54,45 +54,53 @@
                             {{ $q->question }}
                         </p>
 
-                        <ul class="space-y-2" role="list">
-                            @for ($i = 1; $i <= 4; $i++)
-                                @php
-                                    $answerKey = 'answer_' . $i;
-                                @endphp
-
-                                <li>
-                                    <button
-                                        type="button"
-                                        class="w-full text-left flex items-center justify-between
-                                               px-3 py-2 bg-white border rounded
-                                               hover:bg-gray-100
-                                               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                                        data-answer-index="{{ $i }}"
-                                    >
-                                        {{ $q->{$answerKey} }}
-                                    </button>
-                                </li>
-                            @endfor
-                        </ul>
-
                         <form method="POST"
-                              action="{{ route('active-routes.complete', $activeRoute) }}"
-                              class="mt-4">
+                              action="{{ route('active-routes.complete', $activeRoute) }}">
                             @csrf
                             @method('PATCH')
 
+                            <ul class="space-y-2">
+                                @for ($i = 1; $i <= 4; $i++)
+                                    @php
+                                        $answerKey = 'answer_' . $i;
+                                    @endphp
+
+                                    <li>
+                                        <label
+                                            class="flex items-center gap-3 px-3 py-2 bg-white border rounded cursor-pointer
+                                   hover:bg-gray-100
+                                   focus-within:outline focus-within:outline-2 focus-within:outline-offset-2">
+
+                                            <input
+                                                type="radio"
+                                                name="selected_answer"
+                                                value="{{ $i }}"
+                                                class="sr-only peer"
+                                                required
+                                            >
+
+                                            <span
+                                                class="flex-1 peer-checked:font-semibold
+                                       peer-checked:text-natuur_groen">
+                                {{ $q->{$answerKey} }}
+                            </span>
+                                        </label>
+                                    </li>
+                                @endfor
+                            </ul>
+
                             <button
                                 type="submit"
-                                class="w-full px-3 py-2 bg-natuur_groen text-witte_eend
-                                       font-semibold rounded
-                                       hover:bg-lnatuur_groen
-                                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                            >
+                                class="mt-4 w-full px-3 py-2 bg-natuur_groen text-witte_eend
+                       font-semibold rounded
+                       hover:bg-lnatuur_groen
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                                 Antwoord indienen
                             </button>
                         </form>
                     </section>
                 @endforeach
+
             @endif
 
             {{-- SCOUT --}}
@@ -163,7 +171,7 @@
 
                         <label for="drawing_file"
                                class="block text-sm font-medium text-gray-800 mb-1">
-                            Upload bestand (tekening of PDF)
+                            Upload bestand (foto van tekening)
                         </label>
 
                         <input

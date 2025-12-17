@@ -51,7 +51,7 @@
                         Afstand
                     </dt>
                     <dd>
-                        {{ $activeRoute->route->distance }} km
+                        {{ $activeRoute->route->getFormattedDistance() }}
                     </dd>
                 </div>
 
@@ -60,7 +60,7 @@
                         Duur
                     </dt>
                     <dd>
-                        {{ $activeRoute->route->duration }} minuten
+                        {{ $activeRoute->route->getFormattedDuration() }}
                     </dd>
                 </div>
 
