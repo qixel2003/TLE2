@@ -39,6 +39,15 @@ class BonusController extends Controller
         return redirect()->route('messages.show', $request)->with('success', 'Je antwoord is succesvol ingediend!');
     }
 
+    public function show(Bonus $bonus)
+    {
+        if (!Auth::check() || Auth::user()->isStudent()) {
+            return redirect()->route('messages.index')->with('error', 'Je hebt geen rechten om deze inzending te bekijken.');
+        }
+
+        return view('bonuses.show', compact('bonus'));
+    }
+
     public function approve(Bonus $bonus)
     {
         if (!Auth::check() || Auth::user()->isStudent()) {
