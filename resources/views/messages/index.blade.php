@@ -89,9 +89,19 @@
                             kunnen maken.</p>
                         @auth
                             @if(!auth()->user()->isStudent())
-                                <a href="{{ route('messages.create') }}"
-                                   class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg">Maak
-                                    een bonusopdracht aan</a>
+
+                                <form method="POST"
+                                      action="{{ route('messages.create') }}">
+                                    <button
+                                        type="submit"
+                                        class="mt-4 w-full px-3 py-2 bg-natuur_groen text-witte_eend
+                       font-semibold rounded
+                       hover:bg-lnatuur_groen
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                                        Maak
+                                        een bonusopdracht aan
+                                    </button>
+                                </form>
                             @endif
                         @endauth
                     </div>
