@@ -32,17 +32,13 @@ class RouteController extends Controller
 
     public function update(Request $request, Route $route)
     {
-        // if (!Auth::check()) {
-        //     return redirect()->route('login')->with('error', 'Je moet ingelogd zijn om routes te bewerken.');
-        // }
-
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'distance' => 'required|integer|min:0.1',
             'duration' => 'required|integer|min:1',
             'description' => 'required|string|min:10',
-            'image' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|max:2048',
             'difficulty' => 'required|in:makkelijk,gemiddeld,moeilijk',
         ]);
 
@@ -56,16 +52,13 @@ class RouteController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('routes', 'public');
-            $data['image'] = Storage::url($path);
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/routes'), $filename);
+            $data['image'] = '/images/routes/' . $filename;
 
-            if (!empty($route->picture)) {
-                if (str_starts_with($route->picture, '/storage/')) {
-                    $old = substr($route->picture, strlen('/storage/'));
-                    Storage::disk('public')->delete($old);
-                } elseif (preg_match('#/storage/(.+)$#', $route->picture, $m)) {
-                    Storage::disk('public')->delete($m[1]);
-                }
+            if (!empty($route->image) && file_exists(public_path($route->image))) {
+                unlink(public_path($route->image));
             }
         }
 
@@ -79,7 +72,7 @@ class RouteController extends Controller
         return view('routes.create');
     }
 
-    public function store(Request $request, Route $route)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -101,8 +94,10 @@ class RouteController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('routes', 'public');
-            $data['image'] = Storage::url($path);
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/routes'), $filename);
+            $data['image'] = '/images/routes/' . $filename;
         }
 
         Route::create($data);
