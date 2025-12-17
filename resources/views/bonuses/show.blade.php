@@ -1,5 +1,7 @@
 <!-- resources/views/bonuses/show.blade.php -->
-<x-layout :heading="'Bonus inzending: ' . $bonus->title">
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <div class="min-h-screen py-8 px-4">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
@@ -21,7 +23,8 @@
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="mb-4">
                     @if($bonus->status)
-                        <span class="px-3 py-1 rounded text-sm font-semibold {{ $bonus->status === 'goedgekeurd' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                        <span
+                            class="px-3 py-1 rounded text-sm font-semibold {{ $bonus->status === 'goedgekeurd' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                             Status: {{ $bonus->status }}
                         </span>
                     @else
@@ -35,7 +38,8 @@
 
                 @if($bonus->image_path)
                     <div class="mb-6">
-                        <img src="{{ asset('storage/' . $bonus->image_path) }}" alt="{{ $bonus->title }}" class="max-w-full h-auto rounded">
+                        <img src="{{ asset('storage/' . $bonus->image_path) }}" alt="{{ $bonus->title }}"
+                             class="max-w-full h-auto rounded">
                     </div>
                 @endif
 
@@ -48,7 +52,8 @@
                     <h2 class="font-semibold text-gray-700 mb-2">Leerling informatie:</h2>
                     <p class="text-gray-600"><strong>Naam:</strong> {{ $bonus->user->name ?? 'Onbekend' }}</p>
                     <p class="text-gray-600"><strong>Email:</strong> {{ $bonus->user->email ?? 'Onbekend' }}</p>
-                    <p class="text-gray-600"><strong>Ingediend op:</strong> {{ $bonus->created_at->format('d M Y H:i') }}</p>
+                    <p class="text-gray-600"><strong>Ingediend
+                            op:</strong> {{ $bonus->created_at->format('d M Y H:i') }}</p>
                 </div>
 
                 @auth
@@ -59,7 +64,10 @@
                             <div class="flex flex-wrap gap-3">
                                 <form action="{{ route('bonuses.approve', $bonus) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
+                                    <button type="submit" class="px-3 py-2 bg-natuur_groen text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                         {{ $bonus->status === 'goedgekeurd' ? 'disabled' : '' }}>
                                         {{ $bonus->status === 'goedgekeurd' ? 'Goedgekeurd' : 'Goedkeuren' }}
                                     </button>
@@ -67,7 +75,10 @@
 
                                 <form action="{{ route('bonuses.reject', $bonus) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+                                    <button type="submit" class="px-3 py-2 bg-roze_bloem text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                                         {{ $bonus->status === 'afgewezen' ? 'disabled' : '' }}>
                                         {{ $bonus->status === 'afgewezen' ? '✗ Afgekeurd' : 'Afkeuren' }}
                                     </button>
@@ -79,4 +90,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection

@@ -1,5 +1,8 @@
-<x-layout :heading="'Nieuwe opdracht aanmaken'">
-    <form action="{{ route('bonuses.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+@extends('layouts.natuurMonumenten')
+
+@section('content')
+    <form action="{{ route('bonuses.store') }}" method="POST" enctype="multipart/form-data"
+          class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
         @csrf
 
         <div class="border-b pb-4 mb-6">
@@ -38,9 +41,17 @@
 
         <div class="pt-6 border-t">
             <div class="flex space-x-4">
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Opdracht inleveren</button>
-                <a href="{{ route('messages.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Terug</a>
+                <button type="submit" class="px-3 py-2 bg-natuur_groen text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Opdracht
+                    inleveren
+                </button>
+                <a href="{{ route('messages.index') }}" class="px-3 py-2 bg-natuur_groen text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Terug</a>
             </div>
         </div>
     </form>
-</x-layout>
+@endsection
