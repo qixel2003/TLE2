@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <div class="max-w-md mx-auto mt-8 space-y-6">
 
         {{-- Classroom header --}}
@@ -36,11 +38,6 @@
 
         {{-- Acties --}}
         <div class="flex gap-3">
-            <a href="/classrooms/{{ $classroom->id }}/edit"
-               class="flex-1 bg-vitamine_D hover:bg-lvitamine_D text-white text-center rounded-lg py-2 font-medium transition">
-                Bewerken
-            </a>
-
             <form method="POST" action="{{ route('classrooms.destroy', $classroom->id) }}" class="flex-1">
                 @csrf
                 @method('DELETE')
@@ -107,4 +104,4 @@
         </div>
 
     </div>
-</x-app-layout>
+@endsection

@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <div class="max-w-md mx-auto mt-8 space-y-6">
 
         {{-- School / profiel card --}}
@@ -71,4 +73,4 @@
         </a>
 
     </div>
-</x-app-layout>
+@endsection

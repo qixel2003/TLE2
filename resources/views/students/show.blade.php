@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
 <div class="min-h-screen bg-kinder_blauw flex flex-col items-center p-4">
 
     <div class="w-full max-w-sm bg-witte_eend rounded-xl shadow-lg overflow-hidden">
@@ -52,4 +54,4 @@
         </div>
     </div>
 </div>
-</x-app-layout>
+@endsection

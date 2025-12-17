@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('layouts.natuurMonumenten')
+
+@section('content')
     <form method="POST" action="{{ route('classrooms.store') }}">
         @csrf
 
@@ -20,4 +22,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+@endsection

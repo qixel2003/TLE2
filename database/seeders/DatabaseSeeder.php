@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Badge;
+use App\Models\Bonus;
 use App\Models\Checkpoint;
 use App\Models\Classroom;
+use App\Models\Message;
 use App\Models\Mission;
 use App\Models\Prompt;
 use App\Models\Question;
@@ -30,7 +32,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $teacher = User::factory()->create([
             'firstname' => 'Jane',
             'lastname' => 'Doe',
             'email' => 'janedoe@hr.nl',
@@ -174,6 +176,12 @@ class DatabaseSeeder extends Seeder
         foreach ($badges as $badge) {
             Badge::create($badge);
         }
+
+        Message::create([
+            'user_id' => $teacher->id,
+            'title' => 'Voorbeeld opdracht',
+            'message' => 'Dit is een voorbeeld beschrijving voor een opdracht die een leraar kan aanmaken voor zijn of haar studenten. Studenten kunnen hierop reageren door hun eigen foto\'s te uploaden en zo extra punten te verdienen!',
+        ]);
 
     }
 
