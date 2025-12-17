@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
         $route = route::create([
             'name' => 'Groene wandelroute vanaf Rotterdam Centraal Station naar Buitenplaats De Tempel',
             'location' => 'Rotterdams platteland',
-            'distance' => 15,
+            'distance' => 15500,
             'duration' => 310,
             'description' => 'We starten onze wandeling in het centrum van Rotterdam: aan de voorkant van het centraal station.
                 Rondom Rotterdam CS vind je verschillende leuke tentjes om even neer te strijken voor een hapje en een drankje.

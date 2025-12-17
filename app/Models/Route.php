@@ -45,4 +45,16 @@ class Route extends Model {
             return "{$minutes}m";
         }
     }
+
+    public function getFormattedDistance(): string
+    {
+        $km = $this->distance / 1000;
+
+        if ($km >= 1) {
+            return number_format($km, 1) . ' km';
+        } else {
+            return $this->distance . ' m';
+        }
+    }
+
 }
