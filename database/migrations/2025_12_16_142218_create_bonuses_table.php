@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('image_path');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

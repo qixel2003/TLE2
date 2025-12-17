@@ -24,6 +24,12 @@ Route::get('/routes/{route}/edit', [RouteController::class, 'edit'])->name('rout
 Route::put('/routes/{route}', [RouteController::class, 'update'])->name('routes.update');
 //Route::delete('/routes/{route}', [RouteController::class, 'destroy'])->name('routes.destroy');
 
+Route::get('/bonuses/create', [BonusController::class, 'create'])->name('bonuses.create');
+Route::post('/bonuses', [BonusController::class, 'store'])->name('bonuses.store');
+Route::get('/bonuses/{bonus}', [BonusController::class, 'show'])->name('bonuses.show');
+Route::post('/bonuses/{bonus}/approve', [BonusController::class, 'approve'])->name('bonuses.approve');
+Route::post('/bonuses/{bonus}/reject', [BonusController::class, 'reject'])->name('bonuses.reject');
+
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
@@ -31,10 +37,6 @@ Route::get('/messages/{message}', [MessageController::class, 'show'])->name('mes
 Route::get('/messages/{message}/edit', [MessageController::class, 'edit'])->name('messages.edit');
 Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
-
-Route::resource('bonuses', BonusController::class)->only(['create', 'store', 'show']);
-Route::post('/bonuses/{bonus}/approve', [BonusController::class, 'approve'])->name('bonuses.approve');
-Route::post('/bonuses/{bonus}/reject', [BonusController::class, 'reject'])->name('bonuses.reject');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {

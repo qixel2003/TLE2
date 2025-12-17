@@ -16,7 +16,7 @@ class BonusController extends Controller
     /**
      * Store a newly created photo submission from a student.
      */
-    public function store(Request $request)
+    public function store(Request $request, Bonus $bonus)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -29,14 +29,14 @@ class BonusController extends Controller
             $imagePath = $request->file('image_path')->store('student_submissions', 'public');
         }
 
-        Bonus::create([
+        $bonus = Bonus::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('messages.show', $request)->with('success', 'Je antwoord is succesvol ingediend!');
+        return redirect()->route('messages.index')->with('success', 'Je antwoord is succesvol ingediend!');
     }
 
     public function show(Bonus $bonus)
