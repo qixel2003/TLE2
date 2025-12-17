@@ -1,7 +1,8 @@
 @extends('layouts.natuurMonumenten')
 
 @section('content')
-    <form action="{{ route('messages.update', $message->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
+    <form action="{{ route('messages.update', $message->id) }}" method="POST" enctype="multipart/form-data"
+          class="space-y-4 p-6 max-w-2xl mx-auto bg-white rounded-2xl shadow-xl">
         @csrf
         @method('PUT')
 
@@ -35,7 +36,8 @@
             @if($message->photo)
                 <div class="mb-3">
                     <p class="text-sm text-gray-600 mb-1">Huidige foto:</p>
-                    <img src="{{ asset('storage/' . $message->photo) }}" alt="Huidige foto" class="w-32 h-32 object-cover rounded-lg">
+                    <img src="{{ asset('storage/' . $message->photo) }}" alt="Huidige foto"
+                         class="w-32 h-32 object-cover rounded-lg">
                 </div>
             @endif
             <input type="file" name="photo" id="photo" accept="image/*"
@@ -48,8 +50,15 @@
 
         <div class="pt-6 border-t">
             <div class="flex space-x-4">
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">Bijwerken</button>
-                <a href="{{ route('messages.show', $message->id) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-200">Annuleren</a>
+                <button type="submit" class="px-3 py-2 bg-natuur_groen text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Bijwerken
+                </button>
+                <a href="{{ route('messages.show', $message->id) }}" class="px-3 py-2 bg-natuur_groen text-witte_eend
+                          font-semibold rounded
+                          hover:bg-lnatuur_groen
+                          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Annuleren</a>
             </div>
         </div>
     </form>
