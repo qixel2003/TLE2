@@ -31,4 +31,30 @@ class Route extends Model {
     {
         return $this->hasMany(Active_Route::class);
     }
+
+    public function getFormattedDuration(): string
+    {
+        $hours = floor($this->duration / 60);
+        $minutes = $this->duration % 60;
+
+        if ($hours > 0 && $minutes > 0) {
+            return "{$hours}h {$minutes}m";
+        } elseif ($hours > 0) {
+            return "{$hours}h";
+        } else {
+            return "{$minutes}m";
+        }
+    }
+
+    public function getFormattedDistance(): string
+    {
+        $km = $this->distance / 1000;
+
+        if ($km >= 1) {
+            return number_format($km, 1) . ' km';
+        } else {
+            return $this->distance . ' m';
+        }
+    }
+
 }

@@ -68,14 +68,14 @@
                     <li class="bg-lnatuur_groen px-4 py-2 rounded-full">
                         <span aria-hidden="true" class="mr-2">📏</span>
                         <span class="font-semibold">
-                            Afstand: {{ $route->distance ?? '0' }} km
+                            Afstand: {{ $route->getFormattedDistance() }}
                         </span>
                     </li>
 
                     <li class="bg-lkinder_blauw px-4 py-2 rounded-full">
                         <span aria-hidden="true" class="mr-2">⏰</span>
                         <span class="font-semibold">
-                            Duur: {{--{{ $route->duration ?? '0' }} minuten--}} 1,5 uur
+                            Duur: {{ $route->getFormattedDuration() }}
                         </span>
                     </li>
 

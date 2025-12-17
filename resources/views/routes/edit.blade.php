@@ -25,7 +25,7 @@
         </div>
 
         <div>
-            <label for="distance" class="block font-semibold">Afstand</label>
+            <label for="distance" class="block font-semibold">Afstand (in meter)</label>
             <input type="number" step="0.01" name="distance" id="distance" value="{{ old('distance', $route->distance) }}" class="border border-gray-300 rounded p-2 w-full">
             @error('distance')
             <div class="text-red-500">{{ $message }}</div>

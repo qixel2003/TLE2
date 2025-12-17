@@ -90,8 +90,8 @@
                             </div>
 
                             <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                                <div>{{ $route->distance }}</div>
-                                <div>{{ $route->duration }}</div>
+                                <div>{{ $route->getFormattedDistance() }}</div>
+                                <div>{{ $route->getFormattedDuration() }}</div>
                             </div>
 
                             <p class="text-gray-700 mb-6 line-clamp-3">
