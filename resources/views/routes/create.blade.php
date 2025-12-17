@@ -25,7 +25,7 @@
             </div>
 
             <div>
-                <label for="distance" class="block font-semibold text-black">Afstand (in km)</label>
+                <label for="distance" class="block font-semibold text-black">Afstand (in meter)</label>
                 <input type="number" step="0.01" name="distance" id="distance" value="{{ old('distance') }}"
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200">
                 @error('distance')
