@@ -48,19 +48,20 @@
 
                                 <div class="flex items-center space-x-2">
                                     <a href="{{ route('messages.show', $message->id) }}"
-                                       class="text-green-600 hover:text-green-700 font-semibold">Bekijk</a>
+                                       class="bg-natuur_groen hover:bg-gray-400 text-witte_eend font-semibold py-3 px-2 rounded-lg transition duration-200">Bekijk</a>
 
                                     @auth
                                         @if(!auth()->user()->isStudent() && (auth()->id() === $message->user_id || auth()->user()->isAdmin()))
                                             <a href="{{ route('messages.edit', $message->id) }}"
-                                               class="text-blue-600 hover:text-blue-700 font-semibold">Bewerk</a>
+                                               class="bg-natuur_groen hover:bg-gray-400 text-witte_eend font-semibold py-3 px-2 rounded-lg transition duration-200">Bewerk</a>
                                             <form action="{{ route('messages.destroy', $message->id) }}" method="POST"
                                                   class="inline"
                                                   onsubmit="return confirm('Weet je zeker dat je deze opdracht wilt verwijderen?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                        class="text-red-600 hover:text-red-700 font-semibold">Verwijder
+                                                        class="bg-natuur_groen hover:bg-gray-400 text-witte_eend font-semibold py-3 px-2 rounded-lg transition duration-200">
+                                                    Verwijder
                                                 </button>
                                             </form>
                                         @endif
