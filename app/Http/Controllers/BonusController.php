@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bonus;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,13 @@ class BonusController extends Controller
         }
 
         $bonus->update(['status' => 'goedgekeurd']);
+        Photo::create([
+            'user_id' => $bonus->user_id,
+            'title' => $bonus->title,
+            'description' => $bonus->description,
+            'image_path' => $bonus->image_path,
+        ]);
+
         return back()->with('success', 'Foto goedgekeurd!');
     }
 
