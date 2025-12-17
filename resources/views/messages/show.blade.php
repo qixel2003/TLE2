@@ -1,5 +1,5 @@
 <!-- resources/views/messages/show.blade.php -->
-<x-layout :heading="$message->title">
+<x-layout :heading="$message->title"> 
     <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
             <div class="mb-8">
@@ -64,7 +64,7 @@
             @auth
                 @if(auth()->user()->isStudent())
                     <div class="mt-6">
-                        <a href="{{ route('bonus.create', ['message_id' => $message->id]) }}"
+                        <a href="{{ route('bonuses.create', ['message_id' => $message->id]) }}"
                            class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                             Bonus opdracht inleveren
                         </a>
@@ -74,49 +74,47 @@
 
             <div class="mt-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Ingediende antwoorden</h2>
-                @if($studentBonuses && $studentBonuses->count() > 0) <!-- ✅ $studentBonuses ipv $studentPhotos -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach($studentBonuses as $bonus) <!-- ✅ $bonus ipv $photo -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-                        @if($bonus->image_path) <!-- ✅ $bonus->image_path -->
-                        <div class="h-48 overflow-hidden">
-                            <img src="{{ asset('storage/' . $bonus->image_path) }}" alt="{{ $bonus->title }}" class="w-full h-full object-cover">
-                        </div>
-                        @endif
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $bonus->title }}</h3> <!-- ✅ $bonus->title -->
-                            @if($bonus->description) <!-- ✅ $bonus->description -->
-                            <p class="text-gray-600 text-sm mb-3">{{ Str::limit($bonus->description, 100) }}</p>
-                            @endif
-                            <div class="text-sm text-gray-500 border-t pt-3">
-                                <p><span class="font-medium">Leerling:</span> {{ $bonus->user->name ?? 'Onbekend' }}</p> <!-- ✅ $bonus->user -->
-                                <p><span class="font-medium">Ingediend:</span> {{ $bonus->created_at->format('d M Y H:i') }}</p>
+                @if($studentBonuses && $studentBonuses->count() > 0)
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach($studentBonuses as $bonus)
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                                @if($bonus->image_path)
+                                    <div class="h-48 overflow-hidden">
+                                        <img src="{{ asset('storage/' . $bonus->image_path) }}" alt="{{ $bonus->title }}" class="w-full h-full object-cover">
+                                    </div>
+                                @endif
+                                <div class="p-4">
+                                    <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $bonus->title }}</h3>
+                                    @if($bonus->description)
+                                        <p class="text-gray-600 text-sm mb-3">{{ Str::limit($bonus->description, 100) }}</p>
+                                    @endif
+                                    <div class="text-sm text-gray-500 border-t pt-3">
+                                        <p><span class="font-medium">Leerling:</span> {{ $bonus->user->name ?? 'Onbekend' }}</p>
+                                        <p><span class="font-medium">Ingediend:</span> {{ $bonus->created_at->format('d M Y H:i') }}</p>
 
-                                <!-- ✅ Status toevoegen -->
-                                @if($bonus->status)
-                                    <p class="mt-1">
-                                        <span class="font-medium">Status:</span>
-                                        <span class="px-2 py-1 text-xs rounded-full {{ $bonus->status === 'goedgekeurd' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                        @if($bonus->status)
+                                            <p class="mt-1">
+                                                <span class="font-medium">Status:</span>
+                                                <span class="px-2 py-1 text-xs rounded-full {{ $bonus->status === 'goedgekeurd' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                                     {{ $bonus->status }}
                                                 </span>
-                                    </p>
-                                @endif
+                                            </p>
+                                        @endif
 
-                                <!-- ✅ Link naar bonus show voor docenten -->
-                                @auth
-                                    @if(!auth()->user()->isStudent())
-                                        <div class="mt-2">
-                                            <a href="{{ route('bonus.show', $bonus->id) }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                                                Bekijk details & beoordeel →
-                                            </a>
-                                        </div>
-                                    @endif
-                                @endauth
+                                        @auth
+                                            @if(!auth()->user()->isStudent())
+                                                <div class="mt-2">
+                                                    <a href="{{ route('bonuses.show', $bonus->id) }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                        Bekijk details & beoordeel →
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        @endauth
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
                 @else
                     <div class="bg-blue-50 text-blue-800 px-4 py-3 rounded">
                         <p>Nog geen antwoorden ingediend.</p>

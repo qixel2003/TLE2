@@ -10,11 +10,6 @@ class BonusController extends Controller
 {
     public function create()
     {
-        // Controleer of message_id is meegegeven
-        if (!request()->has('message_id')) {
-            return redirect()->route('messages.index')->with('error', 'Geen opdracht geselecteerd.');
-        }
-
         return view('bonuses.create');
     }
 
@@ -41,13 +36,13 @@ class BonusController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('messages.show', $request->message_id)->with('success', 'Je antwoord is succesvol ingediend!');
+        return redirect()->route('messages.show', $request)->with('success', 'Je antwoord is succesvol ingediend!');
     }
 
     public function approve(Bonus $bonus)
     {
         if (!Auth::check() || Auth::user()->isStudent()) {
-            return back()->with('error', 'Je hebt geen rechten om foto\'s goed te keuren.');
+            return back()->with('error', 'Je hebt geen rechten om fotos goed te keuren.');
         }
 
         $bonus->update(['status' => 'goedgekeurd']);

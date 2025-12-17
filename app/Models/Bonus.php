@@ -15,6 +15,7 @@ class Bonus extends Model {
         'title',
         'description',
         'image_path',
+        'status',
     ];
 
     public function user()
