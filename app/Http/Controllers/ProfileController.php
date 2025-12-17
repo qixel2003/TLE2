@@ -15,17 +15,31 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user's profile page.
      */
-    public function index (Request $request): View
+    public function index(Request $request): View
     {
-        $students = Student::all();
-        $active_routes = Active_Route::with('route')->get();
         $user = $request->user();
-        $school = School::all();
-        $authTeacher = (auth()->check() && auth()->user()->role == 1);
-        $authStudent = auth()->user()->student ? auth()->user()->student->load('activeRoutes.route') : null;
-        return view('profile.index', compact('students', 'user', 'active_routes', 'authStudent', 'school', 'authTeacher'));
+
+        $authTeacher = auth()->check() && auth()->user()->role == 1;
+
+        $authStudent = $user->student
+            ? $user->student
+                ->load([
+                    'activeRoutes' => function ($query) {
+                        $query->with('route')
+                            ->latest()   // meest recent eerst (created_at)
+                            ->take(3);   // alleen de 3 meest recente
+                    }
+                ])
+            : null;
+
+        return view('profile.index', [
+            'user' => $user,
+            'authStudent' => $authStudent,
+            'authTeacher' => $authTeacher,
+            'badges' => $user->unlockedBadges ?? collect(),
+        ]);
     }
 
     /**
@@ -36,7 +50,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
             'badges' => $user->unlockedBadges,
         ]);
     }

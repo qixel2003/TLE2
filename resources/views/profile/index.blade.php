@@ -5,49 +5,73 @@
 
         {{-- Pagina titel --}}
         <header>
-            <h1 class="text-3xl font-bold">
-                Profiel van {{ $user->firstname }} {{ $user->lastname }}
+            <h1 class="text-3xl font-bold text-center">
+                Profiel
             </h1>
         </header>
 
-        {{-- Profielgegevens --}}
         <section
-            class="p-6 bg-natuur_groen text-witte_eend rounded-lg shadow"
+            class="bg-natuur_groen text-witte_eend rounded-2xl p-6 shadow"
             aria-labelledby="profielgegevens"
         >
             <h2 id="profielgegevens" class="text-xl font-semibold mb-4">
                 Profielgegevens
             </h2>
 
-            <dl class="space-y-2">
-                <div>
-                    <dt class="font-semibold">Naam</dt>
-                    <dd>{{ $user->firstname }} {{ $user->lastname }}</dd>
+            <div class="flex items-center gap-4">
+
+                <img
+                    src="{{ asset('storage/photos/childicon.png') }}"
+                    alt="Avatar profiel"
+                    class="w-20 h-20 rounded-full bg-white p-1 flex-shrink-0">
+
+
+                <div class="flex flex-col gap-2">
+
+                    <div class="flex gap-6">
+                        <div>
+                            <p class="text-sm opacity-80">Naam</p>
+                            <p class="font-semibold">
+                                {{ $user->firstname }} {{ $user->lastname }}
+                            </p>
+                        </div>
+
+                        @if($authStudent)
+                            <div>
+                                <p class="text-sm opacity-80">Klas</p>
+                                <p class="font-semibold">
+                                    {{ $user->student->classroom->name ?? 'Onbekend' }}
+                                </p>
+                            </div>
+                        @endif
+                    </div>
+
+
+                    @if($authStudent)
+                        <div class="flex gap-6">
+                            <div>
+                                <p class="text-sm opacity-80">School</p>
+                                <p class="font-semibold">
+                                    {{ $user->student->school->name ?? 'Onbekend' }}
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="text-sm opacity-80">Punten</p>
+                                <p class="font-semibold">
+                                    {{ $user->student->points ?? 0 }}
+                                </p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
-
-                @if($authStudent)
-                    <div>
-                        <dt class="font-semibold">Klas</dt>
-                        <dd>{{ $user->student->classroom->name ?? 'Onbekend' }}</dd>
-                    </div>
-
-                    <div>
-                        <dt class="font-semibold">School</dt>
-                        <dd>{{ $user->student->school->name ?? 'Onbekend' }}</dd>
-                    </div>
-
-                    <div>
-                        <dt class="font-semibold">Punten</dt>
-                        <dd>{{ $user->student->points ?? 0 }}</dd>
-                    </div>
-                @endif
-            </dl>
+            </div>
 
             @if($authTeacher)
                 <div class="mt-4 space-y-2">
                     @foreach($user->school as $school)
                         <p>
-                            <span class="font-semibold">School accountbeheerder:</span>
+                            <span class="font-semibold">School accountbeheerder:</span><br>
                             {{ optional($school->user->firstWhere('role', 1))->email ?? 'Niet bekend' }}
                         </p>
 
@@ -61,63 +85,82 @@
             @endif
         </section>
 
-        {{-- Actieve routes --}}
         @if($authStudent)
             <section
-                class="p-6 bg-inkt_vis text-witte_eend rounded-lg shadow"
-                aria-labelledby="actieve-routes"
+                class="bg-inkt_vis text-witte_eend rounded-2xl p-6 shadow"
+                aria-labelledby="route-info"
             >
-                <h2 id="actieve-routes" class="text-xl font-semibold mb-4">
-                    Mijn actieve routes
+                <h2 id="route-info" class="text-xl font-semibold mb-4">
+                    Route
                 </h2>
 
+                <div class="grid grid-cols-3 text-center mb-6">
+                    <div>
+                        <p class="text-sm opacity-80">Aantal</p>
+                        <p class="text-lg font-bold">
+                            {{ $authStudent->activeRoutes->count() }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm opacity-80">Kilometers</p>
+                        <p class="text-lg font-bold">
+                            {{ $authStudent->activeRoutes->sum(fn($r) => $r->route->distance ?? 0) }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-sm opacity-80">Tijd</p>
+                        <p class="text-lg font-bold">
+                            {{ round($authStudent->activeRoutes->sum(fn($r) => $r->route->duration ?? 0) / 60, 1) }} uur
+                        </p>
+                    </div>
+                </div>
+
+                {{-- Route lijst --}}
                 @if($authStudent->activeRoutes->count() > 0)
-                    <ul class="space-y-4" role="list">
+                    <div class="space-y-3 mb-6">
                         @foreach($authStudent->activeRoutes as $active_route)
-                            <li class="p-4 bg-white text-gray-800 rounded-lg">
+                            <div class="bg-white text-gray-800 rounded-xl p-4">
 
-                                <dl class="grid grid-cols-2 gap-4 text-sm">
+                                <p class="font-semibold mb-2">
+                                    {{ $active_route->route->name ?? 'Geen naam' }}
+                                </p>
+
+                                <div class="grid grid-cols-2 text-sm">
                                     <div>
-                                        <dt class="font-semibold">Route</dt>
-                                        <dd>{{ $active_route->route->name ?? 'Geen naam' }}</dd>
+                                        <p class="opacity-70">Moeilijkheid</p>
+                                        <p class="font-medium">
+                                            {{ $active_route->route->difficulty ?? 'NVT' }}
+                                        </p>
                                     </div>
 
                                     <div>
-                                        <dt class="font-semibold">Moeilijkheid</dt>
-                                        <dd>{{ $active_route->route->difficulty ?? 'NVT' }}</dd>
+                                        <p class="opacity-70">Status</p>
+                                        <p class="font-medium">
+                                            {{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <div>
-                                        <dt class="font-semibold">Afstand</dt>
-                                        <dd>{{ $active_route->route->distance ?? 'NVT' }} km</dd>
-                                    </div>
-
-                                    <div>
-                                        <dt class="font-semibold">Duur</dt>
-                                        <dd>{{ $active_route->route->duration ?? 'NVT' }} min</dd>
-                                    </div>
-
-                                    <div>
-                                        <dt class="font-semibold">Status</dt>
-                                        <dd>{{ $active_route->is_completed ? 'Afgerond' : 'Bezig' }}</dd>
-                                    </div>
-                                </dl>
-
-                                <a href="{{ route('routes.show', $active_route->route_id) }}" class="mt-3 inline-block">
-                                    <x-custom-buttons.blue-button>
-                                        Bekijk route
-                                    </x-custom-buttons.blue-button>
-                                </a>
-                            </li>
+                            </div>
                         @endforeach
-                    </ul>
+                    </div>
                 @else
                     <p>Geen actieve routes gevonden.</p>
                 @endif
+
+                <div class="text-center">
+                    <a href="{{ route('routes.index') }}">
+                        <x-custom-buttons.blue-button>
+                            Bekijk details
+                        </x-custom-buttons.blue-button>
+                    </a>
+                </div>
             </section>
         @endif
 
-        {{-- Badges --}}
+
         <section
             class="p-6 bg-sinas_sap text-witte_eend rounded-lg shadow"
             aria-labelledby="badges"
@@ -135,7 +178,6 @@
                                 alt="{{ $badge->name }}"
                                 class="w-16 h-16 mb-2 object-contain"
                             >
-
                             <p class="text-sm font-semibold text-center">
                                 {{ $badge->name }}
                             </p>
@@ -146,7 +188,7 @@
                 <p class="italic">Nog geen badges verdiend</p>
             @endif
 
-            <div class="mt-4">
+            <div class="mt-4 text-center">
                 <x-custom-buttons.pink-button>
                     Bekijk alle
                 </x-custom-buttons.pink-button>
