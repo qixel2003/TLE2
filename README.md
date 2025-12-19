@@ -5,7 +5,7 @@ WandelWild is a web application designed to connect Natuurmonumenten to schools 
 ## ERD
 
 We built the application based on the following Entity Relationship Diagram (ERD):
-![ERD](public/images/ERD-2.png)
+![ERD](public/images/ERD-final.png)
 
 ## Installation and Deployment
 
@@ -17,8 +17,28 @@ To install and deploy the WandelWild application, follow these steps:
 2. **Install Dependencies**: Navigate to the project directory and install the required dependencies using Composer.
    ```bash
    composer install
+   npm install
    ```
 3. **Environment Configuration**: 
+   - Copy the example environment file and rename it to `.env`.
+   - Ensure that the `.env` file is properly configured with database credentials and other necessary environment variables. It should be properly configured by design.
+   - Generate an application key using the following command:
+   ```bash
+   php artisan key:generate
+   ```
+4. **Database Migration and Seeding**: Run the following commands to set up the database schema and seed it with initial data.
+   ```bash
+    php artisan migrate
+    php artisan db:seed
+    ```
+5. **Build Frontend Assets**: Compile the frontend assets using the following command:
+6. ```bash
+   npm run build
+   ```
+7. **Start the Application**: Finally, start the Laravel development server using the command:
+   ```bash
+   npm run dev
+   ```
 
 ## Potential Edge Cases
 
@@ -39,3 +59,13 @@ Made with:
 - [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [AlpineJS](https://alpinejs.dev/)
+- [Composer](https://getcomposer.org/)
+
+Made by:
+- Amber
+- Dani
+- Ishika
+- Jade
+- Madya
+- Quinzel
+of Team 1 - CMGT Hogeschool Rotterdam - TLE 2 2025
